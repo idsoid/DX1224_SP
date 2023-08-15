@@ -9,20 +9,30 @@ public class PlayerData : ScriptableObject
     private playerData _playerData = new playerData();
     public void Init()
     {
-        _playerData.health = 100;
-        _playerData.attack = 25;
-        _playerData.speed = 10;
-        _playerData.stamina = 80;
-        _playerData.temperature = 100;
-        _playerData.hunger = 100;
+        _playerData.health = 100f;
+        _playerData.attack = 25f;
+        _playerData.speed = 10f;
+        _playerData.stamina = 80f;
+        _playerData.temperature = 100f;
+        _playerData.hunger = 100f;
+        _playerData.isAlive = true;
     }
 
-    public void AlterValue(string x, int value)
+    public void AlterValue(string x, float value)
     {
         switch(x)
         {
             case "health":
                 _playerData.health += value;
+                if(_playerData.health <= 0)
+                {
+                    _playerData.isAlive = false;
+                    _playerData.health = 0;
+                }
+                else if (_playerData.health > 100)
+                {
+                    _playerData.health = 100;
+                }
                 break;
             case "attack":
                 _playerData.attack += value;
@@ -35,12 +45,68 @@ public class PlayerData : ScriptableObject
                 break;
             case "temperature":
                 _playerData.temperature += value;
+                if (_playerData.temperature > 100)
+                {
+                    _playerData.temperature = 100;
+                }
+                else if (_playerData.temperature < 0)
+                {
+                    _playerData.temperature = 0;
+                }
+
                 break;
             case "speed":
                 _playerData.speed += value;
                 break;
             default:
                 break;
+        }
+    }
+
+    public void SetValue(string x, float value)
+    {
+        switch (x)
+        {
+            case "health":
+                _playerData.health = value;
+                break;
+            case "attack":
+                _playerData.attack = value;
+                break;
+            case "hunger":
+                _playerData.hunger = value;
+                break;
+            case "stamina":
+                _playerData.stamina = value;
+                break;
+            case "temperature":
+                _playerData.temperature = value;
+                break;
+            case "speed":
+                _playerData.speed = value;
+                break;
+            default:
+                break;
+        }
+    }
+    public float GetValue(string x)
+    {
+        switch (x)
+        {
+            case "health":
+                return _playerData.health;
+            case "attack":
+                return _playerData.attack;
+            case "hunger":
+                return _playerData.hunger;
+            case "stamina":
+                return _playerData.stamina;
+            case "temperature":
+                return _playerData.temperature;
+            case "speed":
+                return _playerData.speed;
+            default:
+                return -1;
         }
     }
 
@@ -53,10 +119,11 @@ public class PlayerData : ScriptableObject
 [System.Serializable]
 public class playerData
 {
-    public int health;
-    public int stamina;
-    public int temperature;
-    public int hunger;
-    public int attack;
-    public int speed;
+    public float health;
+    public float stamina;
+    public float temperature;
+    public float hunger;
+    public float attack;
+    public float speed;
+    public bool isAlive;
 }
