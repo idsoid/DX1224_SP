@@ -180,4 +180,19 @@ public class PlayerController : MonoBehaviour
         Debug.Log("vInput: " + vInput);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("SafeZone"))
+        {
+            isNearCampfire = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("SafeZone"))
+        {
+            isNearCampfire = false;
+        }
+    }
 }
