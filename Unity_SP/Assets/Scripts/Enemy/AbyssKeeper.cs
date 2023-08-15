@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class BaseEnemy : MonoBehaviour
+public class AbyssKeeper : MonoBehaviour
 {
     [SerializeField]
     private GameObject player;
