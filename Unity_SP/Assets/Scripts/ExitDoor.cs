@@ -14,14 +14,6 @@ public class ExitDoor : MonoBehaviour
         closed = true;
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            ToggleClose(!closed);
-        }
-    }
-
     public void ToggleClose(bool x)
     {
         closed = x;
