@@ -11,14 +11,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private int tempDecreaseMultiplier = 100;
+
+    [SerializeField]
+    private bool isNearCampfire = false;
+
+    [SerializeField]
+    private float mvmt = 2f;
+
     float hInput, vInput;
     string idleAnim;
+
+    bool canRun,isRunning;
+
+    bool isCold;
+
     void Start()
     {
+        isCold = false;
+        canRun = true;
+        isRunning = false;
         hInput = vInput = 0f;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        anim.speed = 0.5f;
+        
         playerData.Init();
     }
 
@@ -26,7 +43,10 @@ public class PlayerController : MonoBehaviour
     // Update for input
     void Update()
     {
+
+        PlayerRun();
         HandleInputMovement();
+        HandleTemperatureChange();
     }
 
     //fixed update for data processing
@@ -41,16 +61,88 @@ public class PlayerController : MonoBehaviour
     }
     private void HandleInputMovement()
     {
-        hInput = Input.GetAxis("Horizontal");
-        vInput = Input.GetAxis("Vertical");
+        hInput = Input.GetAxis("Horizontal") * mvmt;
+        vInput = Input.GetAxis("Vertical") * mvmt;
 
-        if(Input.GetKey(KeyCode.LeftShift))
+
+        if (canRun)
         {
-            hInput *= 1.2f;
-            vInput *= 1.2f;
-            anim.speed = 0.8f;
-            playerData.AlterValue("stamina",1);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                hInput *= 1.5f;
+                vInput *= 1.5f;
+                anim.speed = 0.8f;
+                isRunning = true;
+            }
+            else
+            {
+                isRunning = false;
+                anim.speed = 0.5f;
+            }
         }
+
+        rb.velocity = new Vector2 (hInput, vInput);
+    }
+
+    private void HandleTemperatureChange()
+    {
+        if (isNearCampfire && playerData.GetValue("temperature") != 100)
+        {
+            playerData.AlterValue("temperature", Time.deltaTime * tempDecreaseMultiplier);
+            isCold = false;
+        }
+        else if (!isNearCampfire)
+        {
+            if (!isCold)
+            {
+                playerData.AlterValue("temperature", -Time.deltaTime * tempDecreaseMultiplier);
+                if (playerData.GetValue("temperature") == 0)
+                {
+                    isCold = true;
+                }
+            }
+        }
+        if (isCold)
+        {
+            playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
+        }
+    }
+
+    private void PlayerRun()
+    {
+        if (canRun)
+        {
+            if (isRunning)
+            {
+                playerData.AlterValue("stamina", -Time.deltaTime * 20f);
+                if (playerData.GetValue("stamina") <= 0)
+                {
+                    playerData.SetValue("stamina", 0);
+                    anim.speed = 0.5f;
+                    canRun = false;
+                    isRunning = false;
+                }
+            }
+            else
+            {
+                playerData.AlterValue("stamina", +Time.deltaTime * 10f);
+                if (playerData.GetValue("stamina") >= 80)
+                {
+                    playerData.SetValue("stamina",80);
+                }
+            }
+        }
+        else
+        {
+            playerData.AlterValue("stamina", +Time.deltaTime * 10f);
+            if (playerData.GetValue("stamina") >= 80)
+            {
+                playerData.SetValue("stamina", 80);
+                canRun = true;
+                isRunning = false;
+            }
+        }
+
     }
 
     private void HandleMovementAnimation()
