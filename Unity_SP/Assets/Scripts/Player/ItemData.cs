@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemData : ScriptableObject
 {
-    [SerializeField] private int itemID;
+    public int itemID;
     public string itemName;
     public Sprite itemSprite;
     [SerializeField] private PlayerData playerData;

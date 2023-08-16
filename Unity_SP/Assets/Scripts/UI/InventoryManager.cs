@@ -84,4 +84,19 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
+    public void BurnWood()
+    {
+        if (Items.Count == 0) return;
+        else
+        {
+            foreach (ItemData item in ItemContent)
+            {
+                if (item.itemID == 52)
+                {
+                    Remove(item);
+                }
+            }
+        }
+    }
 }
