@@ -40,7 +40,7 @@ public class EnemyData : ScriptableObject
     {
         if (FileManager.LoadFromFile("temp.json", out string s))
         {
-            JsonUtility.FromJsonOverwrite(s, this);
+            JsonUtility.FromJsonOverwrite(s, _enemydata);
         }
     }
 }
