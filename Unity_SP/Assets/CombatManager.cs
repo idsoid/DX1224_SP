@@ -26,6 +26,9 @@ public class CombatManager : MonoBehaviour
     private EnemyData enemyData;
 
     bool playerTurn = true;
+
+    [SerializeField]
+    private string sceneName;
     public enum ACTION
     {
         ATTACK,
@@ -102,17 +105,19 @@ public class CombatManager : MonoBehaviour
                 if (enemyData.GetDead())
                 {
                     combatData.enemyData = enemyData;
-                    SceneManager.LoadScene("andrewScene");
+                    SceneManager.LoadScene(sceneName);
                 }
                 break;
             case ACTION.SKILL:
+                playerData.AlterValue("hunger", -20);
+                playerData.AlterValue("health", 10);
                 enemyData.SetHealth(playerData.GetValue("attack") * 2);
                 playerTurn = false;
                 enemySelect.SetActive(false);
                 if (enemyData.GetDead())
                 {
                     combatData.enemyData = enemyData;
-                    SceneManager.LoadScene("andrewScene");
+                    SceneManager.LoadScene(sceneName);
                 }
                 break;
             case ACTION.HEAL:
