@@ -188,7 +188,7 @@ public class ItemData : ScriptableObject
             else
                 Debug.Log("No food to consume.");
         }
-        else if (itemID == 52)
+        else if (itemID == 52) // Wood
         {
             if (count < 0)
             {
