@@ -38,9 +38,10 @@ public class EnemyData : ScriptableObject
     }
     public void Load()
     {
-        string s;
-        FileManager.LoadFromFile("temp.json",out s);
-        JsonUtility.FromJsonOverwrite(s, this);
+        if (FileManager.LoadFromFile("playerdata.json", out string s))
+        {
+            JsonUtility.FromJsonOverwrite(s, this);
+        }
     }
 }
 
