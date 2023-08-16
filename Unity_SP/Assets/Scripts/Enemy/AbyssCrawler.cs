@@ -6,6 +6,8 @@ using Pathfinding;
 public class AbyssCrawler : MonoBehaviour
 {
     [SerializeField]
+    private EnemyData enemyData;
+    [SerializeField]
     private GameObject player;
     [SerializeField]
     private List<GameObject> objWaypoints = new();
@@ -50,14 +52,18 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        health = 50.0f;
-        attack = 10.0f;
         attackTime = 0.0f;
         furthest = null;
+        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        if (enemyData.GetDead())
+        {
+            gameObject.SetActive(false);
+        }
+
         float dist = 0.0f;
         for (int i = 0; i < objWaypoints.Count; i++)
         {

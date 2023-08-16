@@ -663,10 +663,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1282176653}
     - target: {fileID: 5219829129952075930, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
-      propertyPath: objWaypoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219829129952075930, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: objWaypoints.Array.data[0]
       value: 
       objectReference: {fileID: 2064070302}
@@ -699,10 +695,6 @@ PrefabInstance:
     - target: {fileID: 1299719064040352944, guid: 53c3dc380c885c346a6b38d3cae8a1bd, type: 3}
       propertyPath: m_Name
       value: AbyssKeeper
-      objectReference: {fileID: 0}
-    - target: {fileID: 1299719064040352944, guid: 53c3dc380c885c346a6b38d3cae8a1bd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1299719064040352957, guid: 53c3dc380c885c346a6b38d3cae8a1bd, type: 3}
       propertyPath: m_RootOrder
