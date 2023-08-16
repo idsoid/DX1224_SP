@@ -16,6 +16,8 @@ public class PlayerData : ScriptableObject
         _playerData.temperature = 100f;
         _playerData.hunger = 100f;
         _playerData.isAlive = true;
+        _playerData.tempDecreaseMultiplier = 100f;
+        _playerData.hungerDecreaseMultiplier = 0.5f;
     }
 
     public void AlterValue(string x, float value)
@@ -34,15 +36,19 @@ public class PlayerData : ScriptableObject
                     _playerData.health = 100;
                 }
                 break;
+
             case "attack":
                 _playerData.attack += value;
                 break;
+
             case "hunger":
                 _playerData.hunger += value;
                 break;
+
             case "stamina":
                 _playerData.stamina += value;
                 break;
+
             case "temperature":
                 _playerData.temperature += value;
                 if (_playerData.temperature > 100)
@@ -105,6 +111,10 @@ public class PlayerData : ScriptableObject
                 return _playerData.temperature;
             case "speed":
                 return _playerData.speed;
+            case "tempDecreaseMultiplier":
+                return _playerData.tempDecreaseMultiplier;
+            case "hungerDecreaseMultiplier":
+                return _playerData.hungerDecreaseMultiplier;
             default:
                 return -1;
         }
@@ -126,4 +136,6 @@ public class playerData
     public float attack;
     public float speed;
     public bool isAlive;
+    public float tempDecreaseMultiplier;
+    public float hungerDecreaseMultiplier;
 }

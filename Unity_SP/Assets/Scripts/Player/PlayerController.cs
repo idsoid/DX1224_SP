@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
-    [SerializeField]
-    private int tempDecreaseMultiplier = 100;
 
     [SerializeField]
     private bool isNearCampfire = false;
@@ -26,9 +24,11 @@ public class PlayerController : MonoBehaviour
     bool canRun,isRunning;
 
     bool isCold;
+    bool isHungry;
 
     void Start()
     {
+        isHungry = false;
         isCold = false;
         canRun = true;
         isRunning = false;
@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour
     // Update for input
     void Update()
     {
-
         PlayerRun();
         HandleInputMovement();
         HandleTemperatureChange();
+        HandleHungerChange();
     }
 
     //fixed update for data processing
@@ -88,14 +88,14 @@ public class PlayerController : MonoBehaviour
     {
         if (isNearCampfire && playerData.GetValue("temperature") != 100)
         {
-            playerData.AlterValue("temperature", Time.deltaTime * tempDecreaseMultiplier);
+            playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
             isCold = false;
         }
         else if (!isNearCampfire)
         {
             if (!isCold)
             {
-                playerData.AlterValue("temperature", -Time.deltaTime * tempDecreaseMultiplier);
+                playerData.AlterValue("temperature", -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
                 if (playerData.GetValue("temperature") == 0)
                 {
                     isCold = true;
@@ -103,6 +103,24 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (isCold)
+        {
+            playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
+        }
+    }
+
+    private void HandleHungerChange()
+    {
+        playerData.AlterValue("hunger", -Time.deltaTime * playerData.GetValue("hungerDecreaseMultiplier"));
+        if(playerData.GetValue("hunger") <= 0)
+        {
+            isHungry = true;
+        }
+        else
+        {
+            isHungry = false;
+        }
+
+        if(isHungry)
         {
             playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
         }
