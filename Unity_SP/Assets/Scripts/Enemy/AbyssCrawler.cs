@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class AbyssCrawler : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class AbyssCrawler : MonoBehaviour
     private EnemyData enemyData;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private PlayerData playerData;
     [SerializeField]
     private List<GameObject> objWaypoints = new();
     [SerializeField]
@@ -24,7 +27,6 @@ public class AbyssCrawler : MonoBehaviour
     public bool lightOn = false;
     private float health;
     private float attack;
-    private float attackTime;
 
     Path path;
     private int currentWaypoint = 0;
@@ -45,7 +47,9 @@ public class AbyssCrawler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
+            SceneManager.LoadScene("CombatScene");
         }
     }
     // Start is called before the first frame update
@@ -56,7 +60,6 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        attackTime = 0.0f;
         furthest = null;
         enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }

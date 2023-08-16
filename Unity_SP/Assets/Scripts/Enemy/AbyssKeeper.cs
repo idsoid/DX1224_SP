@@ -23,6 +23,7 @@ public class AbyssKeeper : MonoBehaviour
     private float totalTime;
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
+    private float raycastDistance = 10.0f;
 
     public bool lightOn = false;
     private float health;
@@ -72,8 +73,6 @@ public class AbyssKeeper : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-
         FSM();
         
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -124,11 +123,29 @@ public class AbyssKeeper : MonoBehaviour
     }
     private void FSM()
     {
-        //RaycastHit2D hit;
-        //if (true)
-        //{
-        //    hit = Physics2D.Raycast(transform.position, -Vector2.left);
-        //}
+        Vector2 movementDirection = rb.velocity.normalized;
+        Vector2 rayStart = transform.position;
+        if (movementDirection.x < 0)
+        {
+            rayStart += Vector2.left * transform.localScale.x * 0.5f;
+        }
+        else if (movementDirection.x > 0)
+        {
+            rayStart += Vector2.right * transform.localScale.x * 0.5f;
+        }
+        RaycastHit2D hit = Physics2D.Raycast(rayStart, movementDirection, raycastDistance);
+        // Check for collision and respond accordingly
+        if (hit.collider != null)
+        {
+            Debug.DrawLine(rayStart, hit.point, Color.red);
+            // Perform actions when a collision is detected, e.g., interact with the object
+        }
+        else
+        {
+            Debug.DrawRay(rayStart, movementDirection * raycastDistance, Color.green);
+            // Perform actions when no collision is detected
+        }
+
         switch (currentState)
         {
             case State.IDLE:

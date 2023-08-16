@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1299719064040352957
 Transform:
   m_ObjectHideFlags: 0
@@ -282,10 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2a6bb7db4d89f4fac25b0a9c7ae760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatData: {fileID: 0}
+  raycastDistance: 1
+  combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   enemyData: {fileID: 11400000, guid: 7cf0d0e45a52e534d82a19ba7cdb5937, type: 2}
   player: {fileID: 0}
-  playerData: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
   objWaypoints:
   - {fileID: 0}
   - {fileID: 0}
