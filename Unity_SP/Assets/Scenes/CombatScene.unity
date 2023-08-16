@@ -1061,8 +1061,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1942510244}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2115,8 +2114,8 @@ RectTransform:
   - {fileID: 1816940544}
   - {fileID: 1831876210}
   - {fileID: 499217610}
-  m_Father: {fileID: 1424006719}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2199,6 +2198,7 @@ MonoBehaviour:
   playertext: {fileID: 1816940546}
   playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
   enemytext: {fileID: 1831876212}
+  combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   actionSelect: {fileID: 914349105}
   enemySelect: {fileID: 1811680175}
   action: 0

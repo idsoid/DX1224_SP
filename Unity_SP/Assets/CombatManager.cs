@@ -16,6 +16,10 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private TMP_Text enemytext;
 
+    [SerializeField]
+    private CombatData combatData;
+
+
     public GameObject actionSelect;
     public GameObject enemySelect;
 
@@ -39,9 +43,7 @@ public class CombatManager : MonoBehaviour
         
         enemySelect.SetActive(false);
         action = ACTION.NONE;
-        enemyData = ScriptableObject.CreateInstance<EnemyData>();
-        enemyData.Load();
-        enemyData.Init(100, 10, null, "coc");
+        enemyData = combatData.enemyData;
     }
 
     // Update is called once per frame
@@ -99,6 +101,7 @@ public class CombatManager : MonoBehaviour
                 enemySelect.SetActive(false);
                 if (enemyData.GetDead())
                 {
+                    combatData.enemyData = enemyData;
                     SceneManager.LoadScene("andrewScene");
                 }
                 break;
@@ -108,6 +111,7 @@ public class CombatManager : MonoBehaviour
                 enemySelect.SetActive(false);
                 if (enemyData.GetDead())
                 {
+                    combatData.enemyData = enemyData;
                     SceneManager.LoadScene("andrewScene");
                 }
                 break;
