@@ -6,8 +6,8 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     [SerializeField] private int itemID;
-    [SerializeField] private string itemName;
-    [SerializeField] private Sprite itemSprite;
+    public string itemName;
+    public Sprite itemSprite;
     [SerializeField] private PlayerData playerData;
 
     private bool equipped;
