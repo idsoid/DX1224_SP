@@ -90,11 +90,12 @@ public class InventoryManager : MonoBehaviour
         if (Items.Count == 0) return;
         else
         {
-            foreach (ItemData item in ItemContent)
+            foreach (var item in Items)
             {
                 if (item.itemID == 52)
                 {
                     Remove(item);
+                    break;
                 }
             }
         }

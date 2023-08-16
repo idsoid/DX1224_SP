@@ -7,14 +7,17 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private GameObject fire;
     [SerializeField] private GameObject safeZone;
     [SerializeField] private Animator fireplaceAnim;
+    [SerializeField] private InventoryManager inventoryManager;
 
     private bool lit;
     public float burnTime;
+    private bool playerInteract;
 
     private void Start()
     {
         lit = true;
         burnTime = 180f;
+        playerInteract = false;
     }
 
     private void Update()
@@ -32,6 +35,15 @@ public class Fireplace : MonoBehaviour
             else if (burnTime == 0f)
             {
                 ToggleLit(false);
+            }
+        }
+
+        if (playerInteract)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                inventoryManager.BurnWood();
+                AddFuel();
             }
         }
     }
@@ -64,7 +76,17 @@ public class Fireplace : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            playerInteract = true;
+            Debug.Log("Player interacting");
+        }
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerInteract = false;
+            Debug.Log("Player no longer interacting");
         }
     }
 }
