@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 public class AbyssKeeper : MonoBehaviour
 {
-
+    [SerializeField]
+    private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private PlayerData playerData;
     [SerializeField]
     private List<GameObject> objWaypoints = new();
     [SerializeField]
@@ -40,14 +44,22 @@ public class AbyssKeeper : MonoBehaviour
         FREEZE,
         RUSH
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerData.SavePos(player.transform.position);
+            combatData.enemyData = enemyData;
+            SceneManager.LoadScene("CombatScene");
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
+        if (enemyData.GetDead())
+        {
+            gameObject.SetActive(false);
+        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -60,10 +72,7 @@ public class AbyssKeeper : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
+        
 
         FSM();
         

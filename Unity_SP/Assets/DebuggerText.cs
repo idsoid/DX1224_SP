@@ -28,13 +28,6 @@ public class DebuggerText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            enemyData.Init(100,10, testsprite, "test enemy");
-            enemyData.Save();
-            playerData.SavePos(player.transform.position);
-            SceneManager.LoadScene("CombatScene");
-        }
         debugtext.text = playerData.PrintSelf();
     }
 }

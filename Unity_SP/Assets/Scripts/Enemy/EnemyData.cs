@@ -31,18 +31,6 @@ public class EnemyData : ScriptableObject
             _enemydata.isDead = true;
         }
     }
-    public void Save()
-    {
-        string s = JsonUtility.ToJson(_enemydata);
-        FileManager.WriteToFile("temp.json", s);
-    }
-    public void Load()
-    {
-        if (FileManager.LoadFromFile("temp.json", out string s))
-        {
-            JsonUtility.FromJsonOverwrite(s, _enemydata);
-        }
-    }
 }
 
 [System.Serializable]

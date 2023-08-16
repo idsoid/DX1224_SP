@@ -6,6 +6,8 @@ using Pathfinding;
 public class AbyssCrawler : MonoBehaviour
 {
     [SerializeField]
+    private CombatData combatData;
+    [SerializeField]
     private EnemyData enemyData;
     [SerializeField]
     private GameObject player;
@@ -39,10 +41,12 @@ public class AbyssCrawler : MonoBehaviour
         CHASE,
         FLEE
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            combatData.enemyData = enemyData;
+        }
     }
     // Start is called before the first frame update
     void Start()
