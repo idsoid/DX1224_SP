@@ -59,4 +59,12 @@ public class Fireplace : MonoBehaviour
             ToggleLit(true);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+
+        }
+    }
 }

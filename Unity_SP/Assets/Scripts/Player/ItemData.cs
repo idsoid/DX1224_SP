@@ -39,6 +39,7 @@ public class ItemData : ScriptableObject
     <========== Consumables ==========>
         50. Health Potion +20 hp
         51. Food +20 hunger
+        52. Wood +60 burnTime
     */
 
     public void UseItem()
@@ -187,7 +188,15 @@ public class ItemData : ScriptableObject
             else
                 Debug.Log("No food to consume.");
         }
-
+        else if (itemID == 52)
+        {
+            if (count < 0)
+            {
+                count--;
+            }
+            else
+                Debug.Log("No wood to burn.");
+        }
     }
 
     public int GetCount()
