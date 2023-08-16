@@ -7,6 +7,9 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     private playerData _playerData = new playerData();
+
+    public Vector3 temppos;
+    public bool loadOldPos;
     public void Init()
     {
         _playerData.health = 100f;
@@ -18,6 +21,12 @@ public class PlayerData : ScriptableObject
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 100f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
+    }
+
+    public void SavePos(Vector3 pos)
+    {
+        loadOldPos= true;
+        temppos = pos;
     }
 
     public void AlterValue(string x, float value)
@@ -138,4 +147,5 @@ public class playerData
     public bool isAlive;
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
+    public List<ItemData> inventory;
 }
