@@ -11,10 +11,12 @@ public class ItemData : ScriptableObject
     [SerializeField] private PlayerData playerData;
 
     private bool equipped;
+    private int count;
 
     private void Start()
     {
         equipped = false;
+        count = 0;
     }
 
     /*
@@ -37,6 +39,7 @@ public class ItemData : ScriptableObject
     <========== Consumables ==========>
         50. Health Potion +20 hp
         51. Food +20 hunger
+        52. Wood +60 burnTime
     */
 
     public void UseItem()
@@ -167,12 +170,42 @@ public class ItemData : ScriptableObject
         }
         else if (itemID == 50) // Health Potion
         {
-            playerData.AlterValue("health", 20);
+            if (count > 0)
+            {
+                playerData.AlterValue("health", 20);
+                count--;
+            }
+            else
+                Debug.Log("No health potion to consume.");
         }
         else if (itemID == 51) // Food
         {
-            playerData.AlterValue("hunger", 20);
+            if (count > 0)
+            {
+                playerData.AlterValue("hunger", 20);
+                count--;
+            }
+            else
+                Debug.Log("No food to consume.");
         }
+        else if (itemID == 52) // Wood
+        {
+            if (count < 0)
+            {
+                count--;
+            }
+            else
+                Debug.Log("No wood to burn.");
+        }
+    }
 
+    public int GetCount()
+    {
+        return count;
+    }
+
+    public void AlterCount(int added)
+    {
+        count += added;
     }
 }

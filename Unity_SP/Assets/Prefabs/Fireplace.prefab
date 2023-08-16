@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 333774844}
   m_Layer: 0
   m_Name: Fireplace
-  m_TagString: Untagged
+  m_TagString: Fireplace
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -427,13 +427,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7905470268432330799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01bc7af3ccf7fad43a69d934643f40f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0efa3228bee4f3649b56caa67ab08c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 7905470266464448108}
   safeZone: {fileID: 1024323025}
   fireplaceAnim: {fileID: 7905470267133969568}
-  burnTime: 0
+  burnTime: 180
 --- !u!1 &8268193685158983132
 GameObject:
   m_ObjectHideFlags: 0
