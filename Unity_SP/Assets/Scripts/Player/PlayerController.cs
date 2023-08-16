@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         
         playerData.Init();
+        if(playerData.loadOldPos)
+        {
+            transform.position = playerData.temppos;
+            playerData.loadOldPos = false;
+        }
     }
 
 
