@@ -10,6 +10,8 @@ public class PlayerData : ScriptableObject
 
     public Vector3 temppos;
     public bool loadOldPos;
+    public bool safe;
+
     public void Init()
     {
         _playerData.health = 100f;
@@ -19,7 +21,7 @@ public class PlayerData : ScriptableObject
         _playerData.temperature = 100f;
         _playerData.hunger = 100f;
         _playerData.isAlive = true;
-        _playerData.tempDecreaseMultiplier = 100f;
+        _playerData.tempDecreaseMultiplier = 10f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
     }
 

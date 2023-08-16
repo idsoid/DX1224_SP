@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField]
-    private bool isNearCampfire = false;
-
-    [SerializeField]
     private float mvmt = 2f;
 
     float hInput, vInput;
@@ -91,12 +88,12 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTemperatureChange()
     {
-        if (isNearCampfire && playerData.GetValue("temperature") != 100)
+        if (playerData.safe && playerData.GetValue("temperature") != 100)
         {
             playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
             isCold = false;
         }
-        else if (!isNearCampfire)
+        else if (!playerData.safe)
         {
             if (!isCold)
             {
@@ -207,7 +204,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("SafeZone"))
         {
-            isNearCampfire = true;
+            playerData.safe = true;
         }
     }
 
@@ -215,7 +212,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("SafeZone"))
         {
-            isNearCampfire = false;
+            playerData.safe = false;
         }
     }
 }
