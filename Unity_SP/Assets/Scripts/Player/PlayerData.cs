@@ -23,6 +23,7 @@ public class PlayerData : ScriptableObject
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 10f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
+        _playerData.redUnlocked = _playerData.greenUnlocked = _playerData.blueUnlocked = false;
     }
 
     public void SavePos(Vector3 pos)
@@ -135,6 +136,27 @@ public class PlayerData : ScriptableObject
     {
         return _playerData.health + "\n" + _playerData.stamina + "\n" + _playerData.temperature + "\n" + _playerData.hunger + "\n" + _playerData.attack + "\n" + _playerData.speed;
     }
+
+    public void Unlock(string col)
+    {
+        switch(col)
+        {
+            case "red":
+                _playerData.redUnlocked = true;
+                break;
+            case "green":
+                _playerData.greenUnlocked = true;
+                break;
+            case "blue":
+                _playerData.blueUnlocked = true;
+                break;
+        }
+    }
+
+    public bool CheckUnlocked()
+    {
+        return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.greenUnlocked;
+    }
 }
 
 [System.Serializable]
@@ -150,4 +172,5 @@ public class playerData
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
     public List<ItemData> inventory;
+    public bool redUnlocked, blueUnlocked, greenUnlocked;
 }
