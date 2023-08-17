@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78f3b4ef9b237541be7a8391fe69082, type: 3}
+  m_Name: Key_Blue
+  m_EditorClassIdentifier: 
+  itemID: 2
+  itemName: Key_Blue
+  itemSprite: {fileID: -1988916060, guid: 76b68597c13bc634e9f31544e2d158d3, type: 3}
+  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}

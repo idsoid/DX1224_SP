@@ -147,9 +147,8 @@ public class PlayerData : ScriptableObject
                 return _playerData.hungerDecreaseMultiplier;
             case "maxHealth":
                 return _playerData.maxHealth;
-                break;
             case "maxStamina":
-                return _playerData.maxHealth;
+                return _playerData.maxStamina;
             case "maxTemperature":
                 return _playerData.maxTemperature;
             case "maxHunger":
