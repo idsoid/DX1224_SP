@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovementAnimation();
     }
+
+    #region
     private void HandleInputMovement()
     {
         hInput = Input.GetAxis("Horizontal") * mvmt;
@@ -199,6 +201,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("hInput: " + hInput);
         Debug.Log("vInput: " + vInput);
     }
+    #endregion
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
