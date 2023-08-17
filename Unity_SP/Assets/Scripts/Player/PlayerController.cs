@@ -20,14 +20,12 @@ public class PlayerController : MonoBehaviour
 
     bool canRun,isRunning;
 
-    bool isCold;
     bool isHungry;
 
 
     void Start()
     {
         isHungry = false;
-        isCold = false;
         canRun = true;
         isRunning = false;
         hInput = vInput = 0f;
@@ -94,20 +92,20 @@ public class PlayerController : MonoBehaviour
         if (playerData.safe && playerData.GetValue("temperature") != playerData.GetValue("maxTemperature"))
         {
             playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
-            isCold = false;
+            playerData.isCold = false;
         }
         else if (!playerData.safe)
         {
-            if (!isCold)
+            if (!playerData.isCold)
             {
                 playerData.AlterValue("temperature", -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
                 if (playerData.GetValue("temperature") == 0)
                 {
-                    isCold = true;
+                    playerData.isCold = true;
                 }
             }
         }
-        if (isCold)
+        if (playerData.isCold)
         {
             playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
         }

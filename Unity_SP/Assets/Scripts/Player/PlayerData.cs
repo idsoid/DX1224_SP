@@ -11,9 +11,11 @@ public class PlayerData : ScriptableObject
     public Vector3 temppos;
     public bool loadOldPos;
     public bool safe;
-
+    public bool isCold;
     public void Init()
     {
+        isCold = false;
+        safe = false;
         _playerData.health = 100f;
         _playerData.attack = 25f;
         _playerData.speed = 10f;
@@ -183,6 +185,7 @@ public class PlayerData : ScriptableObject
     {
         return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.greenUnlocked;
     }
+
 }
 
 [System.Serializable]
@@ -198,7 +201,7 @@ public class playerData
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
     public List<ItemData> inventory;
-
+    
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
     public bool redUnlocked, blueUnlocked, greenUnlocked;

@@ -10,6 +10,7 @@ public class UpdateHUD : MonoBehaviour
     public Image healthBar;
     public Image staminaBar;
     public Image hungerBar;
+    //public Image frostBar;
     public GameObject frost1;
     public GameObject frost2;
     public GameObject frost3;
@@ -25,63 +26,83 @@ public class UpdateHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         quintTemp = playerData.GetValue("maxTemperature") / 4;
-
-        if (playerData.GetValue("temperature") < quintTemp)
+        if (!playerData.safe)
         {
-            if (frost4.activeSelf)
+            if (playerData.GetValue("temperature") < quintTemp)
             {
-                //frost4.SetActive(false);
+                if (frost4.activeSelf)
+                {
+                    //frost4.SetActive(false);
+                }
+                else if (!frost4.activeSelf)
+                {
+                    frost4.SetActive(true);
+                }
             }
-            else if (!frost4.activeSelf)
+            else if (playerData.GetValue("temperature") < quintTemp * 2)
             {
-                frost4.SetActive(true);
-                frost3.SetActive(false);
+                if (frost3.activeSelf)
+                {
+                    //frost3.SetActive(false);
+                }
+                else if (!frost3.activeSelf)
+                {
+                    frost3.SetActive(true);
+                }
             }
-        }
-        else if (playerData.GetValue("temperature") < quintTemp * 2)
-        {
-            if (frost3.activeSelf)
+            else if (playerData.GetValue("temperature") < quintTemp * 3)
             {
-                //frost3.SetActive(false);
+                if (frost2.activeSelf)
+                {
+                    //frost2.SetActive(false);
+                }
+                else if (!frost2.activeSelf)
+                {
+                    frost2.SetActive(true);
+                }
             }
-            else if (!frost3.activeSelf)
+            else if (playerData.GetValue("temperature") < quintTemp * 4)
             {
-                frost3.SetActive(true);
-                frost2.SetActive(false);
+                if (frost1.activeSelf)
+                {
+                    //frost1.SetActive(false);
+                }
+                else if (!frost1.activeSelf)
+                {
+                    frost1.SetActive(true);
+                }
             }
-        }
-        else if (playerData.GetValue("temperature") < quintTemp * 3)
-        {
-            if (frost2.activeSelf)
-            {
-                //frost2.SetActive(false);
-            }
-            else if (!frost2.activeSelf)
-            {
-                frost2.SetActive(true);
-                frost1.SetActive(false);
-            }
-        }
-        else if (playerData.GetValue("temperature") < quintTemp * 4)
-        {
-            if (frost1.activeSelf)
-            {
-                //frost1.SetActive(false);
-            }
-            else if (!frost1.activeSelf)
-            {
-                frost1.SetActive(true);
-            }
-        }
-        else
-        {
-            frost1.SetActive(false);
-            frost2.SetActive(false);
-            frost3.SetActive(false);
-            frost4.SetActive(false);
         }
 
+        else if(playerData.safe)
+        {
+            if(playerData.GetValue("temperature") > quintTemp)
+            {
+                if (frost4.activeSelf)
+                    frost4.SetActive(false);
+            }
+
+            if (playerData.GetValue("temperature") > quintTemp * 2)
+            {
+                if (frost3.activeSelf)
+                    frost3.SetActive(false);
+            }
+
+            if (playerData.GetValue("temperature") > quintTemp * 3)
+            {
+                if (frost2.activeSelf)
+                    frost2.SetActive(false);
+            }
+
+
+            if(playerData.GetValue("temperature") == playerData.GetValue("maxTemperature"))
+            {
+                if(frost1.activeSelf)
+                    frost1.SetActive(false);
+            }
+        }
         lerpSpeed = 3f * Time.deltaTime;
 
         setBars();
@@ -92,5 +113,6 @@ public class UpdateHUD : MonoBehaviour
         healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, playerData.GetValue("stamina") / playerData.GetValue("maxStamina"), lerpSpeed);
         hungerBar.fillAmount = Mathf.Lerp(hungerBar.fillAmount, playerData.GetValue("hunger") / playerData.GetValue("maxHunger"), lerpSpeed);
+        //frostBar.fillAmount = Mathf.Lerp(frostBar.fillAmount, (playerData.GetValue("maxTemperature") - playerData.GetValue("temperature")) / playerData.GetValue("maxTemperature"), lerpSpeed);
     }
 }
