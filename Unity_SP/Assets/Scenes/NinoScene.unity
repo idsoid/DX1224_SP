@@ -823,6 +823,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2022733874}
     m_Modifications:
+    - target: {fileID: 1046600668481213539, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1282176653}
+    - target: {fileID: 2077645168676718014, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077645168676718014, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077645168676718014, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077645168676718014, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7880564738824593508, guid: f331fb8eb1e937641ae7afb0fd9ebf98, type: 3}
       propertyPath: m_Name
       value: AbyssImitater
