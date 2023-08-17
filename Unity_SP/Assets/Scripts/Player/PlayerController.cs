@@ -199,8 +199,8 @@ public class PlayerController : MonoBehaviour
 
     private void PrintSelf()
     {
-        Debug.Log("hInput: " + hInput);
-        Debug.Log("vInput: " + vInput);
+        //Debug.Log("hInput: " + hInput);
+        //Debug.Log("vInput: " + vInput);
     }
     #endregion
 
