@@ -23,7 +23,7 @@ public class AbyssCrawler : MonoBehaviour
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
     private Transform furthest;
-    private float raycastDistance = 10.0f;
+    private float raycastDistance = 5.0f;
 
     public bool lightOn = false;
     private float health;
@@ -156,7 +156,7 @@ public class AbyssCrawler : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f)
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
                 {
                     currentState = State.CHASE;
                 }

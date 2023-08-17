@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6861095249169357086}
   - component: {fileID: 7364687031073749542}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Rush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299719063743169543}
   - component: {fileID: 1299719063743169536}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wandering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,13 +181,13 @@ GameObject:
   - component: {fileID: 1299719064040352945}
   - component: {fileID: 4062002773646163647}
   - component: {fileID: 4328184541781674378}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AbyssKeeper
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1299719064040352957
 Transform:
   m_ObjectHideFlags: 0
@@ -282,7 +282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2a6bb7db4d89f4fac25b0a9c7ae760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDistance: 1
   combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   enemyData: {fileID: 11400000, guid: 7cf0d0e45a52e534d82a19ba7cdb5937, type: 2}
   player: {fileID: 0}

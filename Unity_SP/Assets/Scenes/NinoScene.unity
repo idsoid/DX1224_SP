@@ -502,6 +502,7 @@ Transform:
   - {fileID: 458477780}
   - {fileID: 994018639}
   - {fileID: 737215562}
+  - {fileID: 5763181393364220972}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -516,6 +517,7 @@ GameObject:
   - component: {fileID: 2044808749}
   - component: {fileID: 2044808748}
   - component: {fileID: 2044808747}
+  - component: {fileID: 2044808750}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -589,6 +591,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2044808750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044808746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &2064070302
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +709,10 @@ PrefabInstance:
     - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: m_Name
       value: AbyssCrawler
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5219829129952075930, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: player
@@ -776,3 +815,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1299719064040352957, guid: 53c3dc380c885c346a6b38d3cae8a1bd, type: 3}
   m_PrefabInstance: {fileID: 4328184541781674375}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5763181393364220972 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+  m_PrefabInstance: {fileID: 8514413800117683088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8514413800117683088
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2022733874}
+    m_Modifications:
+    - target: {fileID: 4166859674998521777, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_Name
+      value: AbyssTrailer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521777, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19108146
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
