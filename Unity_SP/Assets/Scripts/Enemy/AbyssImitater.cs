@@ -15,14 +15,17 @@ public class AbyssImitater : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
     [SerializeField]
-    private List<GameObject> objWaypoints = new();
-    [SerializeField]
     private Transform enemySprite;
+    [SerializeField]
+    private Transform mimicSprite;
+    [SerializeField]
+    private List<Sprite> itemSprites;
+    private int decider;
     private int targetIndex;
     private float totalTime;
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
-    private float raycastDistance = 5.0f;
+    private Vector3 oldPos;
 
     public bool lightOn = false;
 
@@ -36,10 +39,8 @@ public class AbyssImitater : MonoBehaviour
     private State currentState;
     public enum State
     {
-        IDLE,
-        PATROL,
-        CHASE,
-        FLEE
+        MIMIC,
+        CHASE
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,16 +54,18 @@ public class AbyssImitater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 4)];
+        enemySprite.gameObject.SetActive(false);
         if (enemyData.GetDead())
         {
             gameObject.SetActive(false);
         }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        currentState = State.PATROL;
+        currentState = State.MIMIC;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
-        target = objWaypoints[0].GetComponent<Transform>();
-        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        target = player.transform;
+        enemyData.Init(40, 15, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -75,7 +78,10 @@ public class AbyssImitater : MonoBehaviour
         }
         Vector2 force = speed * Time.deltaTime * ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
 
-        rb.AddForce(force);
+        if (currentState == State.CHASE)
+        {
+            rb.AddForce(force);
+        }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)
@@ -108,70 +114,25 @@ public class AbyssImitater : MonoBehaviour
     }
     private void FSM()
     {
-        Vector2 moveDir = rb.velocity.normalized;
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
-        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
-        {
-            Debug.DrawLine(origin, hit.point, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
-        }
-
         switch (currentState)
         {
-            case State.IDLE:
-                totalTime += Time.deltaTime;
-                if (totalTime >= 1.0f)
+            case State.MIMIC:
+                if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
                 {
-                    targetIndex++;
-                    targetIndex %= objWaypoints.Count;
-                    currentState = State.PATROL;
-                }
-                else if (lightOn)
-                {
-                    speed *= 10;
-                    currentState = State.FLEE;
-                }
-                break;
-            case State.PATROL:
-                target = objWaypoints[targetIndex].GetComponent<Transform>();
-                if (Vector3.Distance(target.position, transform.position) <= 0.5f)
-                {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
-                {
+                    mimicSprite.gameObject.SetActive(false);
+                    enemySprite.gameObject.SetActive(true);
                     currentState = State.CHASE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 10;
-                    currentState = State.FLEE;
                 }
                 break;
             case State.CHASE:           
                 target = player.transform;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
                 {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 5;
-                    currentState = State.FLEE;
-                }
-                break;
-            case State.FLEE:
-                if (Vector3.Distance(player.transform.position, transform.position) >= 1.0f && !lightOn)
-                {
-                    speed /= 5;
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
+                    mimicSprite.gameObject.SetActive(true);
+                    enemySprite.gameObject.SetActive(false);
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
+                    currentState = State.MIMIC;
                 }
                 break;
             default:
