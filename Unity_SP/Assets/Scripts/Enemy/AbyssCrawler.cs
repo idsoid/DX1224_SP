@@ -56,6 +56,10 @@ public class AbyssCrawler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (enemyData.GetDead())
+        {
+            gameObject.SetActive(false);
+        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -67,11 +71,6 @@ public class AbyssCrawler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
-
         float dist = 0.0f;
         for (int i = 0; i < objWaypoints.Count; i++)
         {
@@ -81,7 +80,6 @@ public class AbyssCrawler : MonoBehaviour
                 furthest = objWaypoints[i].transform;
             }
         }
-        Debug.Log(furthest);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
