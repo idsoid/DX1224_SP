@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryItemController : MonoBehaviour
 {
     [SerializeField] private ItemData item;
+    [SerializeField] private GameObject equippedIcon;
 
     public Button RemoveButton;
     public void RemoveItem()
@@ -22,7 +23,14 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseCorrespondingItem()
     {
-        Debug.Log("Use " + item.itemName);
         item.UseItem();
+        if (item.GetEquipped())
+        {
+            equippedIcon.SetActive(true);
+        }
+        else
+        {
+            equippedIcon.SetActive(false);
+        }
     }
 }
