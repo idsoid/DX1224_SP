@@ -81,6 +81,13 @@ public class PlayerData : ScriptableObject
                 _playerData.speed += value;
                 break;
 
+            case "tempDecreaseMultiplier":
+                _playerData.tempDecreaseMultiplier += value;
+                break;
+            case "hungerDecreaseMultiplier":
+                _playerData.hungerDecreaseMultiplier += value;
+                break;
+
             default:
                 break;
         }
@@ -107,6 +114,12 @@ public class PlayerData : ScriptableObject
                 break;
             case "speed":
                 _playerData.speed = value;
+                break;
+            case "tempDecreaseMultiplier":
+                _playerData.tempDecreaseMultiplier = value;
+                break;
+            case "hungerDecreaseMultiplier":
+                _playerData.hungerDecreaseMultiplier = value;
                 break;
             default:
                 break;
