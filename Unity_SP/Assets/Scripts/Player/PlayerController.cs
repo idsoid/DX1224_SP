@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTemperatureChange()
     {
-        if (playerData.safe && playerData.GetValue("temperature") != 100)
+        if (playerData.safe && playerData.GetValue("temperature") != playerData.GetValue("maxTemperature"))
         {
             playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
             isCold = false;
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 playerData.AlterValue("stamina", +Time.deltaTime * 10f);
-                if (playerData.GetValue("stamina") >= 80)
+                if (playerData.GetValue("stamina") >= playerData.GetValue("maxStamina"))
                 {
                     playerData.SetValue("stamina",80);
                 }
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerData.AlterValue("stamina", +Time.deltaTime * 10f);
-            if (playerData.GetValue("stamina") >= 80)
+            if (playerData.GetValue("stamina") >= playerData.GetValue("maxStamina"))
             {
                 playerData.SetValue("stamina", 80);
                 canRun = true;

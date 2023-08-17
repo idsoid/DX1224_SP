@@ -24,6 +24,10 @@ public class PlayerData : ScriptableObject
         _playerData.tempDecreaseMultiplier = 10f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
         _playerData.redUnlocked = _playerData.greenUnlocked = _playerData.blueUnlocked = false;
+        _playerData.maxHealth = 100f;
+        _playerData.maxStamina = 80f;
+        _playerData.maxTemperature = 100f;
+        _playerData.maxHunger = 100f;
     }
 
     public void SavePos(Vector3 pos)
@@ -76,6 +80,7 @@ public class PlayerData : ScriptableObject
             case "speed":
                 _playerData.speed += value;
                 break;
+
             default:
                 break;
         }
@@ -127,6 +132,15 @@ public class PlayerData : ScriptableObject
                 return _playerData.tempDecreaseMultiplier;
             case "hungerDecreaseMultiplier":
                 return _playerData.hungerDecreaseMultiplier;
+            case "maxHealth":
+                return _playerData.maxHealth;
+                break;
+            case "maxStamina":
+                return _playerData.maxHealth;
+            case "maxTemperature":
+                return _playerData.maxTemperature;
+            case "maxHunger":
+                return _playerData.maxHunger;
             default:
                 return -1;
         }
@@ -172,5 +186,8 @@ public class playerData
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
     public List<ItemData> inventory;
+
+    public float maxHealth, maxStamina, maxTemperature, maxHunger;
+
     public bool redUnlocked, blueUnlocked, greenUnlocked;
 }
