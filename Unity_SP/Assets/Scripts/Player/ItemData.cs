@@ -208,4 +208,9 @@ public class ItemData : ScriptableObject
     {
         count += added;
     }
+
+    public bool GetEquipped()
+    {
+        return equipped;
+    }
 }
