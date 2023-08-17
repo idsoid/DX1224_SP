@@ -42,8 +42,12 @@ public class Fireplace : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                inventoryManager.BurnWood();
-                AddFuel();
+                if (inventoryManager.GetItemByID(52) != null)
+                {
+                    var wood = inventoryManager.GetItemByID(52);
+                    inventoryManager.Remove(wood);
+                    AddFuel();
+                }
             }
         }
     }
