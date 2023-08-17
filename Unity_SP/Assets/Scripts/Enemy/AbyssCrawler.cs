@@ -23,6 +23,7 @@ public class AbyssCrawler : MonoBehaviour
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
     private Transform furthest;
+    private float raycastDistance = 10.0f;
 
     public bool lightOn = false;
     private float health;
@@ -122,6 +123,18 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
+        Vector2 moveDir = rb.velocity.normalized;
+        Vector2 origin = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
+        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
+        {
+            Debug.DrawLine(origin, hit.point, Color.red);
+        }
+        else
+        {
+            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
+        }
+
         switch (currentState)
         {
             case State.IDLE:

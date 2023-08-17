@@ -123,27 +123,16 @@ public class AbyssKeeper : MonoBehaviour
     }
     private void FSM()
     {
-        Vector2 movementDirection = rb.velocity.normalized;
-        Vector2 rayStart = transform.position;
-        if (movementDirection.x < 0)
+        Vector2 moveDir = rb.velocity.normalized;
+        Vector2 origin = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
+        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
         {
-            rayStart += Vector2.left * transform.localScale.x * 0.5f;
-        }
-        else if (movementDirection.x > 0)
-        {
-            rayStart += Vector2.right * transform.localScale.x * 0.5f;
-        }
-        RaycastHit2D hit = Physics2D.Raycast(rayStart, movementDirection, raycastDistance);
-        // Check for collision and respond accordingly
-        if (hit.collider != null)
-        {
-            Debug.DrawLine(rayStart, hit.point, Color.red);
-            // Perform actions when a collision is detected, e.g., interact with the object
+            Debug.DrawLine(origin, hit.point, Color.red);
         }
         else
         {
-            Debug.DrawRay(rayStart, movementDirection * raycastDistance, Color.green);
-            // Perform actions when no collision is detected
+            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
         }
 
         switch (currentState)
