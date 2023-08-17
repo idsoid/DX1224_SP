@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a78f3b4ef9b237541be7a8391fe69082, type: 3}
-  m_Name: KitchenKnifeData
+  m_Name: KitchenKnife
   m_EditorClassIdentifier: 
   itemID: 23
   itemName: Kitchen Knife
