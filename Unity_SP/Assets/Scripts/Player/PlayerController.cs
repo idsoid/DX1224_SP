@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     bool isCold;
     bool isHungry;
 
+
     void Start()
     {
         isHungry = false;
