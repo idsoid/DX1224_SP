@@ -10,11 +10,30 @@ public class ExitDoor : MonoBehaviour
 
     private bool closed;
     private bool playerInteract;
+    private bool panelOpen;
 
     private void Start()
     {
         closed = true;
         playerInteract = false;
+        panelOpen = false;
+    }
+
+    private void Update()
+    {
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    panelOpen = !panelOpen;
+        //    lockPanel.SetActive(panelOpen);
+        //}
+        if (playerInteract)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                panelOpen = !panelOpen;
+                lockPanel.SetActive(panelOpen);
+            }
+        }
     }
 
     public void ToggleClose(bool x)
@@ -29,14 +48,6 @@ public class ExitDoor : MonoBehaviour
         {
             closeSprite.SetActive(false);
             openSprite.SetActive(true);
-        }
-
-        if (playerInteract)
-        {
-            if (Input.GetButtonDown("Interact"))
-            {
-                lockPanel.SetActive(true);
-            }
         }
     }
 
