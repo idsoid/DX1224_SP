@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryItemController : MonoBehaviour
 {
-    ItemData item;
+    [SerializeField] private ItemData item;
 
     public Button RemoveButton;
     public void RemoveItem()
@@ -18,5 +18,11 @@ public class InventoryItemController : MonoBehaviour
     public void AddItem(ItemData newItem)
     {
         item = newItem;
+    }
+
+    public void UseCorrespondingItem()
+    {
+        Debug.Log("Use " + item.itemName);
+        item.UseItem();
     }
 }
