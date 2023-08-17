@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 4166859674998521789}
   - component: {fileID: 4166859674998521776}
   - component: {fileID: 1406545123069046206}
+  - component: {fileID: 2200336340585081329}
   m_Layer: 2
   m_Name: AbyssTrailer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4166859674998521788
 Transform:
   m_ObjectHideFlags: 0
@@ -100,6 +101,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0.08246313, y: -0.43630308}
   m_Size: {x: 0.8848253, y: 0.2678881}
   m_Direction: 1
+--- !u!114 &2200336340585081329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166859674998521777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e5dd69f25063a4ea6bd69edb4aa91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatData: {fileID: 0}
+  enemyData: {fileID: 0}
+  player: {fileID: 0}
+  playerData: {fileID: 0}
+  objWaypoints: []
+  enemySprite: {fileID: 0}
+  lightOn: 0
 --- !u!1 &4166859675263112967
 GameObject:
   m_ObjectHideFlags: 0
