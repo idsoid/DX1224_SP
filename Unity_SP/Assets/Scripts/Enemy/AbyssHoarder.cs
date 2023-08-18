@@ -61,7 +61,7 @@ public class AbyssHoarder : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -117,6 +117,10 @@ public class AbyssHoarder : MonoBehaviour
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
+                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
+                {
+                    currentState = State.AGGRO;
+                }
                 break;
             case State.PATROL:
                 target = objWaypoints[targetIndex].GetComponent<Transform>();
@@ -125,9 +129,18 @@ public class AbyssHoarder : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
+                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
+                {
+                    currentState = State.AGGRO;
+                }
                 break;
             case State.AGGRO:
-
+                target = player.transform;
+                if (!lightOn)
+                {
+                    totalTime = 0.0f;
+                    currentState = State.IDLE;
+                }
                 break;
             default:
                 break;

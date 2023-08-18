@@ -98,8 +98,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08246313, y: -0.43630308}
-  m_Size: {x: 0.8848253, y: 0.2678881}
+  m_Offset: {x: 0.010993912, y: -0.39461258}
+  m_Size: {x: 1.0277648, y: 0.18450709}
   m_Direction: 1
 --- !u!114 &131977376021709064
 MonoBehaviour:
@@ -113,12 +113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e5dd69f25063a4ea6bd69edb4aa91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatData: {fileID: 0}
-  enemyData: {fileID: 0}
+  combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
+  enemyData: {fileID: 11400000, guid: 2e665932223a52f4cbf35192cad7d59f, type: 2}
   player: {fileID: 0}
-  playerData: {fileID: 0}
-  objWaypoints: []
-  enemySprite: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
+  objWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  enemySprite: {fileID: 4166859675263112966}
   lightOn: 0
 --- !u!1 &4166859675263112967
 GameObject:
@@ -193,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 834fe2619ac411c4a9d0dfb5f9ecfc95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
