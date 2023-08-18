@@ -12,15 +12,6 @@ public class InventoryItemController : MonoBehaviour
 
     private void Update()
     {
-        //if (item.GetEquipped())
-        //{
-        //    equippedIcon.SetActive(true);
-        //}
-        //else
-        //{
-        //    equippedIcon.SetActive(false);
-        //}
-
         if (item.GetEquipped() != equippedIcon.activeSelf)
         {
             equippedIcon.SetActive(item.GetEquipped());
