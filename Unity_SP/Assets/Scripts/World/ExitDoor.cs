@@ -21,11 +21,6 @@ public class ExitDoor : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    panelOpen = !panelOpen;
-        //    lockPanel.SetActive(panelOpen);
-        //}
         if (playerInteract)
         {
             if (Input.GetButtonDown("Interact"))

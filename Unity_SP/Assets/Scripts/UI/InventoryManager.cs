@@ -24,8 +24,17 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(ItemData item)
     {
-        Debug.Log("ADDED");
+        foreach (var itemData in Items)
+        {
+            if (item.itemID == itemData.itemID)
+            {
+                itemData.AlterCount(1);
+                return;
+            }
+        }
+
         Items.Add(item);
+        item.AlterCount(1);
     }
 
     public void Remove(ItemData item)
@@ -35,11 +44,6 @@ public class InventoryManager : MonoBehaviour
 
     public void ListItems()
     {
-
-        //foreach (Transform item in ItemContent)
-        //{
-        //    Destroy(item.gameObject);
-        //}
         foreach (var Item in Items)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);

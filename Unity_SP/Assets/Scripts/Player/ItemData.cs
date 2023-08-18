@@ -5,13 +5,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemData : ScriptableObject
 {
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private bool equipped;
+    [SerializeField] private int count;
+
     public int itemID;
     public string itemName;
     public Sprite itemSprite;
-    [SerializeField] private PlayerData playerData;
-
-    private bool equipped;
-    private int count;
 
     private void Start()
     {
@@ -50,11 +50,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 10);
+                if (playerData.equippedWeapon != this && playerData.equippedWeapon != null)
+                {
+                    playerData.equippedWeapon.UseItem();
+                }
+                playerData.equippedWeapon = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -10);
+                playerData.equippedWeapon = null;
             }
         }
         else if (itemID == 21) // Candle Stand
@@ -63,11 +69,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 5);
+                if (playerData.equippedWeapon != this && playerData.equippedWeapon != null)
+                {
+                    playerData.equippedWeapon.UseItem();
+                }
+                playerData.equippedWeapon = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -5);
+                playerData.equippedWeapon = null;
             }
         }
         else if (itemID == 22) // Broken Table Leg
@@ -76,11 +88,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 5);
+                if (playerData.equippedWeapon != this && playerData.equippedWeapon != null)
+                {
+                    playerData.equippedWeapon.UseItem();
+                }
+                playerData.equippedWeapon = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -5);
+                playerData.equippedWeapon = null;
             }
         }
         else if (itemID == 23) // Kitchen Knife
@@ -89,11 +107,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 20);
+                if (playerData.equippedWeapon != this && playerData.equippedWeapon != null)
+                {
+                    playerData.equippedWeapon.UseItem();
+                }
+                playerData.equippedWeapon = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -20);
+                playerData.equippedWeapon = null;
             }
         }
         else if (itemID == 24) // Cast Iron Pan
@@ -102,11 +126,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 10);
+                if (playerData.equippedWeapon != this && playerData.equippedWeapon != null)
+                {
+                    playerData.equippedWeapon.UseItem();
+                }
+                playerData.equippedWeapon = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -10);
+                playerData.equippedWeapon = null;
             }
         }
         else if (itemID == 30) // Attack Charm
@@ -115,11 +145,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("attack", 7);
+                if (playerData.equippedCharm != this && playerData.equippedCharm != null)
+                {
+                    playerData.equippedCharm.UseItem();
+                }
+                playerData.equippedCharm = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("attack", -7);
+                playerData.equippedCharm = null;
             }
         }
         else if (itemID == 31) // Speed Charm
@@ -128,11 +164,17 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("speed", 5);
+                if (playerData.equippedCharm != this && playerData.equippedCharm != null)
+                {
+                    playerData.equippedCharm.UseItem();
+                }
+                playerData.equippedCharm = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("speed", -5);
+                playerData.equippedCharm = null;
             }
         }
         else if (itemID == 32) // Anti-hunger Charm
@@ -141,37 +183,55 @@ public class ItemData : ScriptableObject
             {
                 equipped = true;
                 playerData.AlterValue("hungerDecreaseMultiplier", -0.2f);
+                if (playerData.equippedCharm != this && playerData.equippedCharm != null)
+                {
+                    playerData.equippedCharm.UseItem();
+                }
+                playerData.equippedCharm = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("hungerDecreaseMultiplier", 0.2f);
+                playerData.equippedCharm = null;
             }
         }
-        else if (itemID == 32) // Heat Charm
+        else if (itemID == 33) // Heat Charm
         {
             if (!equipped)
             {
                 equipped = true;
                 playerData.AlterValue("tempDecreaseMultiplier", -2.5f);
+                if (playerData.equippedCharm != this && playerData.equippedCharm != null)
+                {
+                    playerData.equippedCharm.UseItem();
+                }
+                playerData.equippedCharm = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("tempDecreaseMultiplier", 2.5f);
+                playerData.equippedCharm = null;
             }
         }
-        else if (itemID == 32) // Starvation Charm
+        else if (itemID == 34) // Starvation Charm
         {
             if (!equipped)
             {
                 equipped = true;
                 playerData.AlterValue("hungerDecreaseMultiplier", 0.25f);
+                if (playerData.equippedCharm != this && playerData.equippedCharm != null)
+                {
+                    playerData.equippedCharm.UseItem();
+                }
+                playerData.equippedCharm = this;
             }
             else
             {
                 equipped = false;
                 playerData.AlterValue("hungerDecreaseMultiplier", -0.25f);
+                playerData.equippedCharm = null;
             }
         }
         else if (itemID == 50) // Health Potion
@@ -196,7 +256,7 @@ public class ItemData : ScriptableObject
         }
         else if (itemID == 52) // Wood
         {
-            if (count < 0)
+            if (count > 0)
             {
                 count--;
             }

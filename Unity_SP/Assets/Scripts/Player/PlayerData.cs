@@ -12,8 +12,10 @@ public class PlayerData : ScriptableObject
     public bool loadOldPos;
     public bool safe;
     public bool isCold;
+    public ItemData equippedWeapon, equippedCharm;
     public void Init()
     {
+        equippedWeapon = equippedCharm = null;
         isCold = false;
         safe = false;
         _playerData.health = 100f;
