@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
@@ -16,6 +17,10 @@ public class UpdateHUD : MonoBehaviour
     public GameObject frost3;
     public GameObject frost4;
 
+    public ParticleSystem snowflake;
+
+    public Image vignette;
+
     public PlayerData playerData;
 
     float lerpSpeed;
@@ -27,50 +32,39 @@ public class UpdateHUD : MonoBehaviour
     void Update()
     {
         
-        quintTemp = playerData.GetValue("maxTemperature") / 4;
+        quintTemp = playerData.GetValue("maxTemperature") / 5;
         if (!playerData.safe)
         {
             if (playerData.GetValue("temperature") < quintTemp)
             {
-                if (frost4.activeSelf)
+                if (!frost4.activeSelf)
                 {
-                    //frost4.SetActive(false);
-                }
-                else if (!frost4.activeSelf)
-                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.313725f);
                     frost4.SetActive(true);
                 }
             }
             else if (playerData.GetValue("temperature") < quintTemp * 2)
             {
-                if (frost3.activeSelf)
+                if (!frost3.activeSelf)
                 {
-                    //frost3.SetActive(false);
-                }
-                else if (!frost3.activeSelf)
-                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.23529f);
                     frost3.SetActive(true);
                 }
             }
             else if (playerData.GetValue("temperature") < quintTemp * 3)
             {
-                if (frost2.activeSelf)
+                if (!frost2.activeSelf)
                 {
-                    //frost2.SetActive(false);
-                }
-                else if (!frost2.activeSelf)
-                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.17647f);
                     frost2.SetActive(true);
                 }
             }
             else if (playerData.GetValue("temperature") < quintTemp * 4)
             {
-                if (frost1.activeSelf)
+                if (!frost1.activeSelf)
                 {
-                    //frost1.SetActive(false);
-                }
-                else if (!frost1.activeSelf)
-                {
+                    snowflake.gameObject.SetActive(true);
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.098039f);
                     frost1.SetActive(true);
                 }
             }
@@ -81,26 +75,40 @@ public class UpdateHUD : MonoBehaviour
             if(playerData.GetValue("temperature") > quintTemp)
             {
                 if (frost4.activeSelf)
+                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.23529f);
                     frost4.SetActive(false);
+                }
+                    
             }
 
             if (playerData.GetValue("temperature") > quintTemp * 2)
             {
                 if (frost3.activeSelf)
+                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.17647f);
                     frost3.SetActive(false);
+                }
             }
 
             if (playerData.GetValue("temperature") > quintTemp * 3)
             {
                 if (frost2.activeSelf)
+                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0.098039f);
                     frost2.SetActive(false);
+                }
             }
 
 
             if(playerData.GetValue("temperature") == playerData.GetValue("maxTemperature"))
             {
-                if(frost1.activeSelf)
+                if (frost1.activeSelf)
+                {
+                    snowflake.gameObject.SetActive(false);
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0f);
                     frost1.SetActive(false);
+                }
             }
         }
         lerpSpeed = 3f * Time.deltaTime;

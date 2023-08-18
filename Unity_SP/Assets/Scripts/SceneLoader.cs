@@ -21,8 +21,11 @@ public class SceneLoader : MonoBehaviour
 
     public void GoToStart()
     {
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("DemoScene");
     }
 
-
+    public void GoToTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
 }

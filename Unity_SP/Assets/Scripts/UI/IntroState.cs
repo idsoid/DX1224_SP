@@ -36,6 +36,6 @@ public class IntroState : MonoBehaviour
 
     public void StartScene()
     {
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("DemoScene");
     }
 }
