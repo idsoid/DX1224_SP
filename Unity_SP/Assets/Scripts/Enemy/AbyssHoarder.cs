@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class AbyssTrailer : MonoBehaviour
+public class AbyssHoarder : MonoBehaviour
 {
     [SerializeField]
     private CombatData combatData;
@@ -38,8 +38,7 @@ public class AbyssTrailer : MonoBehaviour
     {
         IDLE,
         PATROL,
-        CHASE,
-        FLEE
+        AGGRO
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -108,18 +107,6 @@ public class AbyssTrailer : MonoBehaviour
     }
     private void FSM()
     {
-        Vector2 moveDir = rb.velocity.normalized;
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
-        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
-        {
-            Debug.DrawLine(origin, hit.point, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
-        }
-
         switch (currentState)
         {
             case State.IDLE:
@@ -130,11 +117,6 @@ public class AbyssTrailer : MonoBehaviour
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
-                else if (lightOn)
-                {
-                    speed *= 10;
-                    currentState = State.FLEE;
-                }
                 break;
             case State.PATROL:
                 target = objWaypoints[targetIndex].GetComponent<Transform>();
@@ -143,36 +125,9 @@ public class AbyssTrailer : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
-                {
-                    currentState = State.CHASE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 10;
-                    currentState = State.FLEE;
-                }
                 break;
-            case State.CHASE:           
-                target = player.transform;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
-                {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 5;
-                    currentState = State.FLEE;
-                }
-                break;
-            case State.FLEE:
-                if (Vector3.Distance(player.transform.position, transform.position) >= 1.0f && !lightOn)
-                {
-                    speed /= 5;
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
+            case State.AGGRO:
+
                 break;
             default:
                 break;

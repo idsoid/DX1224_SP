@@ -12,14 +12,14 @@ GameObject:
   - component: {fileID: 4166859674998521789}
   - component: {fileID: 4166859674998521776}
   - component: {fileID: 1406545123069046206}
-  - component: {fileID: 2200336340585081329}
+  - component: {fileID: 131977376021709064}
   m_Layer: 2
-  m_Name: AbyssTrailer
+  m_Name: AbyssHoarder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4166859674998521788
 Transform:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.08246313, y: -0.43630308}
   m_Size: {x: 0.8848253, y: 0.2678881}
   m_Direction: 1
---- !u!114 &2200336340585081329
+--- !u!114 &131977376021709064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
