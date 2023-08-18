@@ -7,12 +7,11 @@ public class ItemData : ScriptableObject
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private bool equipped;
+    [SerializeField] private int count;
 
     public int itemID;
     public string itemName;
     public Sprite itemSprite;
-
-    private int count;
 
     private void Start()
     {
