@@ -9,6 +9,24 @@ public class InventoryItemController : MonoBehaviour
     [SerializeField] private GameObject equippedIcon;
 
     public Button RemoveButton;
+
+    private void Update()
+    {
+        //if (item.GetEquipped())
+        //{
+        //    equippedIcon.SetActive(true);
+        //}
+        //else
+        //{
+        //    equippedIcon.SetActive(false);
+        //}
+
+        if (item.GetEquipped() != equippedIcon.activeSelf)
+        {
+            equippedIcon.SetActive(item.GetEquipped());
+        }
+    }
+
     public void RemoveItem()
     {
         InventoryManager.Instance.Remove(item);
@@ -24,13 +42,5 @@ public class InventoryItemController : MonoBehaviour
     public void UseCorrespondingItem()
     {
         item.UseItem();
-        if (item.GetEquipped())
-        {
-            equippedIcon.SetActive(true);
-        }
-        else
-        {
-            equippedIcon.SetActive(false);
-        }
     }
 }
