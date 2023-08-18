@@ -256,7 +256,7 @@ public class ItemData : ScriptableObject
         }
         else if (itemID == 52) // Wood
         {
-            if (count < 0)
+            if (count > 0)
             {
                 count--;
             }

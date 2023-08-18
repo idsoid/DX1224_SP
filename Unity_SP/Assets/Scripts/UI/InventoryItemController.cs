@@ -17,6 +17,12 @@ public class InventoryItemController : MonoBehaviour
     private void Start()
     {
         itemCountText = itemCountDisplay.GetComponent<TMP_Text>();
+
+        if (item.GetCount() >= 2)
+        {
+            itemCountDisplay.SetActive(true);
+            itemCountText.text = "" + item.GetCount();
+        }
     }
 
     private void Update()
@@ -25,14 +31,14 @@ public class InventoryItemController : MonoBehaviour
         {
             equippedIcon.SetActive(item.GetEquipped());
         }
-        if (item.GetCount() >= 2)
+
+        // Wood fix
+        if (item.itemID == 52)
         {
-            itemCountDisplay.SetActive(true);
-            itemCountText.text = "" + item.GetCount();
-        }
-        else
-        {
-            itemCountDisplay.SetActive(false);
+            if (item.GetCount() <= 0)
+            {
+                RemoveItem();
+            }
         }
     }
 
@@ -54,6 +60,16 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetCount() <= 0)
         {
             RemoveItem();
+        }
+
+        if (item.GetCount() >= 2)
+        {
+            itemCountDisplay.SetActive(true);
+            itemCountText.text = "" + item.GetCount();
+        }
+        else
+        {
+            itemCountDisplay.SetActive(false);
         }
     }
 }
