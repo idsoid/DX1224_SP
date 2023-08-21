@@ -67,10 +67,6 @@ public class AbyssHoarder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;

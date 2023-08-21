@@ -78,10 +78,6 @@ public class AbyssImitater : MonoBehaviour
         shook = false;
         mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 3)];
         enemySprite.gameObject.SetActive(false);
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.MIMIC;
