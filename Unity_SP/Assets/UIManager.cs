@@ -11,7 +11,18 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private InventoryManager inventoryManager;
 
-    
+    private bool isPaused = false;
+    private bool isInvent = false;
+    private bool isMenu = false;
+    private bool isOptions = false;
+
+    public GameObject pauseMenuUI;
+    //public GameObject HUD;
+    public GameObject optionsUI;
+    //public GameObject inventoryUI;
+    //public GameObject tabButtons;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +37,21 @@ public class UIManager : MonoBehaviour
             ToggleInventory();
         }
 
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Escape"))
         {
-
+            if (isPaused)
+            {
+                if (inventoryOpen)
+                {
+                    ToggleInventory();
+                }
+                Resume();
+            }
+            else
+            {
+                //tabButtons.SetActive(true);
+                Pause();
+            }
         }
     }
 
@@ -38,11 +61,106 @@ public class UIManager : MonoBehaviour
         inventory.SetActive(inventoryOpen);
         if (inventoryOpen)
         {
+            isPaused = true;
+            Time.timeScale = 0f;
+            isInvent = true;
+            isMenu = false;
+            isOptions = false;
+            //tabButtons.SetActive(true);
             inventoryManager.ListItems();
         }
         else
         {
+            Time.timeScale = 1f;
+            isPaused = false;
+            //if (!isOptions || !isMenu || !isInvent)
+            //{
+            //    tabButtons.SetActive(false);
+            //}
             inventoryManager.Clear();
         }
     }
+
+    public void Resume()
+    {
+        //tabButtons.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        optionsUI.SetActive(false);
+        //inventoryUI.SetActive(false);
+        //HUD.SetActive(true);
+        Time.timeScale = 1f;
+        isInvent = false;
+        isPaused = false;
+        isMenu = false;
+        isOptions = false;
+    }
+
+    public void Pause()
+    {
+        if (!isMenu)
+        {
+            //tabButtons.SetActive(true);
+            pauseMenuUI.SetActive(true);
+            //HUD.SetActive(false);
+            optionsUI.SetActive(false);
+            //inventoryUI.SetActive(false);
+            inventoryOpen = true;
+            if (inventory.activeSelf)
+            {
+                ToggleInventory();
+            }
+            Time.timeScale = 0f;
+            isPaused = true;
+            isInvent = false;
+            isMenu = true;
+            isOptions = false;
+        }
+    }
+
+    public void Options()
+    {
+        if (!isOptions)
+        {
+            //tabButtons.SetActive(true);
+            pauseMenuUI.SetActive(false);
+            optionsUI.SetActive(true);
+            //inventoryUI.SetActive(false);
+            inventoryOpen = true;
+            if (inventory.activeSelf)
+            {
+                ToggleInventory();
+            }
+            Time.timeScale = 0f;
+            isPaused = true;
+            isInvent = false;
+            isMenu = false;
+            isOptions = true;
+        }
+    }
+
+    public void Inventory()
+    {
+        if (!isInvent)
+        {
+            //tabButtons.SetActive(true);
+            isInvent = true;
+            isMenu = false;
+            isOptions = false;
+            pauseMenuUI.SetActive(false);
+            optionsUI.SetActive(false);
+            inventoryOpen = false;
+            Time.timeScale = 0f;
+            isPaused = true;
+            if (!inventory.activeSelf)
+            {
+                ToggleInventory();
+            }
+        }
+    }
+
+    public void Quit()
+    {
+        Time.timeScale = 1f;
+    }
 }
+
