@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
@@ -13,6 +13,8 @@ public class PlayerData : ScriptableObject
     public bool safe;
     public bool isCold;
     public ItemData equippedWeapon, equippedCharm;
+    public List<ItemData> inventory = new List<ItemData>();
+
     public void Init()
     {
         equippedWeapon = equippedCharm = null;
@@ -36,6 +38,7 @@ public class PlayerData : ScriptableObject
 
     public void SavePos(Vector3 pos)
     {
+        Save();
         loadOldPos= true;
         temppos = pos;
     }
@@ -50,6 +53,7 @@ public class PlayerData : ScriptableObject
                 {
                     _playerData.isAlive = false;
                     _playerData.health = 0;
+                    SceneManager.LoadScene("LoseScene");
                 }
                 else if (_playerData.health > 100)
                 {
@@ -203,6 +207,32 @@ public class PlayerData : ScriptableObject
         return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.yellowUnlocked;
     }
 
+
+    public void Save()
+    {
+        _playerData.inventory = inventory;
+        string s = JsonUtility.ToJson(_playerData);
+        FileManager.WriteToFile("playerdata.json", s);
+    }
+
+    public void Load()
+    {
+        string s;
+        FileManager.LoadFromFile("playerdata.json", out s);
+        JsonUtility.FromJsonOverwrite(s, _playerData);
+        inventory = _playerData.inventory;
+        InventoryManager.Instance.LoadInventory();
+    }
+
+    public void SetInventory(List<ItemData> inv)
+    {
+        _playerData.inventory = inv;
+    }
+
+    public List<ItemData> GetInventory()
+    {
+        return _playerData.inventory;
+    }
 }
 
 [System.Serializable]
@@ -222,4 +252,5 @@ public class playerData
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
     public bool redUnlocked, blueUnlocked, yellowUnlocked;
+
 }
