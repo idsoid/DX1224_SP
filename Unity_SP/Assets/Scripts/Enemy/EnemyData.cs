@@ -16,9 +16,13 @@ public class EnemyData : ScriptableObject
         _enemydata.isDead = false;
     }
     public bool GetDead()
-    { 
-        return _enemydata.isDead; 
-    }  
+    {
+        return _enemydata.isDead;
+    }
+    public void SetDead(bool state)
+    {
+        _enemydata.isDead = state;
+    }
     public float GetHealth()
     {
         return _enemydata.health;
@@ -28,7 +32,7 @@ public class EnemyData : ScriptableObject
         _enemydata.health -= damage;
         if (_enemydata.health <= 0.0f)
         {
-            _enemydata.isDead = true;
+            SetDead(true);
         }
     }
 }
@@ -36,6 +40,14 @@ public class EnemyData : ScriptableObject
 [System.Serializable]
 public class enemydata
 {
+    public enum TYPE
+    {
+        KEEPER,
+        CRAWLER,
+        IMITATER,
+        HOARDER,
+        TOTAL
+    }
     public float health;
     public float attack;
     public Sprite enemySprite;

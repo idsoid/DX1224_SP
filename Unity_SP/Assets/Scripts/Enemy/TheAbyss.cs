@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class AbyssHoarder : MonoBehaviour
+public class TheAbyss : MonoBehaviour
 {
     [SerializeField]
     private CombatData combatData;
@@ -19,13 +19,11 @@ public class AbyssHoarder : MonoBehaviour
     [SerializeField]
     private Transform enemySprite;
     private int targetIndex;
-    private float totalTime;
-    private float speed = 200f;
+    private float speed = 400f;
     private float nextWaypointDistance = 1f;
-    private float rezTime;
+    private float raycastDistance = 5.0f;
 
     public bool lightOn = false;
-    public bool isDead = false;
 
     Path path;
     private int currentWaypoint = 0;
@@ -39,21 +37,8 @@ public class AbyssHoarder : MonoBehaviour
     {
         IDLE,
         PATROL,
-        AGGRO
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Flashlight"))
-        {
-            lightOn = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Flashlight"))
-        {
-            lightOn = false;
-        }
+        CHASE,
+        FLEE
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -76,12 +61,11 @@ public class AbyssHoarder : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        //enemyData.SetDead(isDead);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -90,28 +74,7 @@ public class AbyssHoarder : MonoBehaviour
         }
         Vector2 force = speed * Time.deltaTime * ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
 
-        if (enemyData.GetDead() && rezTime <= 0.0f)
-        {
-            rezTime = 30.0f;
-            GetComponent<Collider2D>().enabled = false;
-            enemySprite.gameObject.SetActive(false);
-        }
-        else if (!enemyData.GetDead())
-        {
-            rb.AddForce(force);
-            GetComponent<Collider2D>().enabled = true;
-            enemySprite.gameObject.SetActive(true);
-        }
-
-        if (rezTime > 0.0f)
-        {
-            rezTime -= Time.deltaTime;
-            if (rezTime <= 0.0f)
-            {
-                enemyData.SetDead(false);
-                isDead = false;
-            }
-        }
+        rb.AddForce(force);
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)
@@ -146,39 +109,6 @@ public class AbyssHoarder : MonoBehaviour
     {
         switch (currentState)
         {
-            case State.IDLE:
-                totalTime += Time.deltaTime;
-                if (totalTime >= 1.0f)
-                {
-                    targetIndex++;
-                    targetIndex %= objWaypoints.Count;
-                    currentState = State.PATROL;
-                }
-                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
-                {
-                    currentState = State.AGGRO;
-                }
-                break;
-            case State.PATROL:
-                target = objWaypoints[targetIndex].GetComponent<Transform>();
-                if (Vector3.Distance(target.position, transform.position) <= 0.5f)
-                {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
-                {
-                    currentState = State.AGGRO;
-                }
-                break;
-            case State.AGGRO:
-                target = player.transform;
-                if (!lightOn)
-                {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                break;
             default:
                 break;
         }

@@ -27,7 +27,7 @@ public class PlayerData : ScriptableObject
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 10f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
-        _playerData.redUnlocked = _playerData.greenUnlocked = _playerData.blueUnlocked = false;
+        _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
         _playerData.maxHealth = 100f;
         _playerData.maxStamina = 80f;
         _playerData.maxTemperature = 100f;
@@ -174,8 +174,8 @@ public class PlayerData : ScriptableObject
             case "red":
                 _playerData.redUnlocked = true;
                 break;
-            case "green":
-                _playerData.greenUnlocked = true;
+            case "yellow":
+                _playerData.yellowUnlocked = true;
                 break;
             case "blue":
                 _playerData.blueUnlocked = true;
@@ -183,9 +183,24 @@ public class PlayerData : ScriptableObject
         }
     }
 
+    public bool GetUnlocked(string col)
+    {
+        switch(col)
+        {
+            case "red":
+                return _playerData.redUnlocked;
+            case "yellow":
+                return _playerData.yellowUnlocked;
+            case "blue":
+                return _playerData.blueUnlocked;
+            default:
+                return false;
+        }
+    }
+
     public bool CheckUnlocked()
     {
-        return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.greenUnlocked;
+        return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.yellowUnlocked;
     }
 
 }
@@ -206,5 +221,5 @@ public class playerData
     
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
-    public bool redUnlocked, blueUnlocked, greenUnlocked;
+    public bool redUnlocked, blueUnlocked, yellowUnlocked;
 }

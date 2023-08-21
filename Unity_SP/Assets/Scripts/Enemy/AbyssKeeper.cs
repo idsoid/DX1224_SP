@@ -23,9 +23,10 @@ public class AbyssKeeper : MonoBehaviour
     private float totalTime;
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
-    private float raycastDistance = 10.0f;
+    private float rezTime;
 
     public bool lightOn = false;
+    public bool isDead = false;
     private float attackTime;
 
     Path path;
@@ -43,6 +44,20 @@ public class AbyssKeeper : MonoBehaviour
         FREEZE,
         RUSH
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = false;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -55,10 +70,6 @@ public class AbyssKeeper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -71,6 +82,7 @@ public class AbyssKeeper : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //enemyData.SetDead(isDead);
         FSM();
         
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -85,7 +97,31 @@ public class AbyssKeeper : MonoBehaviour
         }
         else
         {
-            rb.AddForce(force);
+            if (enemyData.GetDead() && rezTime <= 0.0f)
+            {
+                rezTime = 30.0f;
+                GetComponent<Collider2D>().enabled = false;
+                wanderSprite.gameObject.SetActive(false);
+            }
+            else if (!enemyData.GetDead())
+            {
+                rb.AddForce(force);
+                GetComponent<Collider2D>().enabled = true;
+                if (currentState != State.RUSH)
+                {
+                    wanderSprite.gameObject.SetActive(true);
+                }
+            }
+
+            if (rezTime > 0.0f)
+            {
+                rezTime -= Time.deltaTime;
+                if (rezTime <= 0.0f)
+                {
+                    enemyData.SetDead(false);
+                    isDead = false;
+                }
+            }
         }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
