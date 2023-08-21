@@ -46,6 +46,7 @@ public class AbyssKeeper : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("sex");
         if (collision.gameObject.CompareTag("Flashlight"))
         {
             lightOn = true;
