@@ -76,7 +76,7 @@ public class AbyssHoarder : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name, "HOARDER");
     }
     // Update is called once per frame
     void FixedUpdate()

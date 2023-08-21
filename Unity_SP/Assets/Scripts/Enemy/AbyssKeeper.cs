@@ -77,7 +77,7 @@ public class AbyssKeeper : MonoBehaviour
         target = objWaypoints[0].GetComponent<Transform>();
         attackTime = 0.0f;
         rushSprite.gameObject.SetActive(false);
-        enemyData.Init(75, 30, wanderSprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(75, 30, wanderSprite.GetComponent<Sprite>(), gameObject.name, "KEEPER");
     }
     // Update is called once per frame
     void FixedUpdate()

@@ -76,7 +76,7 @@ public class AbyssCrawler : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
         furthest = null;
-        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name, "CRAWLER");
     }
     // Update is called once per frame
     void FixedUpdate()

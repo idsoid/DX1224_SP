@@ -7,13 +7,30 @@ public class EnemyData : ScriptableObject
 {
     private enemydata _enemydata = new enemydata();
 
-    public void Init(float health, float attack, Sprite enemySprite, string name)
+    public void Init(float health, float attack, Sprite enemySprite, string name, string cat)
     {
         _enemydata.health = health;
         _enemydata.attack = attack;
         _enemydata.enemySprite = enemySprite;
         _enemydata.name = name;
         _enemydata.isDead = false;
+        switch (cat)
+        {
+            case "KEEPER":
+                _enemydata.type = enemydata.CATS.KEEPER;
+                break;
+            case "CRAWLER":
+                _enemydata.type = enemydata.CATS.CRAWLER;
+                break;
+            case "IMITATER":
+                _enemydata.type = enemydata.CATS.IMITATER;
+                break;
+            case "HOARDER":
+                _enemydata.type = enemydata.CATS.HOARDER;
+                break;
+            default:
+                break;
+        }
     }
     public bool GetDead()
     {
@@ -40,7 +57,7 @@ public class EnemyData : ScriptableObject
 [System.Serializable]
 public class enemydata
 {
-    public enum TYPE
+    public enum CATS
     {
         KEEPER,
         CRAWLER,
@@ -48,6 +65,7 @@ public class enemydata
         HOARDER,
         TOTAL
     }
+    public CATS type;
     public float health;
     public float attack;
     public Sprite enemySprite;

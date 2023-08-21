@@ -87,7 +87,7 @@ public class AbyssImitater : MonoBehaviour
         currentState = State.MIMIC;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
-        enemyData.Init(40, 15, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(40, 15, enemySprite.GetComponent<Sprite>(), gameObject.name, "IMITATER");
     }
     // Update is called once per frame
     void FixedUpdate()
