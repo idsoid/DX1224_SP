@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
@@ -27,6 +28,7 @@ public class UpdateHUD : MonoBehaviour
 
     float quintTemp;
 
+    public TMP_Text stats;
 
     // Update is called once per frame
     void Update()
@@ -114,6 +116,10 @@ public class UpdateHUD : MonoBehaviour
         lerpSpeed = 3f * Time.deltaTime;
 
         setBars();
+
+        stats.text = "Max Health: " + playerData.GetValue("maxHealth") + "\n Max Stamina: " + playerData.GetValue("maxStamina")
+            + "\n Max Hunger: " + playerData.GetValue("maxHunger") + "\n Attack: " + playerData.GetValue("attack")
+            + "\n Speed: " + playerData.GetValue("speed");
     }
 
     private void setBars()
