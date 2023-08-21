@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private GameObject flashlight;
+    private bool lightOn;
 
     [SerializeField]
     private float mvmt = 2f;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        lightOn = true;
         isHungry = false;
         canRun = true;
         isRunning = false;
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour
         HandleInputMovement();
         HandleTemperatureChange();
         HandleHungerChange();
+        HandleFlashlightToggle();
     }
 
     //fixed update for data processing
@@ -199,6 +204,15 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log("hInput: " + hInput);
         //Debug.Log("vInput: " + vInput);
+    }
+
+    private void HandleFlashlightToggle()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            lightOn = !lightOn;
+            flashlight.SetActive(lightOn);
+        }
     }
     #endregion
 

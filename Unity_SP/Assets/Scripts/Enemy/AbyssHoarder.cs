@@ -4,7 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
-public class AbyssTrailer : MonoBehaviour
+public class AbyssHoarder : MonoBehaviour
 {
     [SerializeField]
     private CombatData combatData;
@@ -38,8 +38,7 @@ public class AbyssTrailer : MonoBehaviour
     {
         IDLE,
         PATROL,
-        CHASE,
-        FLEE
+        AGGRO
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -62,7 +61,7 @@ public class AbyssTrailer : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name);
+        enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -108,18 +107,6 @@ public class AbyssTrailer : MonoBehaviour
     }
     private void FSM()
     {
-        Vector2 moveDir = rb.velocity.normalized;
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
-        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
-        {
-            Debug.DrawLine(origin, hit.point, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
-        }
-
         switch (currentState)
         {
             case State.IDLE:
@@ -130,10 +117,9 @@ public class AbyssTrailer : MonoBehaviour
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
-                else if (lightOn)
+                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
                 {
-                    speed *= 10;
-                    currentState = State.FLEE;
+                    currentState = State.AGGRO;
                 }
                 break;
             case State.PATROL:
@@ -143,33 +129,15 @@ public class AbyssTrailer : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
+                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
                 {
-                    currentState = State.CHASE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 10;
-                    currentState = State.FLEE;
+                    currentState = State.AGGRO;
                 }
                 break;
-            case State.CHASE:           
+            case State.AGGRO:
                 target = player.transform;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
+                if (!lightOn)
                 {
-                    totalTime = 0.0f;
-                    currentState = State.IDLE;
-                }
-                else if (lightOn)
-                {
-                    speed *= 5;
-                    currentState = State.FLEE;
-                }
-                break;
-            case State.FLEE:
-                if (Vector3.Distance(player.transform.position, transform.position) >= 1.0f && !lightOn)
-                {
-                    speed /= 5;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }

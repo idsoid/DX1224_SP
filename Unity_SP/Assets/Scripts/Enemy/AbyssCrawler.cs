@@ -20,7 +20,7 @@ public class AbyssCrawler : MonoBehaviour
     private Transform enemySprite;
     private int targetIndex;
     private float totalTime;
-    private float speed = 200f;
+    private float speed = 400f;
     private float nextWaypointDistance = 1f;
     private Transform furthest;
     private float raycastDistance = 5.0f;

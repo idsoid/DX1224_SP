@@ -13,7 +13,7 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite itemSprite;
 
-    private void Start()
+    private void OnEnable()
     {
         equipped = false;
         count = 0;

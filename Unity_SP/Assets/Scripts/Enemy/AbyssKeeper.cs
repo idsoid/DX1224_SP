@@ -26,8 +26,6 @@ public class AbyssKeeper : MonoBehaviour
     private float raycastDistance = 10.0f;
 
     public bool lightOn = false;
-    private float health;
-    private float attack;
     private float attackTime;
 
     Path path;
@@ -123,18 +121,6 @@ public class AbyssKeeper : MonoBehaviour
     }
     private void FSM()
     {
-        //Vector2 moveDir = rb.velocity.normalized;
-        //Vector2 origin = transform.position;
-        //RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
-        //if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
-        //{
-        //    Debug.DrawLine(origin, hit.point, Color.red);
-        //}
-        //else
-        //{
-        //    Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
-        //}
-
         switch (currentState)
         {
             case State.IDLE:

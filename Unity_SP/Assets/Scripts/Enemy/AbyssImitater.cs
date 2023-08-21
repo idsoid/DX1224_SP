@@ -20,13 +20,15 @@ public class AbyssImitater : MonoBehaviour
     private Transform mimicSprite;
     [SerializeField]
     private List<Sprite> itemSprites;
+    private Animator ar;
     private int decider;
     private int targetIndex;
     private float totalTime;
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
-    private Vector3 oldPos;
 
+    private bool shook;
+    private float attackTime;
     public bool lightOn = false;
 
     Path path;
@@ -40,6 +42,8 @@ public class AbyssImitater : MonoBehaviour
     public enum State
     {
         MIMIC,
+        TARGET,
+        FREEZE,
         CHASE
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,6 +58,8 @@ public class AbyssImitater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ar = mimicSprite.GetComponent<Animator>();
+        shook = false;
         mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 4)];
         enemySprite.gameObject.SetActive(false);
         if (enemyData.GetDead())
@@ -114,17 +120,32 @@ public class AbyssImitater : MonoBehaviour
     }
     private void FSM()
     {
+        if (!lightOn && shook)
+        {
+            shook = false;
+        }
         switch (currentState)
         {
             case State.MIMIC:
-                if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
+                if (lightOn && !shook)
+                {
+                    ar.SetTrigger("lightOn");
+                    shook = true;
+                }
+
+                if (lightOn && shook)
+                {
+                    attackTime = 5.0f;
+                    currentState = State.FREEZE;
+                }
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
                 {
                     mimicSprite.gameObject.SetActive(false);
                     enemySprite.gameObject.SetActive(true);
-                    currentState = State.CHASE;
+                    currentState = State.TARGET;
                 }
                 break;
-            case State.CHASE:           
+            case State.TARGET:           
                 target = player.transform;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
                 {
@@ -134,6 +155,34 @@ public class AbyssImitater : MonoBehaviour
                     rb.angularVelocity = 0f;
                     currentState = State.MIMIC;
                 }
+                break;
+            case State.FREEZE:
+                if (lightOn)
+                {
+                    attackTime -= Time.deltaTime;
+                    if (attackTime <= 0.0f && lightOn)
+                    {
+                        speed *= 10;
+                        lightOn = false;
+                        mimicSprite.gameObject.SetActive(false);
+                        enemySprite.gameObject.SetActive(true);
+                        currentState = State.CHASE;
+                    }
+                }
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
+                {
+                    mimicSprite.gameObject.SetActive(false);
+                    enemySprite.gameObject.SetActive(true);
+                    currentState = State.TARGET;
+                }
+                else
+                {
+                    totalTime = 0.0f;
+                    currentState = State.MIMIC;
+                }
+                break;
+            case State.CHASE:
+                target = player.transform;
                 break;
             default:
                 break;
