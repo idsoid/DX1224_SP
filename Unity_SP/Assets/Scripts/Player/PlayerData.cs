@@ -174,7 +174,7 @@ public class PlayerData : ScriptableObject
             case "red":
                 _playerData.redUnlocked = true;
                 break;
-            case "green":
+            case "yellow":
                 _playerData.yellowUnlocked = true;
                 break;
             case "blue":
