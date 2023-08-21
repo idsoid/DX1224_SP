@@ -20,14 +20,14 @@ public class AbyssCrawler : MonoBehaviour
     private Transform enemySprite;
     private int targetIndex;
     private float totalTime;
-    private float speed = 400f;
+    private float speed = 300f;
     private float nextWaypointDistance = 1f;
     private Transform furthest;
     private float raycastDistance = 5.0f;
+    private float rezTime;
 
     public bool lightOn = false;
-    private float health;
-    private float attack;
+    public bool isDead = false;
 
     Path path;
     private int currentWaypoint = 0;
@@ -44,6 +44,20 @@ public class AbyssCrawler : MonoBehaviour
         CHASE,
         FLEE
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = false;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -56,10 +70,6 @@ public class AbyssCrawler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (enemyData.GetDead())
-        {
-            gameObject.SetActive(false);
-        }
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -71,15 +81,7 @@ public class AbyssCrawler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float dist = 0.0f;
-        for (int i = 0; i < objWaypoints.Count; i++)
-        {
-            if (Vector3.Distance(player.transform.position, objWaypoints[i].transform.position) > dist)
-            {
-                dist = Vector3.Distance(player.transform.position, objWaypoints[i].transform.position);
-                furthest = objWaypoints[i].transform;
-            }
-        }
+        //enemyData.SetDead(isDead);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -88,7 +90,28 @@ public class AbyssCrawler : MonoBehaviour
         }
         Vector2 force = speed * Time.deltaTime * ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
 
-        rb.AddForce(force);
+        if (enemyData.GetDead() && rezTime <= 0.0f)
+        {
+            rezTime = 30.0f;
+            GetComponent<Collider2D>().enabled = false;
+            enemySprite.gameObject.SetActive(false);
+        }
+        else if (!enemyData.GetDead())
+        {
+            rb.AddForce(force);
+            GetComponent<Collider2D>().enabled = true;
+            enemySprite.gameObject.SetActive(true);
+        }
+
+        if (rezTime > 0.0f)
+        {
+            rezTime -= Time.deltaTime;
+            if (rezTime <= 0.0f)
+            {
+                enemyData.SetDead(false);
+                isDead = false;
+            }
+        }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)
@@ -121,6 +144,16 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
+        float dist = 0.0f;
+        for (int i = 0; i < objWaypoints.Count; i++)
+        {
+            if (Vector3.Distance(player.transform.position, objWaypoints[i].transform.position) > dist)
+            {
+                dist = Vector3.Distance(player.transform.position, objWaypoints[i].transform.position);
+                furthest = objWaypoints[i].transform;
+            }
+        }
+
         Vector2 moveDir = rb.velocity.normalized;
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);

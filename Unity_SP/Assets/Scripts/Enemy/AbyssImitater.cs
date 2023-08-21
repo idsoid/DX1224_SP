@@ -23,13 +23,15 @@ public class AbyssImitater : MonoBehaviour
     private Animator ar;
     private int decider;
     private int targetIndex;
-    private float totalTime;
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
 
     private bool shook;
     private float attackTime;
+    private float rezTime;
+
     public bool lightOn = false;
+    public bool isDead = false;
 
     Path path;
     private int currentWaypoint = 0;
@@ -46,6 +48,20 @@ public class AbyssImitater : MonoBehaviour
         FREEZE,
         CHASE
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Flashlight"))
+        {
+            lightOn = false;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -60,7 +76,7 @@ public class AbyssImitater : MonoBehaviour
     {
         ar = mimicSprite.GetComponent<Animator>();
         shook = false;
-        mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 4)];
+        mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 3)];
         enemySprite.gameObject.SetActive(false);
         if (enemyData.GetDead())
         {
@@ -76,6 +92,7 @@ public class AbyssImitater : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //enemyData.SetDead(isDead);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -84,9 +101,37 @@ public class AbyssImitater : MonoBehaviour
         }
         Vector2 force = speed * Time.deltaTime * ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
 
-        if (currentState == State.CHASE)
+        if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rb.AddForce(force);
+            rezTime = 30.0f;
+            GetComponent<Collider2D>().enabled = false;
+            mimicSprite.gameObject.SetActive(false);
+            enemySprite.gameObject.SetActive(false);
+        }
+        else if (!enemyData.GetDead())
+        {
+            if (currentState == State.CHASE || currentState == State.TARGET)
+            {
+                rb.AddForce(force);
+                mimicSprite.gameObject.SetActive(false);
+                enemySprite.gameObject.SetActive(true);
+            }
+            else
+            {
+                mimicSprite.gameObject.SetActive(true);
+                enemySprite.gameObject.SetActive(false);
+            }
+            GetComponent<Collider2D>().enabled = true;
+        }
+
+        if (rezTime > 0.0f)
+        {
+            rezTime -= Time.deltaTime;
+            if (rezTime <= 0.0f)
+            {
+                enemyData.SetDead(false);
+                isDead = false;
+            }
         }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -177,12 +222,16 @@ public class AbyssImitater : MonoBehaviour
                 }
                 else
                 {
-                    totalTime = 0.0f;
                     currentState = State.MIMIC;
                 }
                 break;
             case State.CHASE:
                 target = player.transform;
+                if (enemyData.GetDead())
+                {
+                    speed /= 10;
+                    currentState = State.MIMIC;
+                }
                 break;
             default:
                 break;
