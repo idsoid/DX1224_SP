@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Fireplace
+  - SafeZone
+  - Enemy
+  - eProj
+  - Flashlight
   layers:
   - Default
   - TransparentFX

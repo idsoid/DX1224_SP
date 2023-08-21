@@ -5,4 +5,5 @@ using UnityEngine;
 public class CombatData : ScriptableObject
 {
     public EnemyData enemyData;
+    public bool dodgeOn;
 }

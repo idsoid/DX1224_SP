@@ -13,6 +13,9 @@ public class InventoryManager : MonoBehaviour
     public Transform ItemContent;
     public GameObject InventoryItem;
 
+    [SerializeField]
+    private PlayerData playerData;
+
     public Toggle EnableRemove;
 
     public InventoryItemController[] InventoryItems;
@@ -20,6 +23,11 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void LoadInventory()
+    {
+        Items = playerData.GetInventory();
     }
 
     public void Add(ItemData item)
@@ -35,11 +43,14 @@ public class InventoryManager : MonoBehaviour
 
         Items.Add(item);
         item.AlterCount(1);
+
+        playerData.inventory = Items;
     }
 
     public void Remove(ItemData item)
     {
         Items.Remove(item);
+        playerData.inventory = Items;
     }
 
     public void ListItems()

@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         playerData.Init();
         if(playerData.loadOldPos)
         {
+            playerData.Load();
             transform.position = playerData.temppos;
             playerData.loadOldPos = false;
         }
