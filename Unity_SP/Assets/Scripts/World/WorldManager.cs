@@ -45,12 +45,4 @@ public class WorldManager : MonoBehaviour
     {
         
     }
-
-    private void Next()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-
-        }
-    }
 }
