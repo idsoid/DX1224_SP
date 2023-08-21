@@ -16,12 +16,14 @@ public class ExitDoor : MonoBehaviour
     private bool closed;
     private bool playerInteract;
     private bool panelOpen;
+    private BoxCollider2D boxCol;
 
     private void Start()
     {
         closed = true;
         playerInteract = false;
         panelOpen = false;
+        boxCol = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -70,6 +72,12 @@ public class ExitDoor : MonoBehaviour
             playerData.Unlock("yellow");
             yellowLock.SetActive(false);
         }
+
+        if (playerData.CheckUnlocked())
+        {
+            closed = false;
+            ToggleClose(false);
+        }
     }
 
     public void UnlockBlue()
@@ -78,6 +86,12 @@ public class ExitDoor : MonoBehaviour
         {
             playerData.Unlock("blue");
             blueLock.SetActive(false);
+        }
+
+        if (playerData.CheckUnlocked())
+        {
+            closed = false;
+            ToggleClose(false);
         }
     }
 
@@ -88,6 +102,12 @@ public class ExitDoor : MonoBehaviour
             playerData.Unlock("red");
             redLock.SetActive(false);
         }
+
+        if (playerData.CheckUnlocked())
+        {
+            closed = false;
+            ToggleClose(false);
+        }
     }
 
     public void ToggleClose(bool x)
@@ -97,11 +117,13 @@ public class ExitDoor : MonoBehaviour
         {
             closeSprite.SetActive(true);
             openSprite.SetActive(false);
+            boxCol.enabled = true;
         }
         else
         {
             closeSprite.SetActive(false);
             openSprite.SetActive(true);
+            boxCol.enabled = false;
         }
     }
 
