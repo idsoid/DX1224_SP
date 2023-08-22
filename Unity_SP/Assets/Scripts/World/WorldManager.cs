@@ -8,7 +8,9 @@ public class WorldManager : MonoBehaviour
     private WorldState worldState;
 
     [SerializeField]
-    private List<GameObject> drops;
+    public GameObject drops;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class WorldManager : MonoBehaviour
         {
             if (worldState.pickedUp[i])
             {
-                Destroy(drops[i]);
+                Destroy(drops.GetComponentsInChildren<PickUp>()[i].gameObject);
             }
         }
     }

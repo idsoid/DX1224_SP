@@ -63,6 +63,10 @@ public class AbyssHoarder : MonoBehaviour
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
+        if (collision.gameObject.CompareTag("Walls"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        }
     }
     // Start is called before the first frame update
     void Start()

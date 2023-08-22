@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3892618246891560318}
   - component: {fileID: 4888282783220998294}
   - component: {fileID: 5773824779064937761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CandleStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 19
   m_Sprite: {fileID: 21300000, guid: c13524c00029d62449c2f676c710844a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,3 +129,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 2509bcdf610d2cb4097a4e78d5fbcbfd, type: 2}
+  dropIndex: 3
+  worldState: {fileID: 0}

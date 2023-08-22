@@ -265,6 +265,11 @@ public class ItemData : ScriptableObject
         }
     }
 
+    public int GetID()
+    {
+        return itemID;
+    }
+
     public int GetCount()
     {
         return count;
