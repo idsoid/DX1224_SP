@@ -357,7 +357,7 @@ MonoBehaviour:
   combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   enemyData: {fileID: 11400000, guid: be5637903a22fc0439fe57b80735cb04, type: 2}
   player: {fileID: 0}
-  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   enemySprite: {fileID: 7880564738550221011}
   mimicSprite: {fileID: 2077645168676718014}
   itemSprites:

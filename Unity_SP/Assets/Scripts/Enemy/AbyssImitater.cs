@@ -90,12 +90,8 @@ public class AbyssImitater : MonoBehaviour
         currentState = State.MIMIC;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
-<<<<<<< Updated upstream
-        enemyData.Init(40, 15, enemySprite.GetComponent<Sprite>(), gameObject.name, "IMITATER");
         Physics2D.IgnoreLayerCollision(2, 8);
-=======
         enemyData.Init(40, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "IMITATER");
->>>>>>> Stashed changes
     }
     // Update is called once per frame
     void FixedUpdate()

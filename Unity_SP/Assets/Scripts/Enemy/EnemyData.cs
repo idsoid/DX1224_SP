@@ -52,15 +52,13 @@ public class EnemyData : ScriptableObject
             SetDead(true);
         }
     }
-<<<<<<< Updated upstream
     public enemydata.CATS GetEnemyType()
     {
         return _enemydata.type;
-=======
+    }
     public Sprite GetSprite()
     {
         return _enemydata.enemySprite;
->>>>>>> Stashed changes
     }
 }
 

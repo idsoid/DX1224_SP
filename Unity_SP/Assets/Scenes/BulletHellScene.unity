@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9c841907387fb40acd5770fc0cec17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
 --- !u!212 &943955797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   frost4: {fileID: 1135430938}
   snowflake: {fileID: 0}
   vignette: {fileID: 1135430941}
-  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   stats: {fileID: 0}
 --- !u!1 &1544064552
 GameObject:

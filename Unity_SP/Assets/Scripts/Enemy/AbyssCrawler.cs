@@ -82,15 +82,10 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-<<<<<<< Updated upstream
         scaryAlert = target;
-        enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name, "CRAWLER");
         Physics2D.IgnoreLayerCollision(2, 8);
         rezTime = 0.0f;
-=======
-        furthest = null;
         enemyData.Init(50, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "CRAWLER");
->>>>>>> Stashed changes
     }
     // Update is called once per frame
     void FixedUpdate()

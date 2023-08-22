@@ -12,26 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee60757ab201844b5e2ac05ccd54c1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  temppos: {x: -2.4151943, y: -31.322329, z: 0}
-=======
-  temppos: {x: 16.294666, y: -22.004827, z: 0}
->>>>>>> Stashed changes
+  temppos: {x: 0, y: 0, z: 0}
   loadOldPos: 0
-  safe: 0
-  isCold: 1
-  equippedWeapon: {fileID: 0}
-  equippedCharm: {fileID: 0}
-  inventory:
-  - {fileID: 0}
-=======
-  temppos: {x: 23.665781, y: -26.886831, z: 0}
-  loadOldPos: 1
   safe: 0
   isCold: 0
   equippedWeapon: {fileID: 0}
   equippedCharm: {fileID: 0}
-  inventory:
-  - {fileID: 11400000, guid: 21cd69a4da32d2149a47295ff96df5fe, type: 2}
->>>>>>> Stashed changes
+  inventory: []
