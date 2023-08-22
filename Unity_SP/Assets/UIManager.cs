@@ -22,6 +22,9 @@ public class UIManager : MonoBehaviour
     //public GameObject inventoryUI;
     //public GameObject tabButtons;
 
+    [SerializeField]
+    AudioHandler audioHandler;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +40,7 @@ public class UIManager : MonoBehaviour
         //    ToggleInventory();
         //}
 
-        if (Input.GetButtonDown("Escape"))
+        if (Input.GetButtonDown("Inventory"))
         {
             if (isPaused)
             {
@@ -50,7 +53,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 //tabButtons.SetActive(true);
-                Pause();
+                Inventory();
             }
         }
     }
@@ -142,6 +145,8 @@ public class UIManager : MonoBehaviour
     {
         if (!isInvent)
         {
+
+            audioHandler.playAudio("inventory");
             //tabButtons.SetActive(true);
             isInvent = true;
             isMenu = false;

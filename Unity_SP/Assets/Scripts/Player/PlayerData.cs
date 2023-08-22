@@ -34,6 +34,10 @@ public class PlayerData : ScriptableObject
         _playerData.maxStamina = 80f;
         _playerData.maxTemperature = 100f;
         _playerData.maxHunger = 100f;
+
+        _playerData.masterVol = -20f;
+        _playerData.sfxVol = -20f;
+        _playerData.bgmVol = -20f;
     }
 
     public void SavePos(Vector3 pos)
@@ -95,7 +99,7 @@ public class PlayerData : ScriptableObject
             case "hungerDecreaseMultiplier":
                 _playerData.hungerDecreaseMultiplier += value;
                 break;
-
+            
             default:
                 break;
         }
@@ -129,6 +133,15 @@ public class PlayerData : ScriptableObject
             case "hungerDecreaseMultiplier":
                 _playerData.hungerDecreaseMultiplier = value;
                 break;
+            case "masterVol":
+                _playerData.masterVol = value;
+                break;
+            case "sfxVol":
+                _playerData.sfxVol = value;
+                break;
+            case "bgmVol":
+                _playerData.bgmVol = value;
+                break;
             default:
                 break;
         }
@@ -161,6 +174,12 @@ public class PlayerData : ScriptableObject
                 return _playerData.maxTemperature;
             case "maxHunger":
                 return _playerData.maxHunger;
+            case "masterVol":
+                return _playerData.masterVol;
+            case "sfxVol":
+                return _playerData.sfxVol;
+            case "bgmVol":
+                return _playerData.bgmVol;
             default:
                 return -1;
         }
@@ -252,5 +271,9 @@ public class playerData
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
     public bool redUnlocked, blueUnlocked, yellowUnlocked;
+
+    public float masterVol;
+    public float sfxVol;
+    public float bgmVol;
 
 }

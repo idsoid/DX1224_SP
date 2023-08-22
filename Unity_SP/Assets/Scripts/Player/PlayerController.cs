@@ -21,13 +21,18 @@ public class PlayerController : MonoBehaviour
     float hInput, vInput;
     string idleAnim;
 
-    bool canRun,isRunning;
+    bool canRun, isRunning;
 
     bool isHungry;
+
+    [SerializeField]
+    AudioHandler audioHandler;
 
 
     void Start()
     {
+        
+
         lightOn = true;
         isHungry = false;
         canRun = true;
@@ -35,9 +40,9 @@ public class PlayerController : MonoBehaviour
         hInput = vInput = 0f;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+
         playerData.Init();
-        if(playerData.loadOldPos)
+        if (playerData.loadOldPos)
         {
             playerData.Load();
             transform.position = playerData.temppos;
@@ -82,15 +87,17 @@ public class PlayerController : MonoBehaviour
                 vInput *= 1.5f;
                 anim.speed = 0.8f;
                 isRunning = true;
+                audioHandler.playAudio("sprint");
             }
             else
             {
                 isRunning = false;
                 anim.speed = 0.5f;
+                
             }
         }
 
-        rb.velocity = new Vector2 (hInput, vInput);
+        rb.velocity = new Vector2(hInput, vInput);
     }
 
     private void HandleTemperatureChange()
@@ -120,7 +127,7 @@ public class PlayerController : MonoBehaviour
     private void HandleHungerChange()
     {
         playerData.AlterValue("hunger", -Time.deltaTime * playerData.GetValue("hungerDecreaseMultiplier"));
-        if(playerData.GetValue("hunger") <= 0)
+        if (playerData.GetValue("hunger") <= 0)
         {
             isHungry = true;
         }
@@ -129,7 +136,7 @@ public class PlayerController : MonoBehaviour
             isHungry = false;
         }
 
-        if(isHungry)
+        if (isHungry)
         {
             playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
         }
@@ -155,7 +162,7 @@ public class PlayerController : MonoBehaviour
                 playerData.AlterValue("stamina", +Time.deltaTime * 10f);
                 if (playerData.GetValue("stamina") >= playerData.GetValue("maxStamina"))
                 {
-                    playerData.SetValue("stamina",80);
+                    playerData.SetValue("stamina", 80);
                 }
             }
         }
@@ -174,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementAnimation()
     {
-        if(hInput > 0)
+        if (hInput > 0)
         {
             anim.Play("walk_e");
             idleAnim = "idle_e";
@@ -209,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFlashlightToggle()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             lightOn = !lightOn;
             flashlight.SetActive(lightOn);
@@ -220,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("SafeZone"))
+        if (collision.gameObject.CompareTag("SafeZone"))
         {
             playerData.safe = true;
         }
@@ -233,4 +240,6 @@ public class PlayerController : MonoBehaviour
             playerData.safe = false;
         }
     }
+
+    
 }
