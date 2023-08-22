@@ -38,16 +38,16 @@ public class BulletSpawner : MonoBehaviour
         switch (combatData.enemyData.GetEnemyType())
         {
             case enemydata.CATS.KEEPER:
-                
+                KeeperBH();
                 break;
             case enemydata.CATS.CRAWLER:
-                
+                CrawlerBH();
                 break;
             case enemydata.CATS.IMITATER:
-
+                ImitaterBH();
                 break;
             case enemydata.CATS.HOARDER:
-
+                HoarderBH();
                 break;
             default:
                 fTime_elapsed += Time.deltaTime;
@@ -66,5 +66,25 @@ public class BulletSpawner : MonoBehaviour
         SceneManager.MoveGameObjectToScene(bullet,SceneManager.GetSceneByName("BulletHellScene"));
         Vector3 dir = (player.transform.position - bullet.transform.position).normalized * 50f;
         bullet.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
+    }
+
+    private void KeeperBH()
+    {
+
+    }
+
+    private void CrawlerBH()
+    {
+
+    }
+
+    private void ImitaterBH()
+    {
+
+    }
+
+    private void HoarderBH()
+    {
+
     }
 }
