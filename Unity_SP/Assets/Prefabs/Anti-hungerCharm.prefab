@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3892618246891560318}
   - component: {fileID: 4888282783220998294}
   - component: {fileID: 5773824779064937761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Anti-hungerCharm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,4 +130,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 341f4a5e92df0a4449de5f79a78284f1, type: 2}
   dropIndex: 0
-  worldState: {fileID: 0}
+  worldState: {fileID: 11400000, guid: fd2caec875e1b1a4c95c3275c94f8518, type: 2}

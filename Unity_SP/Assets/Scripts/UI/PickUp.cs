@@ -7,9 +7,9 @@ public class PickUp : MonoBehaviour
     public ItemData item;
 
     [SerializeField]
-    private int dropIndex;
+    public int dropIndex;
     [SerializeField]
-    private WorldState worldState;
+    public WorldState worldState;
 
 
     void Pickup()

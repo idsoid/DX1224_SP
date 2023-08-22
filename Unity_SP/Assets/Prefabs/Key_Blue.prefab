@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3892618246891560318}
   - component: {fileID: 4888282783220998294}
   - component: {fileID: 5773824779064937761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Key_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,5 +129,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3b8b9110b8ea6ba448d6b102f740481a, type: 2}
-  dropIndex: 0
+  dropIndex: 8
   worldState: {fileID: 0}
