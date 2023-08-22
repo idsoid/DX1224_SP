@@ -6,25 +6,57 @@ public class BulletSpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject projectile;
-
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private CombatData combatData; 
 
     private float fTime_elapsed;
     // Start is called before the first frame update
     void Start()
     {
         fTime_elapsed = 0f;
+
+        switch (combatData.enemyData.GetEnemyType())
+        {
+            case enemydata.CATS.KEEPER:
+                break;
+            case enemydata.CATS.CRAWLER:
+                break;
+            case enemydata.CATS.IMITATER:
+                break;
+            case enemydata.CATS.HOARDER:
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        fTime_elapsed += Time.deltaTime;
-        if(fTime_elapsed > 1f)
+        switch (combatData.enemyData.GetEnemyType())
         {
-            Bullet1();
-            fTime_elapsed = 0f;
+            case enemydata.CATS.KEEPER:
+                
+                break;
+            case enemydata.CATS.CRAWLER:
+                
+                break;
+            case enemydata.CATS.IMITATER:
+
+                break;
+            case enemydata.CATS.HOARDER:
+
+                break;
+            default:
+                fTime_elapsed += Time.deltaTime;
+                if (fTime_elapsed > 1f)
+                {
+                    Bullet1();
+                    fTime_elapsed = 0f;
+                }
+                break;
         }
     }
 

@@ -52,6 +52,10 @@ public class EnemyData : ScriptableObject
             SetDead(true);
         }
     }
+    public enemydata.CATS GetEnemyType()
+    {
+        return _enemydata.type;
+    }
 }
 
 [System.Serializable]
@@ -62,8 +66,7 @@ public class enemydata
         KEEPER,
         CRAWLER,
         IMITATER,
-        HOARDER,
-        TOTAL
+        HOARDER
     }
     public CATS type;
     public float health;

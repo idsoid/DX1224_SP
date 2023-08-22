@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class AbyssKeeper : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mapCol;
+    [SerializeField]
     private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
@@ -46,7 +48,6 @@ public class AbyssKeeper : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("sex");
         if (collision.gameObject.CompareTag("Flashlight"))
         {
             lightOn = true;
@@ -63,6 +64,7 @@ public class AbyssKeeper : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -83,6 +85,7 @@ public class AbyssKeeper : MonoBehaviour
         attackTime = 0.0f;
         rushSprite.gameObject.SetActive(false);
         enemyData.Init(75, 30, wanderSprite.GetComponent<Sprite>(), gameObject.name, "KEEPER");
+        Physics2D.IgnoreLayerCollision(2, 8);
     }
     // Update is called once per frame
     void FixedUpdate()

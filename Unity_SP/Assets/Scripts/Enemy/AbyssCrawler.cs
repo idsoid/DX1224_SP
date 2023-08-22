@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssCrawler : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mapCol;
+    [SerializeField]
     private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
@@ -22,7 +24,7 @@ public class AbyssCrawler : MonoBehaviour
     private float totalTime;
     private float speed = 300f;
     private float nextWaypointDistance = 1f;
-    private Transform furthest;
+    private Transform scaryAlert;
     private float raycastDistance = 5.0f;
     private float rezTime;
 
@@ -62,6 +64,7 @@ public class AbyssCrawler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -79,8 +82,10 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        furthest = null;
+        scaryAlert = target;
         enemyData.Init(50, 10, enemySprite.GetComponent<Sprite>(), gameObject.name, "CRAWLER");
+        Physics2D.IgnoreLayerCollision(2, 8);
+        rezTime = 0.0f;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -148,16 +153,6 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
-        float dist = 0.0f;
-        for (int i = 0; i < objWaypoints.Count; i++)
-        {
-            if (Vector3.Distance(player.transform.position, objWaypoints[i].transform.position) > dist)
-            {
-                dist = Vector3.Distance(player.transform.position, objWaypoints[i].transform.position);
-                furthest = objWaypoints[i].transform;
-            }
-        }
-
         Vector2 moveDir = rb.velocity.normalized;
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
@@ -174,6 +169,7 @@ public class AbyssCrawler : MonoBehaviour
         {
             case State.IDLE:
                 totalTime += Time.deltaTime;
+                scaryAlert = objWaypoints[targetIndex].GetComponent<Transform>();
                 if (totalTime >= 1.0f)
                 {
                     targetIndex++;
@@ -182,7 +178,8 @@ public class AbyssCrawler : MonoBehaviour
                 }
                 else if (lightOn)
                 {
-                    speed *= 10;
+                    rb.velocity = Vector3.zero;
+                    speed *= 5;
                     currentState = State.FLEE;
                 }
                 break;
@@ -199,7 +196,8 @@ public class AbyssCrawler : MonoBehaviour
                 }
                 else if (lightOn)
                 {
-                    speed *= 10;
+                    rb.velocity = Vector3.zero;
+                    speed *= 5;
                     currentState = State.FLEE;
                 }
                 break;
@@ -212,12 +210,13 @@ public class AbyssCrawler : MonoBehaviour
                 }
                 else if (lightOn)
                 {
+                    rb.velocity = Vector3.zero;
                     speed *= 5;
                     currentState = State.FLEE;
                 }
                 break;
             case State.FLEE:
-                target = furthest;
+                target = scaryAlert;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 1.0f && !lightOn)
                 {
                     speed /= 5;

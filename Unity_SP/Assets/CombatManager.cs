@@ -82,7 +82,7 @@ public class CombatManager : MonoBehaviour
                     bhPhysicsScene.Simulate(Time.deltaTime);
                 }
             }
-            if (fTime_elapsed > 5f)
+            if (fTime_elapsed > 15f)
             {
                 SceneManager.UnloadSceneAsync(scene);
                 actionSelect.SetActive(true);

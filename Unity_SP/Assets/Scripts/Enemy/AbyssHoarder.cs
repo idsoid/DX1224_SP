@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssHoarder : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mapCol;
+    [SerializeField]
     private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
@@ -59,6 +61,7 @@ public class AbyssHoarder : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -77,6 +80,7 @@ public class AbyssHoarder : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
         enemyData.Init(60, 20, enemySprite.GetComponent<Sprite>(), gameObject.name, "HOARDER");
+        Physics2D.IgnoreLayerCollision(2, 8);
     }
     // Update is called once per frame
     void FixedUpdate()

@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssImitater : MonoBehaviour
 {
     [SerializeField]
+    private GameObject mapCol;
+    [SerializeField]
     private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
@@ -66,6 +68,7 @@ public class AbyssImitater : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -88,6 +91,7 @@ public class AbyssImitater : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
         enemyData.Init(40, 15, enemySprite.GetComponent<Sprite>(), gameObject.name, "IMITATER");
+        Physics2D.IgnoreLayerCollision(2, 8);
     }
     // Update is called once per frame
     void FixedUpdate()
