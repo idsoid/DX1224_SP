@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   temppos: {x: -2.4151943, y: -31.322329, z: 0}
+=======
+  temppos: {x: 16.294666, y: -22.004827, z: 0}
+>>>>>>> Stashed changes
   loadOldPos: 0
   safe: 0
   isCold: 1

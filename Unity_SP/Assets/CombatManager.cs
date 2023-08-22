@@ -22,6 +22,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private GameObject eventsys;
 
+    [SerializeField]
+    private Image enemySprite;
+
 
     public GameObject actionSelect;
     public GameObject enemySelect;
@@ -54,8 +57,8 @@ public class CombatManager : MonoBehaviour
         enemySelect.SetActive(false);
         action = ACTION.NONE;
         enemyData = combatData.enemyData;
+        enemySprite.sprite = combatData.enemyData.GetSprite();
 
-        
     }
 
     // Update is called once per frame
