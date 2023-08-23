@@ -52,6 +52,10 @@ public class EnemyData : ScriptableObject
             SetDead(true);
         }
     }
+    public void ResetHealth(float health)
+    {
+        _enemydata.health = health;
+    }
     public enemydata.CATS GetEnemyType()
     {
         return _enemydata.type;
@@ -59,6 +63,14 @@ public class EnemyData : ScriptableObject
     public Sprite GetSprite()
     {
         return _enemydata.enemySprite;
+    }
+    public Vector3 GetPos()
+    {
+        return _enemydata.oldPos;
+    }
+    public void SetPos(Vector3 pos) 
+    {
+        _enemydata.oldPos = pos;
     }
 }
 
@@ -78,4 +90,5 @@ public class enemydata
     public Sprite enemySprite;
     public string name;
     public bool isDead;
+    public Vector3 oldPos;
 }

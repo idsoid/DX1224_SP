@@ -85,7 +85,11 @@ public class AbyssKeeper : MonoBehaviour
         attackTime = 0.0f;
         rushSprite.gameObject.SetActive(false);
         Physics2D.IgnoreLayerCollision(2, 8);
-        enemyData.Init(75, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "KEEPER");
+        rezTime = 0.0f;
+        if (enemyData.GetSprite() == null)
+        {
+            enemyData.Init(75, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -126,8 +130,10 @@ public class AbyssKeeper : MonoBehaviour
                 rezTime -= Time.deltaTime;
                 if (rezTime <= 0.0f)
                 {
+                    rezTime = 0.0f;
                     enemyData.SetDead(false);
                     isDead = false;
+                    enemyData.ResetHealth(75);
                 }
             }
         }

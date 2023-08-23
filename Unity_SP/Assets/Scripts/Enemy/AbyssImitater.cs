@@ -91,7 +91,11 @@ public class AbyssImitater : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
         Physics2D.IgnoreLayerCollision(2, 8);
-        enemyData.Init(40, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "IMITATER");
+        rezTime = 0.0f;
+        if (enemyData.GetSprite() == null)
+        {
+            enemyData.Init(40, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Imitater", "IMITATER");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -107,7 +111,7 @@ public class AbyssImitater : MonoBehaviour
 
         if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rezTime = 30.0f;
+            rezTime = 10.0f;
             GetComponent<Collider2D>().enabled = false;
             mimicSprite.gameObject.SetActive(false);
             enemySprite.gameObject.SetActive(false);
@@ -133,8 +137,10 @@ public class AbyssImitater : MonoBehaviour
             rezTime -= Time.deltaTime;
             if (rezTime <= 0.0f)
             {
+                rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
+                enemyData.ResetHealth(40);
             }
         }
 

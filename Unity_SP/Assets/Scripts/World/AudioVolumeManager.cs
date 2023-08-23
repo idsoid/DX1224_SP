@@ -21,6 +21,7 @@ public class AudioVolumeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerPrefs.Save();
         playerPrefs.Load();
     }
 

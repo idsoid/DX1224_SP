@@ -64,7 +64,6 @@ public class AbyssCrawler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -82,15 +81,21 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        scaryAlert = target;
+        scaryAlert = objWaypoints[objWaypoints.Count-1].GetComponent<Transform>(); ;
         Physics2D.IgnoreLayerCollision(2, 8);
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
-        enemyData.Init(50, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "CRAWLER");
+        if (enemyData.GetSprite() == null)
+        {
+            enemyData.Init(50, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         //enemyData.SetDead(isDead);
+        //Debug.Log(enemyData.GetSprite());
+        //Debug.Log("rez:" + rezTime);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -117,8 +122,10 @@ public class AbyssCrawler : MonoBehaviour
             rezTime -= Time.deltaTime;
             if (rezTime <= 0.0f)
             {
+                rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
+                enemyData.ResetHealth(50);
             }
         }
 

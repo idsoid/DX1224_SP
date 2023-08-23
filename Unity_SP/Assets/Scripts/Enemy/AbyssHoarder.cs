@@ -80,7 +80,11 @@ public class AbyssHoarder : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
         Physics2D.IgnoreLayerCollision(2, 8);
-        enemyData.Init(60, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, gameObject.name, "HOARDER");
+        rezTime = 0.0f;
+        if (enemyData.GetHealth() != 0.0f)
+        {
+            enemyData.Init(60, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -96,7 +100,7 @@ public class AbyssHoarder : MonoBehaviour
 
         if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rezTime = 30.0f;
+            rezTime = 10.0f;
             GetComponent<Collider2D>().enabled = false;
             enemySprite.gameObject.SetActive(false);
         }
@@ -112,8 +116,10 @@ public class AbyssHoarder : MonoBehaviour
             rezTime -= Time.deltaTime;
             if (rezTime <= 0.0f)
             {
+                rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
+                enemyData.ResetHealth(60);
             }
         }
 

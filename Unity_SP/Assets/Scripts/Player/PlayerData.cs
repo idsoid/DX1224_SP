@@ -27,8 +27,8 @@ public class PlayerData : ScriptableObject
         _playerData.temperature = 100f;
         _playerData.hunger = 100f;
         _playerData.isAlive = true;
-        _playerData.tempDecreaseMultiplier = 10f;
-        _playerData.hungerDecreaseMultiplier = 0.5f;
+        _playerData.tempDecreaseMultiplier = 0f;
+        _playerData.hungerDecreaseMultiplier = 0f;
         _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
         _playerData.maxHealth = 100f;
         _playerData.maxStamina = 80f;
