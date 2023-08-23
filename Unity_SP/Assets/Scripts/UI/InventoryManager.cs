@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
 
     public Toggle EnableRemove;
 
-    public InventoryItemController[] InventoryItems;
+    public List<InventoryItemController> InventoryItems;
 
 
     private void Awake()
@@ -68,6 +68,7 @@ public class InventoryManager : MonoBehaviour
     public void Remove(ItemData item)
     {
         Items.Remove(item);
+
         playerData.inventory = Items;
     }
 
@@ -91,13 +92,17 @@ public class InventoryManager : MonoBehaviour
         
     }
 
+    
+
     public void SetInventoryItems()
     {
-        InventoryItems = ItemContent.gameObject.GetComponentsInChildren<InventoryItemController>();
+        InventoryItems.Clear();
+        InventoryItemController[] temp = ItemContent.gameObject.GetComponentsInChildren<InventoryItemController>();
         for (int i = 0; i < Items.Count; i++)
         {
             //Debug.Log(i);
-            InventoryItems[i].AddItem(Items[i]);
+            temp[i].AddItem(Items[i]);
+            InventoryItems.Add(temp[i]);
         }
     }
     
@@ -107,7 +112,7 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(InventoryItems[i].gameObject);
         }
-        InventoryItems = null;
+        //InventoryItems = null;
     }
     public void EnableItemsRemove()
     {

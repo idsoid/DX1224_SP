@@ -60,6 +60,8 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetCount() <= 0)
         {
             RemoveItem();
+            Debug.Log("uh");
+            InventoryManager.Instance.InventoryItems.Remove(this);
         }
 
         if (item.GetCount() >= 2)
