@@ -91,6 +91,7 @@ public class AbyssKeeper : MonoBehaviour
         attackTime = 0.0f;
         rushSprite.gameObject.SetActive(false);
         Physics2D.IgnoreLayerCollision(2, 8);
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {

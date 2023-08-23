@@ -94,6 +94,7 @@ public class AbyssImitater : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
         Physics2D.IgnoreLayerCollision(2, 8);
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
@@ -114,7 +115,7 @@ public class AbyssImitater : MonoBehaviour
 
         if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rezTime = 10.0f;
+            rezTime = 30.0f;
             GetComponent<Collider2D>().enabled = false;
             mimicSprite.gameObject.SetActive(false);
             enemySprite.gameObject.SetActive(false);

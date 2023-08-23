@@ -84,7 +84,7 @@ public class AbyssCrawler : MonoBehaviour
         currentState = State.PATROL;
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
-        scaryAlert = objWaypoints[objWaypoints.Count-1].GetComponent<Transform>(); ;
+        scaryAlert = objWaypoints[objWaypoints.Count-1].GetComponent<Transform>();
         Physics2D.IgnoreLayerCollision(2, 8);
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
@@ -163,17 +163,14 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
-        Vector2 moveDir = rb.velocity.normalized;
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
-        
-        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
+        if (!hit.collider.gameObject.CompareTag("Player"))
         {
-            Debug.DrawLine(origin, hit.point, Color.red);
+            Debug.DrawLine(transform.position, hit.point, Color.red);
         }
         else
         {
-            Debug.DrawRay(origin, moveDir * raycastDistance, Color.green);
+            Debug.DrawLine(transform.position, player.transform.position, Color.green);
         }
 
         switch (currentState)
@@ -206,7 +203,7 @@ public class AbyssCrawler : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 4.0f && hit.collider == null)
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 4.0f && hit.collider.gameObject.CompareTag("Player"))
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;

@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e5dd69f25063a4ea6bd69edb4aa91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crystal: {fileID: 1354720374}
   mapCol: {fileID: 2158163100545060725}
   combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   enemyData: {fileID: 11400000, guid: 2e665932223a52f4cbf35192cad7d59f, type: 2}
@@ -344,7 +345,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   enemySprite: {fileID: 4166859675263112966}
-  lightOn: 0
   isDead: 0
 --- !u!1 &4166859675263112967
 GameObject:

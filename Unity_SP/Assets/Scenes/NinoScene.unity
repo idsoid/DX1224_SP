@@ -197,6 +197,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1282176653}
     - target: {fileID: 131977376021709064, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: objWaypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 131977376021709064, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
       propertyPath: objWaypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1138576246}
@@ -210,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4166859674998521777, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4166859674998521788, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
       propertyPath: m_RootOrder

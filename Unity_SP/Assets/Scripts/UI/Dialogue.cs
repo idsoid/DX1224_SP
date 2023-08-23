@@ -11,6 +11,9 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private TMP_Text text;
 
+    [SerializeField]
+    private GameObject textBox;
+
     private int current;
     private int strIndex;
 
@@ -28,12 +31,17 @@ public class Dialogue : MonoBehaviour
         strIndex = 0;
         bFinishedLine = false;
         fTime_elapsed = 0f;
-        SetSpeed(0.1f);
+        SetSpeed(.05f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    textBox.SetActive(true);
+        //}
+
         if (Input.GetKeyDown(KeyCode.E) && bFinishedLine)
         {
             Next();
