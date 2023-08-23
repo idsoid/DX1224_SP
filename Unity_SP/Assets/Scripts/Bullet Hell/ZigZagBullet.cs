@@ -18,37 +18,28 @@ public class ZigZagBullet : MonoBehaviour
 
         originalPositionY = transform.position.y;
         if (transform.position.y > 0)
-        {
             velocityY = speed * 3;
-        }
         else if (transform.position.y < 0)
-        {
             velocityY = -speed * 3;
-        }
     }
 
     private void Update()
     {
-        if (transform.position.x > 6.5f)
-        {
-            if (velocityX != -speed)
+        if (transform.position.x > 6.5f && velocityX != -speed)
                 velocityX = -speed;
-        }
-        else if (transform.position.x < -6.5f)
-        {
-            if (velocityX != speed)
-                velocityX = speed;
-        }
+        else if (transform.position.x < -6.5f && velocityX != speed)
+            velocityX = speed;
 
-        if (transform.position.y > originalPositionY + 1.5f)
-        {
+        if (transform.position.y > originalPositionY + 1.5f && velocityY != -speed * 2)
             velocityY = -speed * 2;
-        }
-        else if (transform.position.y < originalPositionY - 1.5f)
-        {
+        else if (transform.position.y < originalPositionY - 1.5f && velocityY != speed * 2)
             velocityY = speed * 2;
-        }
 
         rb.velocity = new Vector2(velocityX, velocityY); 
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
     }
 }

@@ -12,6 +12,7 @@ public class BulletSpawner : MonoBehaviour
 
     [Header("Bullet Hell Prefabs")]
     [SerializeField] GameObject rotatingSquare;
+    [SerializeField] GameObject zigZagbullet;
 
     private float fTime_elapsed;
     private bool startHell;
@@ -47,13 +48,29 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
                 {
-                    GameObject spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+                    GameObject spawnedBullet;
+                    spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
                     spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
                     firstSpawn = false;
                 }
                 break;
             case enemydata.CATS.CRAWLER:
-                CrawlerBH();
+                if (startHell && firstSpawn)
+                {
+                    GameObject spawnedBullet;
+                    int opp = 1;
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (i == 1)
+                            opp = -1;
+                        spawnedBullet = Instantiate(zigZagbullet, new Vector2(7f * opp, 2.5f * opp), Quaternion.identity);
+                        spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(4f);
+                        spawnedBullet = Instantiate(zigZagbullet, new Vector2(9f * opp, 2.3f * opp), Quaternion.identity);
+                        spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(3f);
+                    }
+                    firstSpawn = false;
+                }
                 break;
             case enemydata.CATS.IMITATER:
                 ImitaterBH();
@@ -62,12 +79,7 @@ public class BulletSpawner : MonoBehaviour
                 HoarderBH();
                 break;
             default:
-                fTime_elapsed += Time.deltaTime;
-                if (fTime_elapsed > 1f)
-                {
-                    Bullet1();
-                    fTime_elapsed = 0f;
-                }
+                Debug.Log("Error: Invalid enemy type");
                 break;
         }
 

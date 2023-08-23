@@ -1184,6 +1184,7 @@ MonoBehaviour:
   combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
   timeToStartHell: 3
   rotatingSquare: {fileID: 6647926016911750749, guid: 47f14fb2a58ea8147b9ebc8c25de4dc5, type: 3}
+  zigZagbullet: {fileID: 5476387683782334815, guid: 21617028d214827439a740eaa3d067c2, type: 3}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
