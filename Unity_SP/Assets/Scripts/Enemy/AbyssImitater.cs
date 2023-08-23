@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssImitater : MonoBehaviour
 {
     [SerializeField]
+    private Transform eyes;
+    [SerializeField]
     private GameObject mapCol;
     [SerializeField]
     private CombatData combatData;
@@ -81,6 +83,7 @@ public class AbyssImitater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eyes.gameObject.SetActive(false);
         ar = mimicSprite.GetComponent<Animator>();
         shook = false;
         mimicSprite.GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, 3)];
@@ -152,10 +155,12 @@ public class AbyssImitater : MonoBehaviour
         if (rb.velocity.x >= 0.01f)
         {
             enemySprite.localScale = new Vector3(-1f, 1f, 1f);
+            eyes.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.velocity.x <= -0.01f)
         {
             enemySprite.localScale = new Vector3(1f, 1f, 1f);
+            eyes.localScale = new Vector3(1f, 1f, 1f);
         }
     }
     void OnPathComplete(Path p)
@@ -199,6 +204,7 @@ public class AbyssImitater : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    eyes.gameObject.SetActive(true);
                     mimicSprite.gameObject.SetActive(false);
                     enemySprite.gameObject.SetActive(true);
                     currentState = State.TARGET;
@@ -210,6 +216,7 @@ public class AbyssImitater : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    eyes.gameObject.SetActive(false);
                     mimicSprite.gameObject.SetActive(true);
                     enemySprite.gameObject.SetActive(false);
                     currentState = State.MIMIC;
@@ -225,6 +232,7 @@ public class AbyssImitater : MonoBehaviour
                         rb.angularVelocity = 0f;
                         speed *= 10;
                         lightOn = false;
+                        eyes.gameObject.SetActive(true);
                         mimicSprite.gameObject.SetActive(false);
                         enemySprite.gameObject.SetActive(true);
                         currentState = State.CHASE;
@@ -234,6 +242,7 @@ public class AbyssImitater : MonoBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    eyes.gameObject.SetActive(true);
                     mimicSprite.gameObject.SetActive(false);
                     enemySprite.gameObject.SetActive(true);
                     currentState = State.TARGET;
@@ -249,6 +258,7 @@ public class AbyssImitater : MonoBehaviour
                 target = player.transform;
                 if (enemyData.GetDead())
                 {
+                    eyes.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     speed /= 10;
