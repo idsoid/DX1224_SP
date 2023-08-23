@@ -14,6 +14,7 @@ public class PlayerData : ScriptableObject
     public bool isCold;
     public ItemData equippedWeapon, equippedCharm;
     public List<ItemData> inventory = new List<ItemData>();
+    public bool ReadyLoad = false;
 
     public void Init()
     {
@@ -56,8 +57,9 @@ public class PlayerData : ScriptableObject
                 if(_playerData.health <= 0)
                 {
                     _playerData.isAlive = false;
-                    _playerData.health = 0;
+                    
                     SceneManager.LoadScene("LoseScene");
+
                 }
                 else if (_playerData.health > 100)
                 {

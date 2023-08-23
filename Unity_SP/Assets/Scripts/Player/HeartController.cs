@@ -26,6 +26,11 @@ public class HeartController : MonoBehaviour
     {
         //healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         HandleInputMovement();
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            playerData.AlterValue("health", -10);
+        }
     }
 
     private void HandleInputMovement()

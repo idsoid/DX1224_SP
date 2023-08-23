@@ -24,7 +24,9 @@ public class GeneralButtons : MonoBehaviour
 
     public void OnLoadSaveClick()
     {
-        playerData.Load();
+        playerData.ReadyLoad = true;
+        playerData.SetValue("health", 100);
+        playerData.Save();
         SceneManager.LoadScene(sceneName);
     }
 
