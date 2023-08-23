@@ -103,7 +103,7 @@ public class AbyssKeeper : MonoBehaviour
         }
         Vector2 force = speed * Time.deltaTime * ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
 
-        if (lightOn)
+        if (lightOn && currentState != State.RUSH)
         {
             rb.velocity = Vector3.zero;
         }
@@ -177,13 +177,17 @@ public class AbyssKeeper : MonoBehaviour
                 totalTime += Time.deltaTime;
                 if (totalTime >= 1.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     targetIndex++;
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
                 else if (lightOn)
                 {
-                    attackTime = 2.0f;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
+                    attackTime = 1.25f;
                     currentState = State.FREEZE;
                 }
                 break;
@@ -191,12 +195,16 @@ public class AbyssKeeper : MonoBehaviour
                 target = objWaypoints[targetIndex].GetComponent<Transform>();
                 if (Vector3.Distance(target.position, transform.position) <= 0.5f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
                 else if (lightOn)
                 {
-                    attackTime = 2.0f;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
+                    attackTime = 1.25f;
                     currentState = State.FREEZE;
                 }
                 break;
@@ -206,6 +214,8 @@ public class AbyssKeeper : MonoBehaviour
                     attackTime -= Time.deltaTime;
                     if (attackTime <= 0.0f && lightOn)
                     {
+                        rb.velocity = Vector3.zero;
+                        rb.angularVelocity = 0f;
                         speed *= 10;
                         lightOn = false;
                         wanderSprite.gameObject.SetActive(false);
@@ -215,6 +225,8 @@ public class AbyssKeeper : MonoBehaviour
                 }
                 else
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
@@ -223,6 +235,8 @@ public class AbyssKeeper : MonoBehaviour
                 target = player.transform;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 10.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     speed /= 10;
                     wanderSprite.gameObject.SetActive(true);

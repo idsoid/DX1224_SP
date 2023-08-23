@@ -160,12 +160,16 @@ public class AbyssHoarder : MonoBehaviour
                 totalTime += Time.deltaTime;
                 if (totalTime >= 1.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     targetIndex++;
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
                 else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     currentState = State.AGGRO;
                 }
                 break;
@@ -173,11 +177,15 @@ public class AbyssHoarder : MonoBehaviour
                 target = objWaypoints[targetIndex].GetComponent<Transform>();
                 if (Vector3.Distance(target.position, transform.position) <= 0.5f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
                 else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     currentState = State.AGGRO;
                 }
                 break;
@@ -185,6 +193,8 @@ public class AbyssHoarder : MonoBehaviour
                 target = player.transform;
                 if (!lightOn)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }

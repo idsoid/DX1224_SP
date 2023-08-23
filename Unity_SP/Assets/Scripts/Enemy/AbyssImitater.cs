@@ -190,11 +190,15 @@ public class AbyssImitater : MonoBehaviour
 
                 if (lightOn && shook)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     attackTime = 5.0f;
                     currentState = State.FREEZE;
                 }
                 else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     mimicSprite.gameObject.SetActive(false);
                     enemySprite.gameObject.SetActive(true);
                     currentState = State.TARGET;
@@ -204,10 +208,10 @@ public class AbyssImitater : MonoBehaviour
                 target = player.transform;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
                 {
-                    mimicSprite.gameObject.SetActive(true);
-                    enemySprite.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    mimicSprite.gameObject.SetActive(true);
+                    enemySprite.gameObject.SetActive(false);
                     currentState = State.MIMIC;
                 }
                 break;
@@ -217,6 +221,8 @@ public class AbyssImitater : MonoBehaviour
                     attackTime -= Time.deltaTime;
                     if (attackTime <= 0.0f && lightOn)
                     {
+                        rb.velocity = Vector3.zero;
+                        rb.angularVelocity = 0f;
                         speed *= 10;
                         lightOn = false;
                         mimicSprite.gameObject.SetActive(false);
@@ -226,12 +232,16 @@ public class AbyssImitater : MonoBehaviour
                 }
                 else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     mimicSprite.gameObject.SetActive(false);
                     enemySprite.gameObject.SetActive(true);
                     currentState = State.TARGET;
                 }
                 else
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     currentState = State.MIMIC;
                 }
                 break;
@@ -239,6 +249,8 @@ public class AbyssImitater : MonoBehaviour
                 target = player.transform;
                 if (enemyData.GetDead())
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     speed /= 10;
                     currentState = State.MIMIC;
                 }

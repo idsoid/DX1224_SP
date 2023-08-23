@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee60757ab201844b5e2ac05ccd54c1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  temppos: {x: -1.752031, y: -38.811268, z: 0}
-  loadOldPos: 0
+  temppos: {x: 9.90279, y: -25.670736, z: 0}
+  loadOldPos: 1
   safe: 0
   isCold: 0
   equippedWeapon: {fileID: 0}
   equippedCharm: {fileID: 0}
-  inventory:
-  - {fileID: 11400000, guid: 1ca662e437bc80646a7b7e35339b74c9, type: 2}
+  inventory: []
+  ReadyLoad: 0

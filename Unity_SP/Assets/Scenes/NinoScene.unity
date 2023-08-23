@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4166859675263112966, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a38ac236c9d5aab428f743d38372e999, type: 3}
 --- !u!4 &383184958 stripped
@@ -497,6 +501,10 @@ PrefabInstance:
     - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: m_Name
       value: AbyssCrawler (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5219829129952075930, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: player
@@ -928,6 +936,10 @@ PrefabInstance:
     - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: m_Name
       value: AbyssCrawler
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444625815343035855, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5219829129952075930, guid: c12833f5ee0f39d4b8ca1d20721d59a7, type: 3}
       propertyPath: player

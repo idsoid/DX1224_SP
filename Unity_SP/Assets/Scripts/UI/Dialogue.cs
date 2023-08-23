@@ -17,12 +17,18 @@ public class Dialogue : MonoBehaviour
     private string line;
 
     private bool bFinishedLine;
+
+    private float fSpeed;
+
+    private float fTime_elapsed;
     void Start()
     {
         line = "";
         current = 0;
         strIndex = 0;
         bFinishedLine = false;
+        fTime_elapsed = 0f;
+        SetSpeed(0.1f);
     }
 
     // Update is called once per frame
@@ -31,27 +37,36 @@ public class Dialogue : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && bFinishedLine)
         {
             Next();
-            
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            bFinishedLine = true;
+            text.text = dialogueLines[current];
+        }
+
+        if (!bFinishedLine)
+        {
+            fTime_elapsed += Time.deltaTime;
+            if (fTime_elapsed > fSpeed)
+            {
+                line += dialogueLines[current][strIndex];
+                text.text = line;
+                Debug.Log(line);
+                if (line == dialogueLines[current])
+                {
+                    bFinishedLine = true;
+                }
+                else
+                {
+                    strIndex++;
+                }
+                fTime_elapsed = 0f;
+            }
         }
     }
 
-    private void FixedUpdate()
-    {
-        if(!bFinishedLine)
-        {
-            line += dialogueLines[current][strIndex];
-            text.text = line;
-            Debug.Log(line);
-            if (line == dialogueLines[current])
-            {
-                bFinishedLine = true;
-            }
-            else
-            {
-                strIndex++;
-            }
-        }
-    }
+   
     private void Next()
     {
         current++;
@@ -62,5 +77,10 @@ public class Dialogue : MonoBehaviour
         strIndex = 0;
         line = "";
         bFinishedLine = false;
+    }
+
+    public void SetSpeed(float sec)
+    {
+        fSpeed = sec;
     }
 }

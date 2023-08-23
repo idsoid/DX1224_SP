@@ -25,6 +25,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private Image enemySprite;
 
+    [SerializeField]
+    private GameObject attack;
+
 
     public GameObject actionSelect;
     public GameObject enemySelect;
@@ -58,31 +61,35 @@ public class CombatManager : MonoBehaviour
         action = ACTION.NONE;
         enemyData = combatData.enemyData;
         enemySprite.sprite = combatData.enemyData.GetSprite();
-
+        UpdateData();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playertext.text = playerData.PrintSelf();
-
-        enemytext.text = enemyData.name + "\n" + System.Convert.ToString(enemyData.GetHealth());
+        
 
         if(!playerTurn)
         {
             fTime_elapsed += Time.deltaTime;
             if(fTime_elapsed > 1f)
             {
-                if (!scene.isLoaded)
+                
+                CheckDead();
+
+                if (!enemyData.GetDead())
                 {
-                    eventsys.SetActive(false);
-                    LoadSceneParameters param = new LoadSceneParameters(LoadSceneMode.Additive, LocalPhysicsMode.Physics2D);
-                    scene = SceneManager.LoadScene(bhSceneName, param);
-                    bhPhysicsScene = scene.GetPhysicsScene2D();
-                }
-                if (bhPhysicsScene != null)
-                {
-                    bhPhysicsScene.Simulate(Time.deltaTime);
+                    if (!scene.isLoaded)
+                    {
+                        eventsys.SetActive(false);
+                        LoadSceneParameters param = new LoadSceneParameters(LoadSceneMode.Additive, LocalPhysicsMode.Physics2D);
+                        scene = SceneManager.LoadScene(bhSceneName, param);
+                        bhPhysicsScene = scene.GetPhysicsScene2D();
+                    }
+                    if (bhPhysicsScene != null)
+                    {
+                        bhPhysicsScene.Simulate(Time.deltaTime);
+                    }
                 }
             }
             if (fTime_elapsed > 15f)
@@ -91,6 +98,8 @@ public class CombatManager : MonoBehaviour
                 actionSelect.SetActive(true);
                 playerTurn = true;
                 eventsys.SetActive(true);
+
+                UpdateData();
             }
             //playerData.AlterValue("health", -10);
             //actionSelect.SetActive(true);
@@ -131,16 +140,16 @@ public class CombatManager : MonoBehaviour
         {
             case ACTION.ATTACK:
                 enemyData.SetHealth(playerData.GetValue("attack"));
+                Attack();
                 playerTurn = false;
                 enemySelect.SetActive(false);
-                CheckDead();
                 break;
             case ACTION.SKILL:
                 playerData.AlterValue("hunger", -20);
                 enemyData.SetHealth(playerData.GetValue("attack") * 2);
+                Attack();
                 playerTurn = false;
                 enemySelect.SetActive(false);
-                CheckDead();
                 break;
             case ACTION.HEAL:
                 break;
@@ -159,5 +168,16 @@ public class CombatManager : MonoBehaviour
             playerData.Save();
             SceneManager.LoadScene(sceneName);
         }
+    }
+
+    public void UpdateData()
+    {
+        playertext.text = playerData.PrintSelf();
+        enemytext.text = enemyData.name + "\n" + System.Convert.ToString(enemyData.GetHealth());
+    }
+
+    private void Attack()
+    {
+        attack.SetActive(true);
     }
 }

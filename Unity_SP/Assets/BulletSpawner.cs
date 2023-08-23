@@ -4,18 +4,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class BulletSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject projectile;
-    [SerializeField]
-    private GameObject player;
-    [SerializeField]
-    private CombatData combatData; 
+    [Header("Variables")]
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject player;
+    [SerializeField]private CombatData combatData;
+    [SerializeField] private float timeToStartHell;
+
+    [Header("Bullet Hell Prefabs")]
+    [SerializeField] GameObject rotatingSquare;
 
     private float fTime_elapsed;
+    private bool startHell;
+    private bool firstSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
         fTime_elapsed = 0f;
+        startHell = false;
+        firstSpawn = true;
 
         switch (combatData.enemyData.GetEnemyType())
         {
@@ -35,10 +42,15 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (combatData.enemyData.GetEnemyType())
+        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
-                KeeperBH();
+                if (startHell && firstSpawn)
+                {
+                    GameObject spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+                    spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
+                    firstSpawn = false;
+                }
                 break;
             case enemydata.CATS.CRAWLER:
                 CrawlerBH();
@@ -58,6 +70,14 @@ public class BulletSpawner : MonoBehaviour
                 }
                 break;
         }
+
+        if (timeToStartHell > 0)
+            timeToStartHell -= Time.deltaTime;
+        else if (timeToStartHell < 0)
+        {
+            startHell = true;
+            timeToStartHell = 0;
+        }
     }
 
     private void Bullet1()
@@ -66,11 +86,6 @@ public class BulletSpawner : MonoBehaviour
         SceneManager.MoveGameObjectToScene(bullet,SceneManager.GetSceneByName("BulletHellScene"));
         Vector3 dir = (player.transform.position - bullet.transform.position).normalized * 50f;
         bullet.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
-    }
-
-    private void KeeperBH()
-    {
-
     }
 
     private void CrawlerBH()
