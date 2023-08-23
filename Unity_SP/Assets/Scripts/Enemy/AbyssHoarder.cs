@@ -26,7 +26,6 @@ public class AbyssHoarder : MonoBehaviour
     private float nextWaypointDistance = 1f;
     private float rezTime;
 
-    public bool lightOn = false;
     public bool isDead = false;
 
     Path path;
@@ -42,20 +41,6 @@ public class AbyssHoarder : MonoBehaviour
         IDLE,
         PATROL,
         AGGRO
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Flashlight"))
-        {
-            lightOn = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Flashlight"))
-        {
-            lightOn = false;
-        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -80,6 +65,7 @@ public class AbyssHoarder : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
         Physics2D.IgnoreLayerCollision(2, 8);
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
         if (enemyData.GetHealth() != 0.0f)
         {
@@ -154,6 +140,16 @@ public class AbyssHoarder : MonoBehaviour
     }
     private void FSM()
     {
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
+        if (!hit.collider.gameObject.CompareTag("Player"))
+        {
+            Debug.DrawLine(transform.position, hit.point, Color.red);
+        }
+        else
+        {
+            Debug.DrawLine(transform.position, player.transform.position, Color.green);
+        }
+
         switch (currentState)
         {
             case State.IDLE:
@@ -166,10 +162,11 @@ public class AbyssHoarder : MonoBehaviour
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
                 }
-                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
+                else if (player.GetComponent<PlayerController>().lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    speed = 300.0f;
                     currentState = State.AGGRO;
                 }
                 break;
@@ -182,7 +179,7 @@ public class AbyssHoarder : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f)
+                else if (player.GetComponent<PlayerController>().lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f && hit.collider.gameObject.CompareTag("Player"))
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
@@ -191,8 +188,9 @@ public class AbyssHoarder : MonoBehaviour
                 break;
             case State.AGGRO:
                 target = player.transform;
-                if (!lightOn)
+                if (!player.GetComponent<PlayerController>().lightOn)
                 {
+                    speed = 300.0f;
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     totalTime = 0.0f;
