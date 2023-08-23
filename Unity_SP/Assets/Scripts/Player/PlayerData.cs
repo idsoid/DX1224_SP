@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
+    [SerializeField]
+    private WorldState worldState;
+
     private playerData _playerData = new playerData();
 
     public Vector3 temppos;
@@ -26,7 +29,7 @@ public class PlayerData : ScriptableObject
         _playerData.speed = 1f;
         _playerData.stamina = 80f;
         _playerData.temperature = 100f;
-        _playerData.hunger = 100f;
+        _playerData.hunger = 50f;
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 2f;
         _playerData.hungerDecreaseMultiplier = 0.5f;
@@ -35,10 +38,9 @@ public class PlayerData : ScriptableObject
         _playerData.maxStamina = 80f;
         _playerData.maxTemperature = 100f;
         _playerData.maxHunger = 100f;
-
-        _playerData.masterVol = -20f;
-        _playerData.sfxVol = -20f;
-        _playerData.bgmVol = -20f;
+        _playerData.inventory = null;
+        inventory = null;
+        worldState.altered = false;
     }
 
     public void SavePos(Vector3 pos)
@@ -135,15 +137,6 @@ public class PlayerData : ScriptableObject
             case "hungerDecreaseMultiplier":
                 _playerData.hungerDecreaseMultiplier = value;
                 break;
-            case "masterVol":
-                _playerData.masterVol = value;
-                break;
-            case "sfxVol":
-                _playerData.sfxVol = value;
-                break;
-            case "bgmVol":
-                _playerData.bgmVol = value;
-                break;
             default:
                 break;
         }
@@ -176,12 +169,6 @@ public class PlayerData : ScriptableObject
                 return _playerData.maxTemperature;
             case "maxHunger":
                 return _playerData.maxHunger;
-            case "masterVol":
-                return _playerData.masterVol;
-            case "sfxVol":
-                return _playerData.sfxVol;
-            case "bgmVol":
-                return _playerData.bgmVol;
             default:
                 return -1;
         }
@@ -231,7 +218,10 @@ public class PlayerData : ScriptableObject
 
     public void Save()
     {
-        _playerData.inventory = inventory;
+        inventory = InventoryManager.Instance.Items;
+        //_playerData.inventory = inventory;
+        SetInventory();
+        _playerData.pickeds = worldState.pickedUp;
         string s = JsonUtility.ToJson(_playerData);
         FileManager.WriteToFile("playerdata.json", s);
     }
@@ -241,18 +231,34 @@ public class PlayerData : ScriptableObject
         string s;
         FileManager.LoadFromFile("playerdata.json", out s);
         JsonUtility.FromJsonOverwrite(s, _playerData);
-        inventory = _playerData.inventory;
-        InventoryManager.Instance.LoadInventory();
+        //inventory = _playerData.inventory;
+        ConvertInventory();
+        InventoryManager.Instance.Items = inventory;
+        worldState.pickedUp = _playerData.pickeds;
+        worldState.altered = true;
     }
 
-    public void SetInventory(List<ItemData> inv)
+    public void SetInventory()
     {
-        _playerData.inventory = inv;
+        foreach(ItemData yay in inventory)
+        {
+            string s = JsonUtility.ToJson(yay);
+            Debug.Log(s);
+            _playerData.inventory.Add(s);
+        }
     }
 
+    public void ConvertInventory()
+    {
+        for(int i = 0; i < _playerData.inventory.Count; i++)
+        {
+            string data = _playerData.inventory[i];
+            JsonUtility.FromJsonOverwrite(data,inventory[i]);
+        }
+    }
     public List<ItemData> GetInventory()
     {
-        return _playerData.inventory;
+        return inventory;
     }
 }
 
@@ -268,14 +274,11 @@ public class playerData
     public bool isAlive;
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
-    public List<ItemData> inventory;
+    public List<string> inventory;
     
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
     public bool redUnlocked, blueUnlocked, yellowUnlocked;
 
-    public float masterVol;
-    public float sfxVol;
-    public float bgmVol;
-
+    public List<bool> pickeds;
 }

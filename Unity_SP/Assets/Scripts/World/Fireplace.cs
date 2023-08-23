@@ -13,10 +13,13 @@ public class Fireplace : MonoBehaviour
     public float burnTime;
     private bool playerInteract;
 
+    [SerializeField]
+    private GameObject fireLight;
+
     private void Start()
     {
         lit = true;
-        burnTime = 180f;
+        //burnTime = 120f;
         playerInteract = false;
     }
 
@@ -60,16 +63,18 @@ public class Fireplace : MonoBehaviour
         if (!x)
         {
             fireplaceAnim.Play("fireplace_unlit");
+            
         }
         else
         {
             fireplaceAnim.Play("fireplace_lit");
         }
+        fireLight.SetActive(lit);
     }
 
     public void AddFuel()
     {
-        burnTime += 60;
+        burnTime += 120;
         if (!lit)
         {
             ToggleLit(true);
@@ -81,7 +86,6 @@ public class Fireplace : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerInteract = true;
-            Debug.Log("Player interacting");
         }
     }
 
@@ -90,7 +94,6 @@ public class Fireplace : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerInteract = false;
-            Debug.Log("Player no longer interacting");
         }
     }
 }

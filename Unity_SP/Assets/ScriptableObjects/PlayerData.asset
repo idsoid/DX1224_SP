@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cee60757ab201844b5e2ac05ccd54c1, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  worldState: {fileID: 11400000, guid: fd2caec875e1b1a4c95c3275c94f8518, type: 2}
   temppos: {x: 9.90279, y: -25.670736, z: 0}
-  loadOldPos: 1
+  loadOldPos: 0
   safe: 0
   isCold: 0
   equippedWeapon: {fileID: 0}

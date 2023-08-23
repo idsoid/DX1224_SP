@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject flashlight;
-    private bool lightOn;
+    public bool lightOn;
 
     float hInput, vInput;
     string idleAnim;

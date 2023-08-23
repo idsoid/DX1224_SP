@@ -24,6 +24,7 @@ public class GeneralButtons : MonoBehaviour
 
     public void OnLoadSaveClick()
     {
+        Time.timeScale = 1f;
         playerData.ReadyLoad = true;
         playerData.SetValue("health", 100);
         playerData.Save();

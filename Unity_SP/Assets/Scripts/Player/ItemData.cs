@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
+[System.Serializable]
 public class ItemData : ScriptableObject
 {
     [SerializeField] private PlayerData playerData;
@@ -259,9 +260,14 @@ public class ItemData : ScriptableObject
             if (count > 0)
             {
                 count--;
+                if (count == 0)
+                {
+                    InventoryManager.Instance.Remove(this);
+                }
             }
             else
                 Debug.Log("No wood to burn.");
+            
         }
     }
 

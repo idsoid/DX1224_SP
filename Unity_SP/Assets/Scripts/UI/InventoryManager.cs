@@ -78,7 +78,7 @@ public class InventoryManager : MonoBehaviour
         InventoryItems = ItemContent.gameObject.GetComponentsInChildren<InventoryItemController>();
         for (int i = 0; i < Items.Count; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             InventoryItems[i].AddItem(Items[i]);
         }
     }
@@ -89,7 +89,7 @@ public class InventoryManager : MonoBehaviour
         {
             Destroy(InventoryItems[i].gameObject);
         }
-
+        InventoryItems = null;
     }
     public void EnableItemsRemove()
     {
