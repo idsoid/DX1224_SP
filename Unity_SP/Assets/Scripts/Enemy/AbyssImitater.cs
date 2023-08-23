@@ -115,7 +115,7 @@ public class AbyssImitater : MonoBehaviour
 
         if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rezTime = 10.0f;
+            rezTime = 30.0f;
             GetComponent<Collider2D>().enabled = false;
             mimicSprite.gameObject.SetActive(false);
             enemySprite.gameObject.SetActive(false);

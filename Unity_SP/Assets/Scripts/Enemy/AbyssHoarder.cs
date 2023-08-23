@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssHoarder : MonoBehaviour
 {
     [SerializeField]
+    private Transform crystal;
+    [SerializeField]
     private GameObject mapCol;
     [SerializeField]
     private CombatData combatData;
@@ -46,14 +48,14 @@ public class AbyssHoarder : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
-        if (collision.gameObject.CompareTag("Walls"))
+        if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Enemy"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(mapCol.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
     // Start is called before the first frame update
@@ -67,7 +69,7 @@ public class AbyssHoarder : MonoBehaviour
         Physics2D.IgnoreLayerCollision(2, 8);
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
-        if (enemyData.GetHealth() != 0.0f)
+        if (enemyData.GetSprite() == null)
         {
             enemyData.Init(60, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
@@ -86,7 +88,8 @@ public class AbyssHoarder : MonoBehaviour
 
         if (enemyData.GetDead() && rezTime <= 0.0f)
         {
-            rezTime = 10.0f;
+            crystal.gameObject.SetActive(false);
+            rezTime = 30.0f;
             GetComponent<Collider2D>().enabled = false;
             enemySprite.gameObject.SetActive(false);
         }
