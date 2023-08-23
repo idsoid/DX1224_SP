@@ -977,7 +977,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!224 &1527332091
 RectTransform:
@@ -1186,6 +1186,11 @@ MonoBehaviour:
   rotatingSquare: {fileID: 6647926016911750749, guid: 47f14fb2a58ea8147b9ebc8c25de4dc5, type: 3}
   zigZagbullet: {fileID: 5476387683782334815, guid: 21617028d214827439a740eaa3d067c2, type: 3}
   longBar: {fileID: 3797024178947013569, guid: 9b9f29f4998f6db44a43e2099b7cd3cb, type: 3}
+  verticalSet: {fileID: 8589659880770422388, guid: ff78699e92d163444bf7308cbe5b3ced, type: 3}
+  horizontalSet: {fileID: 1483684764386588054, guid: 601b038bb7a3b2d4183f0f4a7c3387d8, type: 3}
+  dangerZone: {fileID: 5497439304196159445, guid: e173e954160979c47aea95f6d71d4a39, type: 3}
+  spawnedHorizontalSet: {fileID: 0}
+  spawnedVerticalSet: {fileID: 0}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
