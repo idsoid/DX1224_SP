@@ -27,7 +27,6 @@ public class AbyssCrawler : MonoBehaviour
     private float speed = 300f;
     private float nextWaypointDistance = 1f;
     private Transform scaryAlert;
-    private float raycastDistance = 5.0f;
     private float rezTime;
 
     public bool lightOn = false;
