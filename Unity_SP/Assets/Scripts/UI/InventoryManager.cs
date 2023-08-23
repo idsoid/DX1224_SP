@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
     public List<ItemData> Items = new List<ItemData>();
 
+    public List<ItemData> itemDatabase;
     public Transform ItemContent;
     public GameObject InventoryItem;
 
@@ -20,6 +21,7 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryItemController[] InventoryItems;
 
+
     private void Awake()
     {
         Instance = this;
@@ -27,8 +29,24 @@ public class InventoryManager : MonoBehaviour
 
     public void LoadInventory()
     {
-        Items = playerData.GetInventory();
+        foreach (ItemData item in itemDatabase)
+        {
+            item.SetCount(0);
+        }
+        Items.Clear();
+        List<int> things = playerData.GetInventory();
+        for (int i = 0; i < things.Count; i++)
+        {
+            foreach (ItemData elem in itemDatabase)
+            {
+                if (things[i] == elem.GetID())
+                {
+                    Add(elem);
+                }
+            }
+        }
     }
+
 
     public void Add(ItemData item)
     {

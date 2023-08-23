@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
     [SerializeField]
     private WorldState worldState;
+
+    [SerializeField]
+    private List<ItemData> itemsList;
 
     private playerData _playerData = new playerData();
 
@@ -38,8 +43,9 @@ public class PlayerData : ScriptableObject
         _playerData.maxStamina = 80f;
         _playerData.maxTemperature = 100f;
         _playerData.maxHunger = 100f;
-        _playerData.inventory = null;
-        inventory = null;
+        _playerData.inventory.Clear();
+        inventory.Clear();
+        InventoryManager.Instance.Items.Clear();
         worldState.altered = false;
     }
 
@@ -219,9 +225,16 @@ public class PlayerData : ScriptableObject
     public void Save()
     {
         inventory = InventoryManager.Instance.Items;
-        //_playerData.inventory = inventory;
-        SetInventory();
         _playerData.pickeds = worldState.pickedUp;
+
+        foreach (ItemData item in inventory)
+        {
+            for(int i = 0; i < item.GetCount(); i++)
+            {
+                _playerData.inventory.Add(item.GetID());
+            }
+        }
+
         string s = JsonUtility.ToJson(_playerData);
         FileManager.WriteToFile("playerdata.json", s);
     }
@@ -231,34 +244,19 @@ public class PlayerData : ScriptableObject
         string s;
         FileManager.LoadFromFile("playerdata.json", out s);
         JsonUtility.FromJsonOverwrite(s, _playerData);
-        //inventory = _playerData.inventory;
-        ConvertInventory();
-        InventoryManager.Instance.Items = inventory;
+
+        
         worldState.pickedUp = _playerData.pickeds;
         worldState.altered = true;
+
+
+        InventoryManager.Instance.LoadInventory();
     }
 
-    public void SetInventory()
+    
+    public List<int> GetInventory()
     {
-        foreach(ItemData yay in inventory)
-        {
-            string s = JsonUtility.ToJson(yay);
-            Debug.Log(s);
-            _playerData.inventory.Add(s);
-        }
-    }
-
-    public void ConvertInventory()
-    {
-        for(int i = 0; i < _playerData.inventory.Count; i++)
-        {
-            string data = _playerData.inventory[i];
-            JsonUtility.FromJsonOverwrite(data,inventory[i]);
-        }
-    }
-    public List<ItemData> GetInventory()
-    {
-        return inventory;
+        return _playerData.inventory;
     }
 }
 
@@ -274,8 +272,8 @@ public class playerData
     public bool isAlive;
     public float tempDecreaseMultiplier;
     public float hungerDecreaseMultiplier;
-    public List<string> inventory;
-    
+    //public List<ItemData> inventory;
+    public List<int> inventory;
     public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
     public bool redUnlocked, blueUnlocked, yellowUnlocked;

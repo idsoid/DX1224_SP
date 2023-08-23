@@ -281,6 +281,10 @@ public class ItemData : ScriptableObject
         return count;
     }
 
+    public void SetCount(int value)
+    {
+        count = value;
+    }
     public void AlterCount(int added)
     {
         count += added;

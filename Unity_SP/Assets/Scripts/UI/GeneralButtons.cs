@@ -31,6 +31,12 @@ public class GeneralButtons : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void OnLoadButtonClick()
+    {
+        Time.timeScale = 1f;
+        playerData.ReadyLoad = true;
+        SceneManager.LoadScene(sceneName);
+    }
     public void OnSaveClick()
     {
         if (playerData.safe)
