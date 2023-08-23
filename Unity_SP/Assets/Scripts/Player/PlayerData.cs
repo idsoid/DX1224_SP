@@ -23,13 +23,13 @@ public class PlayerData : ScriptableObject
         safe = false;
         _playerData.health = 100f;
         _playerData.attack = 25f;
-        _playerData.speed = 10f;
+        _playerData.speed = 1f;
         _playerData.stamina = 80f;
         _playerData.temperature = 100f;
         _playerData.hunger = 100f;
         _playerData.isAlive = true;
-        _playerData.tempDecreaseMultiplier = 0f;
-        _playerData.hungerDecreaseMultiplier = 0f;
+        _playerData.tempDecreaseMultiplier = 2f;
+        _playerData.hungerDecreaseMultiplier = 0.5f;
         _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
         _playerData.maxHealth = 100f;
         _playerData.maxStamina = 80f;

@@ -6,8 +6,25 @@ public class AudioHandler : MonoBehaviour
 {
     [Header("Audio")]
     private AudioSource sfxAudioSrc;
-    public AudioClip walkAudio;
-    public AudioClip invenAudio;
+
+    public AudioClip walk;
+    public AudioClip inventory;
+    public AudioClip fireBurning;
+    public AudioClip fireExtinguish;
+    public AudioClip fireStoked;
+    public AudioClip equip;
+    public AudioClip playerAttack;
+    public AudioClip flashLight;
+    public AudioClip unlockNoise;
+    public AudioClip exitDoorOpen;
+    public AudioClip playerDamaged;
+    public AudioClip frost;
+    public AudioClip eat;
+    public AudioClip heal;
+    public AudioClip pickup;
+
+    //enemystuff
+    public AudioClip enemyHurt;
 
     // Start is called before the first frame update
     void Start()
@@ -20,18 +37,17 @@ public class AudioHandler : MonoBehaviour
         switch (name)
         {
             case "sprint":
-                if (!sfxAudioSrc.isPlaying)
-                {
-                    sfxAudioSrc.clip = walkAudio;
-                    sfxAudioSrc.Play();
-                }
+                if(!sfxAudioSrc.isPlaying)
+                    sfxAudioSrc.PlayOneShot(walk);
                 break;
             case "inventory":
-                if (!sfxAudioSrc.isPlaying)
-                {
-                    sfxAudioSrc.clip = invenAudio;
-                    sfxAudioSrc.Play();
-                }
+                sfxAudioSrc.PlayOneShot(inventory);
+                break;
+            case "enemyHurt":
+                sfxAudioSrc.PlayOneShot(enemyHurt);
+                break;
+            case "pickup":
+                sfxAudioSrc.PlayOneShot(pickup);
                 break;
             default:
                 break;

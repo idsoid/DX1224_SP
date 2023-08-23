@@ -15,9 +15,6 @@ public class PlayerController : MonoBehaviour
     private GameObject flashlight;
     private bool lightOn;
 
-    [SerializeField]
-    private float mvmt = 2f;
-
     float hInput, vInput;
     string idleAnim;
 
@@ -25,9 +22,10 @@ public class PlayerController : MonoBehaviour
 
     bool isHungry;
 
+    float mvmt;
+
     [SerializeField]
     AudioHandler audioHandler;
-
 
     void Start()
     {
@@ -79,6 +77,7 @@ public class PlayerController : MonoBehaviour
     #region
     private void HandleInputMovement()
     {
+        mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
         hInput = Input.GetAxis("Horizontal") * mvmt;
         vInput = Input.GetAxis("Vertical") * mvmt;
 
@@ -108,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerData.safe && playerData.GetValue("temperature") != playerData.GetValue("maxTemperature"))
         {
-            playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
+            playerData.AlterValue("temperature", Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier") * 5);
             playerData.isCold = false;
         }
         else if (!playerData.safe)
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
         }
         if (playerData.isCold)
         {
-            playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
+            playerData.AlterValue("health", -Time.deltaTime * 5); 
         }
     }
 

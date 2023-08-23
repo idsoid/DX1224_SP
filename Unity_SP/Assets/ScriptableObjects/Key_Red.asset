@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78f3b4ef9b237541be7a8391fe69082, type: 3}
   m_Name: Key_Red
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
+  equipped: 0
+  count: 0
   itemID: 3
   itemName: Key_Red
   itemSprite: {fileID: 360591885, guid: 76b68597c13bc634e9f31544e2d158d3, type: 3}
-  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}

@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    public CombatManager combatManager;
+    [SerializeField]
+    private CombatManager combatManager;
 
     private Animator anim;
+
+    [SerializeField]
+    private AudioHandler audioHandler;
+
+    private
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +37,7 @@ public class Attack : MonoBehaviour
     public void bruh()
     {
         combatManager.UpdateData();
+        audioHandler.playAudio("enemyHurt");
     }
 
     public void bruh2()

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78f3b4ef9b237541be7a8391fe69082, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 3d4ba3ac266d0d24199cafa30317d589, type: 2}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   equipped: 0
-  count: 0
+  count: 1
   itemID: 52
   itemName: Wood
   itemSprite: {fileID: 21300000, guid: 59607b9ccd542274996495fb597521f4, type: 3}
