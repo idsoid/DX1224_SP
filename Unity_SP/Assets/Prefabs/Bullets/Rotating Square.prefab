@@ -44,4 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f6aaa995ec235408d88421d8dae29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayedBullet: {fileID: 6803176651148000820, guid: cac1e48bb0bd0af44ae51c081865b6bd, type: 3}
+  target: {fileID: 0}
   rotationSpeed: 50
+  initialDelay: 2
+  subsequentDelay: 0.5
