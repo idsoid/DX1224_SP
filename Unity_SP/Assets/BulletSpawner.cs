@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class BulletSpawner : MonoBehaviour
 {
     [Header("Variables")]
@@ -53,49 +54,49 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (enemydata.CATS.HOARDER) // combatData.enemyData.GetEnemyType()
+        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
         {
-            //case enemydata.CATS.KEEPER:
-            //    if (startHell && firstSpawn)
-            //    {
-            //        GameObject spawnedBullet;
-            //        spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
-            //        spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
-            //        firstSpawn = false;
-            //    }
-            //    break;
-            //case enemydata.CATS.CRAWLER:
-            //    if (startHell && firstSpawn)
-            //    {
-            //        GameObject spawnedBullet;
-            //        int opp = 1;
+            case enemydata.CATS.KEEPER:
+                if (startHell && firstSpawn)
+                {
+                    GameObject spawnedBullet;
+                    spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+                    spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
+                    firstSpawn = false;
+                }
+                break;
+            case enemydata.CATS.CRAWLER:
+                if (startHell && firstSpawn)
+                {
+                    GameObject spawnedBullet;
+                    int opp = 1;
 
-            //        for (int i = 0; i < 2; i++)
-            //        {
-            //            if (i == 1)
-            //                opp = -1;
-            //            spawnedBullet = Instantiate(zigZagbullet, new Vector2(7f * opp, 2.5f * opp), Quaternion.identity);
-            //            spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(4f);
-            //            spawnedBullet = Instantiate(zigZagbullet, new Vector2(9f * opp, 2.3f * opp), Quaternion.identity);
-            //            spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(3f);
-            //        }
-            //        firstSpawn = false;
-            //    }
-            //    break;
-            //case enemydata.CATS.IMITATER:
-            //    if (startHell && firstSpawn)
-            //    {
-            //        Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
-            //        firstSpawn = false;
-            //    }
-            //    break;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        if (i == 1)
+                            opp = -1;
+                        spawnedBullet = Instantiate(zigZagbullet, new Vector2(7f * opp, 2.5f * opp), Quaternion.identity);
+                        spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(4f);
+                        spawnedBullet = Instantiate(zigZagbullet, new Vector2(9f * opp, 2.3f * opp), Quaternion.identity);
+                        spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(3f);
+                    }
+                    firstSpawn = false;
+                }
+                break;
+            case enemydata.CATS.IMITATER:
+                if (startHell && firstSpawn)
+                {
+                    Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
+                    firstSpawn = false;
+                }
+                break;
             case enemydata.CATS.HOARDER:
                 if (startHell && firstSpawn)
                 {
                     GameObject spawnedBullet;
-                    spawnedBullet = Instantiate(verticalSet, new Vector2(0f, 0f), Quaternion.identity);
+                    spawnedBullet = Instantiate(verticalSet, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
                     spawnedVerticalSet = spawnedBullet.GetComponent<VerticalSet>();
-                    spawnedBullet = Instantiate(horizontalSet, new Vector2(0f, 0f), Quaternion.identity);
+                    spawnedBullet = Instantiate(horizontalSet, new Vector2(Random.Range(-5.2f, 5.2f), 0f), Quaternion.identity);
                     spawnedHorizontalSet = spawnedBullet.GetComponent<HorizontalSet>();
                     safeTime = 1.5f;
                     danger = false;
@@ -133,9 +134,9 @@ public class BulletSpawner : MonoBehaviour
                     }
                 }
                 break;
-            //default:
-            //    Debug.Log("Error: Invalid enemy type");
-            //    break;
+            default:
+                Debug.Log("Error: Invalid enemy type");
+                break;
         }
 
         if (timeToStartHell > 0)
