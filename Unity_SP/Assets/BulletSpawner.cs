@@ -13,6 +13,7 @@ public class BulletSpawner : MonoBehaviour
     [Header("Bullet Hell Prefabs")]
     [SerializeField] GameObject rotatingSquare;
     [SerializeField] GameObject zigZagbullet;
+    [SerializeField] GameObject longBar;
 
     private float fTime_elapsed;
     private bool startHell;
@@ -73,7 +74,11 @@ public class BulletSpawner : MonoBehaviour
                 }
                 break;
             case enemydata.CATS.IMITATER:
-                ImitaterBH();
+                if (startHell && firstSpawn)
+                {
+                    Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
+                    firstSpawn = false;
+                }
                 break;
             case enemydata.CATS.HOARDER:
                 HoarderBH();
@@ -99,17 +104,6 @@ public class BulletSpawner : MonoBehaviour
         Vector3 dir = (player.transform.position - bullet.transform.position).normalized * 50f;
         bullet.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
     }
-
-    private void CrawlerBH()
-    {
-
-    }
-
-    private void ImitaterBH()
-    {
-
-    }
-
     private void HoarderBH()
     {
 

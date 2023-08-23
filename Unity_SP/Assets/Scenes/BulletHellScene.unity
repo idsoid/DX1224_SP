@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482032753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.0765676, y: -0.625948, z: -0.18728326}
+  m_LocalPosition: {x: -8.9, y: 0, z: -0.18728326}
   m_LocalScale: {x: 0.2, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 943955795}
   - component: {fileID: 943955794}
   m_Layer: 0
-  m_Name: player heart
+  m_Name: Player Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943955793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 0.34, z: 93.601105}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -593,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035330440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.923432, y: -0.625948, z: -0.18728326}
+  m_LocalPosition: {x: 8.9, y: 0, z: -0.18728326}
   m_LocalScale: {x: 0.2, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -776,7 +776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199709039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.625948, z: 0.18728326}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -891,7 +891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203900951}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9234325, y: 4.374052, z: -0.18728326}
+  m_LocalPosition: {x: 0, y: 5, z: -0.18728326}
   m_LocalScale: {x: 18, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1128,7 +1128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544064552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9234325, y: -5.625948, z: -0.18728326}
+  m_LocalPosition: {x: 0, y: -5, z: -0.18728326}
   m_LocalScale: {x: 18, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1182,9 +1182,10 @@ MonoBehaviour:
   projectile: {fileID: 2794968116544723498, guid: 5d1dacddd63b68741b2714435f1af2a5, type: 3}
   player: {fileID: 943955793}
   combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
-  timeToStartHell: 3
+  timeToStartHell: 2
   rotatingSquare: {fileID: 6647926016911750749, guid: 47f14fb2a58ea8147b9ebc8c25de4dc5, type: 3}
   zigZagbullet: {fileID: 5476387683782334815, guid: 21617028d214827439a740eaa3d067c2, type: 3}
+  longBar: {fileID: 3797024178947013569, guid: 9b9f29f4998f6db44a43e2099b7cd3cb, type: 3}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
