@@ -13,7 +13,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject flashlight;
+
+    [SerializeField]
+    private GameObject candle;
+
     public bool lightOn;
+    public float candleBurnTime;
 
     float hInput, vInput;
     string idleAnim;
@@ -24,13 +29,21 @@ public class PlayerController : MonoBehaviour
 
     float mvmt;
 
+    private enum HAND
+    {
+        FLASHLIGHT,
+        CANDLE
+    }
+
+    private HAND hand;
+
     [SerializeField]
     AudioHandler audioHandler;
 
     void Start()
     {
-        
-
+        hand = HAND.FLASHLIGHT;
+        candleBurnTime = 0f;
         lightOn = true;
         isHungry = false;
         canRun = true;
@@ -52,7 +65,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     // Update for input
     void Update()
     {
@@ -60,6 +72,7 @@ public class PlayerController : MonoBehaviour
         HandleInputMovement();
         HandleTemperatureChange();
         HandleHungerChange();
+        HandleHandSwapping();
         HandleFlashlightToggle();
     }
 
@@ -112,9 +125,23 @@ public class PlayerController : MonoBehaviour
         }
         else if (!playerData.safe)
         {
+            //Decrease temperature until cold
             if (!playerData.isCold)
             {
-                playerData.AlterValue("temperature", -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier"));
+                float increment = -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier");
+
+                //if candle is being used, decrease rate of temp
+                if(hand == HAND.CANDLE && lightOn && candleBurnTime > 0f)
+                {
+                    candleBurnTime -= Time.deltaTime;
+                    if(candleBurnTime <= 0f)
+                    {
+                        candle.SetActive(false);
+                    }
+                    increment *= 0.6f;
+                }
+
+                playerData.AlterValue("temperature", increment);
                 if (playerData.GetValue("temperature") == 0)
                 {
                     playerData.isCold = true;
@@ -184,18 +211,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementAnimation()
     {
-        if (hInput > 0)
-        {
-            anim.Play("walk_e");
-            idleAnim = "idle_e";
-        }
-        else if (hInput < 0)
-        {
-            anim.Play("walk_w");
-            idleAnim = "idle_w";
-        }
-
-        else if (vInput > 0)
+        if (vInput > 0)
         {
             anim.Play("walk_n");
             idleAnim = "idle_n";
@@ -204,6 +220,16 @@ public class PlayerController : MonoBehaviour
         {
             anim.Play("walk_s");
             idleAnim = "idle_s";
+        }
+        else if(hInput > 0)
+        {
+            anim.Play("walk_e");
+            idleAnim = "idle_e";
+        }
+        else if (hInput < 0)
+        {
+            anim.Play("walk_w");
+            idleAnim = "idle_w";
         }
         else
         {
@@ -222,11 +248,57 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             lightOn = !lightOn;
-            flashlight.SetActive(lightOn);
+            switch (hand)
+            {
+                case HAND.FLASHLIGHT:
+                    flashlight.SetActive(lightOn);
+                    break;
+                case HAND.CANDLE:
+                    candle.SetActive(lightOn);
+                    break;
+            }
+        }
+    }
+
+    private void HandleHandSwapping()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            switch(hand)
+            {
+                case HAND.FLASHLIGHT:
+                    hand = HAND.CANDLE;
+                    flashlight.SetActive(false);
+                    if (lightOn && candleBurnTime > 0f)
+                    {
+                        
+                        candle.SetActive(true);
+                    }
+                    break;
+                case HAND.CANDLE:
+                    hand = HAND.FLASHLIGHT;
+                    if (lightOn)
+                    {
+                        flashlight.SetActive(true);
+                        candle.SetActive(false);
+                    }
+                    break;
+            }
         }
     }
     #endregion
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Fireplace"))
+        {
+            if(hand == HAND.CANDLE && candleBurnTime > 0f)
+            {
+                candle.SetActive(true);
+            }
+            candleBurnTime = 80f;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

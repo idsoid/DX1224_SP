@@ -6,9 +6,8 @@ public class PickUp : MonoBehaviour
 {
     public ItemData item;
 
-    [SerializeField]
     public int dropIndex;
-    [SerializeField]
+
     public WorldState worldState;
 
 
@@ -26,7 +25,7 @@ public class PickUp : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Pickup();
         }

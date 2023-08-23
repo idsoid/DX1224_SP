@@ -165,7 +165,6 @@ public class CombatManager : MonoBehaviour
         if (enemyData.GetDead())
         {
             combatData.enemyData = enemyData;
-            playerData.Save();
             SceneManager.LoadScene(sceneName);
         }
     }

@@ -3330,6 +3330,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405079966}
   m_CullTransparentMesh: 1
+--- !u!1 &405403660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 405403660, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
+  m_PrefabInstance: {fileID: 2040502151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &410729284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45171,7 +45176,7 @@ GameObject:
   - component: {fileID: 1481406099}
   - component: {fileID: 1481406101}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45185,7 +45190,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481406097}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.5, y: -4.8, z: 0}
+  m_LocalPosition: {x: 11.48, y: -4.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45259,7 +45264,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -915324802, guid: fa2a91c974816b447955bcdee72bbbbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -50271,6 +50276,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5945832209217094366, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
   m_PrefabInstance: {fileID: 2040502151}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1514180305 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5945832209217094368, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
+  m_PrefabInstance: {fileID: 2040502151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514180300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63604e454ad46564688fd407b0827aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1522599127
 GameObject:
   m_ObjectHideFlags: 0
@@ -81577,6 +81593,10 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1522599128}
+    - target: {fileID: 333774844, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1514180305}
     - target: {fileID: 1970797841, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
       propertyPath: m_Intensity
       value: 2.5
@@ -81644,6 +81664,10 @@ PrefabInstance:
     - target: {fileID: 7905470268432330799, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
       propertyPath: m_Name
       value: Fireplace
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905470268432330799, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
@@ -82491,18 +82515,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 405403660, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5945832208770036765, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: m_Layer
-      value: 6
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5945832209217094366, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5945832209217094368, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: playerData
+      propertyPath: candle
       value: 
-      objectReference: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
+      objectReference: {fileID: 405403660}
     - target: {fileID: 5945832209217094368, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
       propertyPath: audioHandler
       value: 
@@ -82555,22 +82583,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 307440034}
-    - target: {fileID: 5945832209217094377, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5945832209217094377, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: m_InstanceId
-      value: -163472
-      objectReference: {fileID: 0}
-    - target: {fileID: 6843368091176713500, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6843368091176713500, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
 --- !u!1 &2048298951

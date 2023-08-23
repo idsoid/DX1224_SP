@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<ItemData> Items = new List<ItemData>();
+    public List<ItemData> Items;
 
     public List<ItemData> itemDatabase;
     public Transform ItemContent;

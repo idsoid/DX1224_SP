@@ -22,9 +22,5 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
 
 }

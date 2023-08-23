@@ -14,14 +14,14 @@ public class PlayerData : ScriptableObject
     [SerializeField]
     private List<ItemData> itemsList;
 
-    private playerData _playerData = new playerData();
+    private playerData _playerData;
 
     public Vector3 temppos;
     public bool loadOldPos;
     public bool safe;
     public bool isCold;
     public ItemData equippedWeapon, equippedCharm;
-    public List<ItemData> inventory = new List<ItemData>();
+    public List<ItemData> inventory;
     public bool ReadyLoad = false;
 
     public void Init()
@@ -227,6 +227,7 @@ public class PlayerData : ScriptableObject
         inventory = InventoryManager.Instance.Items;
         _playerData.pickeds = worldState.pickedUp;
 
+        _playerData.inventory.Clear();
         foreach (ItemData item in inventory)
         {
             for(int i = 0; i < item.GetCount(); i++)

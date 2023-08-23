@@ -8,7 +8,7 @@ public class WorldManager : MonoBehaviour
     private WorldState worldState;
 
     [SerializeField]
-    public GameObject drops;
+    private GameObject drops;
 
 
     // Start is called before the first frame update
@@ -43,8 +43,5 @@ public class WorldManager : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
