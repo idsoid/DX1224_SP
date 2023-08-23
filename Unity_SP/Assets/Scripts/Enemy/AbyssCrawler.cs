@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class AbyssCrawler : MonoBehaviour
 {
     [SerializeField]
+    private Transform eyes;
+    [SerializeField]
     private GameObject mapCol;
     [SerializeField]
     private CombatData combatData;
@@ -76,6 +78,7 @@ public class AbyssCrawler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eyes.gameObject.SetActive(false);
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -135,10 +138,12 @@ public class AbyssCrawler : MonoBehaviour
         if (rb.velocity.x >= 0.01f)
         {
             enemySprite.localScale = new Vector3(-1f, 1f, 1f);
+            eyes.localScale = new Vector3(-1f, 1f, 1f);
         }
         else if (rb.velocity.x <= -0.01f)
         {
             enemySprite.localScale = new Vector3(1f, 1f, 1f);
+            eyes.localScale = new Vector3(1f, 1f, 1f);
         }
     }
     void OnPathComplete(Path p)
@@ -158,10 +163,10 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
-        Debug.Log(currentState);
         Vector2 moveDir = rb.velocity.normalized;
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
+        
         if (hit.collider != null && !hit.collider.gameObject.CompareTag("Enemy"))
         {
             Debug.DrawLine(origin, hit.point, Color.red);
@@ -201,10 +206,11 @@ public class AbyssCrawler : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 4.0f && hit.collider == null)
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
+                    eyes.gameObject.SetActive(true);
                     currentState = State.CHASE;
                 }
                 else if (lightOn)
@@ -215,17 +221,20 @@ public class AbyssCrawler : MonoBehaviour
                     currentState = State.FLEE;
                 }
                 break;
-            case State.CHASE:           
+            case State.CHASE:
+                eyes.gameObject.SetActive(true);
                 target = player.transform;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 2.5f)
+                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
                 {
+                    eyes.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     totalTime = 0.0f;
-                    currentState = State.IDLE;
+                    currentState = State.PATROL;
                 }
                 else if (lightOn)
                 {
+                    eyes.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     speed *= 5;

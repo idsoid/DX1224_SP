@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class AbyssKeeper : MonoBehaviour
 {
     [SerializeField]
+    private Transform wanderEyes;
+    [SerializeField]
+    private Transform rushEyes;
+    [SerializeField]
     private GameObject mapCol;
     [SerializeField]
     private CombatData combatData;
@@ -77,6 +81,8 @@ public class AbyssKeeper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wanderEyes.gameObject.SetActive(false);
+        rushEyes.gameObject.SetActive(false);
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         currentState = State.PATROL;
@@ -146,11 +152,15 @@ public class AbyssKeeper : MonoBehaviour
         if (rb.velocity.x >= 0.01f)
         {
             wanderSprite.localScale = new Vector3(-1f, 1f, 1f);
+            wanderEyes.localScale = new Vector3(-1f, 1f, 1f);
+            rushEyes.localScale = new Vector3(-1f, 1f, 1f);
             rushSprite.eulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
         }
         else if (rb.velocity.x <= -0.01f)
         {
             wanderSprite.localScale = new Vector3(1f, 1f, 1f);
+            wanderEyes.localScale = new Vector3(1f, 1f, 1f);
+            rushEyes.localScale = new Vector3(1f, 1f, 1f);
             rushSprite.eulerAngles = new Vector3(0.0f, 0.0f, -90.0f);
         }
     }
@@ -211,9 +221,12 @@ public class AbyssKeeper : MonoBehaviour
             case State.FREEZE:
                 if (lightOn)
                 {
+                    wanderEyes.gameObject.SetActive(true);
                     attackTime -= Time.deltaTime;
                     if (attackTime <= 0.0f && lightOn)
                     {
+                        wanderEyes.gameObject.SetActive(false);
+                        rushEyes.gameObject.SetActive(true);
                         rb.velocity = Vector3.zero;
                         rb.angularVelocity = 0f;
                         speed *= 10;
@@ -225,6 +238,7 @@ public class AbyssKeeper : MonoBehaviour
                 }
                 else
                 {
+                    wanderEyes.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     totalTime = 0.0f;
@@ -235,6 +249,7 @@ public class AbyssKeeper : MonoBehaviour
                 target = player.transform;
                 if (Vector3.Distance(player.transform.position, transform.position) >= 10.0f)
                 {
+                    rushEyes.gameObject.SetActive(false);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
                     totalTime = 0.0f;
