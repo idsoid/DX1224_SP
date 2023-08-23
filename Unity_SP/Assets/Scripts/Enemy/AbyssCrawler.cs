@@ -94,8 +94,6 @@ public class AbyssCrawler : MonoBehaviour
     void FixedUpdate()
     {
         //enemyData.SetDead(isDead);
-        //Debug.Log(enemyData.GetSprite());
-        //Debug.Log("rez:" + rezTime);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -160,6 +158,7 @@ public class AbyssCrawler : MonoBehaviour
     }
     private void FSM()
     {
+        Debug.Log(currentState);
         Vector2 moveDir = rb.velocity.normalized;
         Vector2 origin = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(origin, moveDir, raycastDistance);
@@ -179,6 +178,8 @@ public class AbyssCrawler : MonoBehaviour
                 scaryAlert = objWaypoints[targetIndex].GetComponent<Transform>();
                 if (totalTime >= 1.0f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     targetIndex++;
                     targetIndex %= objWaypoints.Count;
                     currentState = State.PATROL;
@@ -186,6 +187,7 @@ public class AbyssCrawler : MonoBehaviour
                 else if (lightOn)
                 {
                     rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     speed *= 5;
                     currentState = State.FLEE;
                 }
@@ -194,37 +196,45 @@ public class AbyssCrawler : MonoBehaviour
                 target = objWaypoints[targetIndex].GetComponent<Transform>();
                 if (Vector3.Distance(target.position, transform.position) <= 0.5f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
                 else if (Vector3.Distance(player.transform.position, transform.position) <= 5.0f && hit.collider == null)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     currentState = State.CHASE;
                 }
                 else if (lightOn)
                 {
                     rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     speed *= 5;
                     currentState = State.FLEE;
                 }
                 break;
             case State.CHASE:           
                 target = player.transform;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
+                if (Vector3.Distance(player.transform.position, transform.position) >= 2.5f)
                 {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
                 else if (lightOn)
                 {
                     rb.velocity = Vector3.zero;
+                    rb.angularVelocity = 0f;
                     speed *= 5;
                     currentState = State.FLEE;
                 }
                 break;
             case State.FLEE:
                 target = scaryAlert;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 1.0f && !lightOn)
+                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f && !lightOn)
                 {
                     speed /= 5;
                     totalTime = 0.0f;
