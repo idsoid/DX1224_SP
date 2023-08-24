@@ -672,6 +672,8 @@ MonoBehaviour:
   flashlight: {fileID: 5945832208770036765}
   candle: {fileID: 0}
   lightOn: 0
+  candleBurnTime: 0
+  speedmult: 1
   audioHandler: {fileID: 0}
 --- !u!50 &5945832209217094367
 Rigidbody2D:
