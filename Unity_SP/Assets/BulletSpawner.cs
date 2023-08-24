@@ -61,7 +61,7 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
         GameObject spawnedBullet;
-        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
+        switch (enemydata.CATS.BOSS) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
@@ -148,9 +148,9 @@ public class BulletSpawner : MonoBehaviour
                     }
                 }
                 break;
-            default:
+            case enemydata.CATS.BOSS:
                 int randomizeAttack = Random.Range(1, 4);
-                switch (randomizeAttack)
+                switch (1)
                 {
                     case 1:
                         if (startHell && firstSpawn)
@@ -179,7 +179,9 @@ public class BulletSpawner : MonoBehaviour
                     case 3:
                         break;
                 }
-                //Debug.Log("Error: Invalid enemy type");
+                break;
+            default:
+                Debug.Log("Error: Invalid enemy type");
                 break;
         }
 
