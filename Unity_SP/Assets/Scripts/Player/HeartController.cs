@@ -14,14 +14,12 @@ public class HeartController : MonoBehaviour
 
     //public Image healthBar;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         HandleInputMovement();
