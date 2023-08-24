@@ -240,7 +240,7 @@ public class ItemData : ScriptableObject
         {
             if (count > 0)
             {
-                playerData.AlterValue("health", 20);
+                playerData.AlterValue("health", 35);
                 count--;
             }
             else
@@ -250,7 +250,7 @@ public class ItemData : ScriptableObject
         {
             if (count > 0)
             {
-                playerData.AlterValue("hunger", 20);
+                playerData.AlterValue("hunger", 35);
                 count--;
             }
             else

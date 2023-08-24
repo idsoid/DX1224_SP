@@ -13,7 +13,7 @@ public class HeartController : MonoBehaviour
     public float iFrameTimer;
     private bool takeDamage;
 
-    public Image healthBar;
+    
 
     private void Start()
     {
@@ -24,7 +24,6 @@ public class HeartController : MonoBehaviour
 
     private void Update()
     {
-        healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         HandleInputMovement();
 
         if (takeDamage)

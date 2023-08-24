@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
-  healthBar: {fileID: 2142480523}
+  iFrameTimer: 0
 --- !u!212 &943955797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1009,22 +1009,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527332087}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ccd7d577db532418948d6aa16e10db, type: 3}
+  m_Script: {fileID: 11500000, guid: aaa73ea0c536b0948879a7b21be950ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2142480523}
-  staminaBar: {fileID: 1135430941}
-  hungerBar: {fileID: 1135430941}
-  frost1: {fileID: 1135430938}
-  frost2: {fileID: 1135430938}
-  frost3: {fileID: 1135430938}
-  frost4: {fileID: 1135430938}
-  snowflake: {fileID: 0}
-  vignette: {fileID: 1135430941}
   playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
-  stats: {fileID: 0}
 --- !u!1 &1544064552
 GameObject:
   m_ObjectHideFlags: 0
