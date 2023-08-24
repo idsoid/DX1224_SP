@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527332087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57ccd7d577db532418948d6aa16e10db, type: 3}
   m_Name: 
@@ -1189,8 +1189,7 @@ MonoBehaviour:
   verticalSet: {fileID: 8589659880770422388, guid: ff78699e92d163444bf7308cbe5b3ced, type: 3}
   horizontalSet: {fileID: 1483684764386588054, guid: 601b038bb7a3b2d4183f0f4a7c3387d8, type: 3}
   dangerZone: {fileID: 5497439304196159445, guid: e173e954160979c47aea95f6d71d4a39, type: 3}
-  spawnedHorizontalSet: {fileID: 0}
-  spawnedVerticalSet: {fileID: 0}
+  sweeper: {fileID: 6266496693618075257, guid: e0c304b7a4f288543996945c9fdec461, type: 3}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
