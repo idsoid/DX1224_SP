@@ -54,7 +54,7 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (enemydata.CATS.HOARDER) // combatData.enemyData.GetEnemyType()
+        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
