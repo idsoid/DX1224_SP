@@ -10,24 +10,25 @@ public class HeartController : MonoBehaviour
 
     private float hInput, vInput;
     private float mvmt = 5f;
-    private float iFrameTimer;
+    public float iFrameTimer;
+    private bool takeDamage;
 
-    //public Image healthBar;
+    public Image healthBar;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        takeDamage = false;
     }
 
     private void Update()
     {
-        //healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
+        healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         HandleInputMovement();
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            playerData.AlterValue("health", -10);
-        }
+        if (takeDamage)
+            TakeDamage(10);
 
         if (iFrameTimer > 0)
             iFrameTimer -= Time.deltaTime;
@@ -48,23 +49,27 @@ public class HeartController : MonoBehaviour
         if (iFrameTimer == 0)
         {
             playerData.AlterValue("health", -damageTaken);
-            Debug.Log("Ouch");
+            iFrameTimer = 0.5f;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("eProj"))
+        if(collision.gameObject.CompareTag("eProj") ||
+            collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f) ||
+            collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
         {
-            TakeDamage(10);
+            takeDamage = true;
         }
-        if (collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f))
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("eProj") ||
+            collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f) ||
+            collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
         {
-            TakeDamage(10);
-        }
-        if (collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
-        {
-            TakeDamage(10);
+            takeDamage = false;
         }
     }
 }
