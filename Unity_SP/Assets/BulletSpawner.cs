@@ -67,7 +67,7 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
         GameObject spawnedBullet;
-        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
+        switch (enemydata.CATS.HOARDER) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
@@ -152,7 +152,7 @@ public class BulletSpawner : MonoBehaviour
                 break;
             case enemydata.CATS.BOSS:
                 int randomizeAttack = Random.Range(1, 4);
-                switch (randomizeAttack)
+                switch (2)
                 {
                     case 1:
                         if (startHell && firstSpawn)

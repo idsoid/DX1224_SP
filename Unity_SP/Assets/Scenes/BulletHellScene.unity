@@ -1192,8 +1192,8 @@ MonoBehaviour:
   sweeper: {fileID: 6266496693618075257, guid: e0c304b7a4f288543996945c9fdec461, type: 3}
   laserH: {fileID: 1483684764386588054, guid: 9d33bab1a3d0ddd4ab187d45d677639c, type: 3}
   laserV: {fileID: 8589659880770422388, guid: e4252a232cd55ad45ad9f99db6187002, type: 3}
-  dangerLaserH: {fileID: 0}
-  dangerLaserV: {fileID: 0}
+  dangerLaserH: {fileID: 693549625549166811, guid: 4881c45be3927af46af213b8b62ac8fa, type: 3}
+  dangerLaserV: {fileID: 7921477826931828822, guid: d8890ec0dc148ed41b811e73b92f88ab, type: 3}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
