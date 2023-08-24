@@ -25,6 +25,7 @@ public class ItemData : ScriptableObject
         1. Key_Yellow
         2. Key_Blue
         3. Key_Red
+        4. Rusty_Key
     <========== Weapons ==========>
         20. Fireplace Poker +10 atk
         21. Candle Stand +5 atk
