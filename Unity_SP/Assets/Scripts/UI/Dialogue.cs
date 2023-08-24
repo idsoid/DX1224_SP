@@ -11,8 +11,8 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private TMP_Text text;
 
-    [SerializeField]
-    private GameObject textBox;
+    //[SerializeField]
+    //private GameObject textBox;
 
     private int current;
     private int strIndex;
