@@ -106,30 +106,33 @@ public class PlayerController : MonoBehaviour
     #region
     private void HandleInputMovement()
     {
-        mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
-        hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
-        vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
-
-
-        if (canRun)
+        if (playerData.canMove)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                hInput *= 1.5f;
-                vInput *= 1.5f;
-                anim.speed = 0.8f;
-                isRunning = true;
-                audioHandler.playAudio("sprint");
-            }
-            else
-            {
-                isRunning = false;
-                anim.speed = 0.5f;
-                
-            }
-        }
+            mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
+            hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
+            vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
 
-        rb.velocity = new Vector2(hInput, vInput);
+
+            if (canRun)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    hInput *= 1.5f;
+                    vInput *= 1.5f;
+                    anim.speed = 0.8f;
+                    isRunning = true;
+                    audioHandler.playAudio("sprint");
+                }
+                else
+                {
+                    isRunning = false;
+                    anim.speed = 0.5f;
+
+                }
+            }
+
+            rb.velocity = new Vector2(hInput, vInput);
+        }
     }
 
     private void HandleTemperatureChange()
@@ -184,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         if (isHungry)
         {
-            playerData.AlterValue("health", -Time.deltaTime * 10); //to replace 10
+            playerData.AlterValue("health", -Time.deltaTime * 1);
         }
     }
 

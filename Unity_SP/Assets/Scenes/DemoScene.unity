@@ -45261,6 +45261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - The yellow key opens the lock.
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   text: {fileID: 1401227164}
 --- !u!114 &1401227164
 MonoBehaviour:
@@ -77027,6 +77028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - The door opens.
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   text: {fileID: 1776805537}
 --- !u!1 &1783442999
 GameObject:
@@ -85610,6 +85612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - The yellow key opens the lock.
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   text: {fileID: 2138844030}
 --- !u!114 &2138844030
 MonoBehaviour:
