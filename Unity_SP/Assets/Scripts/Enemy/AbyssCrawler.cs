@@ -65,7 +65,7 @@ public class AbyssCrawler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            enemyData.SetPos(transform.position);
+            //enemyData.SetPos(transform.position);
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -91,11 +91,12 @@ public class AbyssCrawler : MonoBehaviour
         if (enemyData.GetSprite() == null)
         {
             enemyData.Init(50, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
+            //enemyData.SetPos(transform.position);
         }
-        if (enemyData.GetPos() != null)
-        {
-            transform.position = enemyData.GetPos();
-        }
+        //if (enemyData.GetPos() != null)
+        //{
+        //    transform.position = enemyData.GetPos();
+        //}
         
     }
     // Update is called once per frame

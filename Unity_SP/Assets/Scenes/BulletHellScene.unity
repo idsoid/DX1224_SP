@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
+  healthBar: {fileID: 2142480523}
 --- !u!212 &943955797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1365,7 +1366,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.481
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

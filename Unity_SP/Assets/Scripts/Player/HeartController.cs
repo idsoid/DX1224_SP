@@ -4,33 +4,36 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HeartController : MonoBehaviour
 {
-
-    private float hInput, vInput;
-    private float mvmt = 5f;
+    [SerializeField] private PlayerData playerData;
 
     private Rigidbody2D rb;
 
-    [SerializeField]
-    private PlayerData playerData;
+    private float hInput, vInput;
+    private float mvmt = 5f;
+    public float iFrameTimer;
+    private bool takeDamage;
 
-    //public Image healthBar;
+    public Image healthBar;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        takeDamage = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
+        healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         HandleInputMovement();
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            playerData.AlterValue("health", -10);
-        }
+        if (takeDamage)
+            TakeDamage(10);
+
+        if (iFrameTimer > 0)
+            iFrameTimer -= Time.deltaTime;
+        else if (iFrameTimer < 0)
+            iFrameTimer = 0;
     }
 
     private void HandleInputMovement()
@@ -41,19 +44,32 @@ public class HeartController : MonoBehaviour
         rb.velocity = new Vector2(hInput, vInput);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void TakeDamage(int damageTaken)
     {
-        if(collision.gameObject.CompareTag("eProj"))
+        if (iFrameTimer == 0)
         {
-            playerData.AlterValue("health", -10);
+            playerData.AlterValue("health", -damageTaken);
+            iFrameTimer = 0.5f;
         }
-        if (collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f))
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("eProj") ||
+            collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f) ||
+            collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
         {
-            playerData.AlterValue("health", -10);
+            takeDamage = true;
         }
-        if (collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("eProj") ||
+            collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f) ||
+            collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
         {
-            playerData.AlterValue("health", -10);
+            takeDamage = false;
         }
     }
 }
