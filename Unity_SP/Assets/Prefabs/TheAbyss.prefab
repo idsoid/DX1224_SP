@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5022208981258944428}
   - component: {fileID: 5022208981258944417}
   - component: {fileID: 8062813255150480815}
+  - component: {fileID: 7512293785851137404}
   m_Layer: 2
   m_Name: TheAbyss
   m_TagString: Enemy
@@ -100,6 +101,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0.011941951, y: -0.16906585}
   m_Size: {x: 0.6992458, y: 0.26788893}
   m_Direction: 1
+--- !u!114 &7512293785851137404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022208981258944416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b071fea9a8e45404b89ace4e590f7a4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatData: {fileID: 11400000, guid: 6157294e90e328e4ea67f933192fd3bf, type: 2}
+  enemyData: {fileID: 11400000, guid: eb3f9ae3bebdce7449ba6a45faedf6ff, type: 2}
+  player: {fileID: 0}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
+  enemySprite: {fileID: 5022208981505775383}
+  isDead: 0
 --- !u!1 &5022208981505775382
 GameObject:
   m_ObjectHideFlags: 0

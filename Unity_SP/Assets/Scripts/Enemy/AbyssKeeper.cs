@@ -68,8 +68,8 @@ public class AbyssKeeper : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Physics2D.IgnoreCollision(collision.collider, mapCol.GetComponent<Collider2D>());
             playerData.SavePos(player.transform.position);
+            enemyData.SetPos(transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
@@ -96,6 +96,10 @@ public class AbyssKeeper : MonoBehaviour
         if (enemyData.GetSprite() == null)
         {
             enemyData.Init(75, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
+        }
+        if (enemyData.GetPos() != null)
+        {
+            transform.position = enemyData.GetPos();
         }
     }
     // Update is called once per frame

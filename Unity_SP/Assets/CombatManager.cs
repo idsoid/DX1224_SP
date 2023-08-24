@@ -172,7 +172,7 @@ public class CombatManager : MonoBehaviour
     public void UpdateData()
     {
         playertext.text = playerData.PrintSelf();
-        enemytext.text = enemyData.name + "\n" + System.Convert.ToString(enemyData.GetHealth());
+        enemytext.text = enemyData.GetName() + "\n" + System.Convert.ToString(enemyData.GetHealth());
     }
 
     private void Attack()
