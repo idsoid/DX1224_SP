@@ -30,18 +30,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 831e3d252d39ef649b8aacfc89b4b83d, type: 2}
   - {fileID: 11400000, guid: 9343dd826e0184143866d1a81ce2c527, type: 2}
   - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
-  temppos: {x: -2.1606185, y: -26.850584, z: 0}
-  temphp: 60
-  temphunger: 25.69941
+  temppos: {x: 125.346054, y: -9.224641, z: 0}
+  temphp: 99.966446
+  temphunger: 28.947025
   loadOldPos: 0
   safe: 0
-  isCold: 1
+  isCold: 0
   equippedWeapon: {fileID: 0}
   equippedCharm: {fileID: 0}
   inventory:
-  - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
-  - {fileID: 11400000, guid: 1ca662e437bc80646a7b7e35339b74c9, type: 2}
-  - {fileID: 11400000, guid: 921f19e1505bc9c4580f0b44d9e8d41a, type: 2}
+  - {fileID: 11400000, guid: 527f51043286a544584e75ca2a9332b5, type: 2}
   - {fileID: 11400000, guid: 04965797797c7134e816b8cf29b865b9, type: 2}
+  - {fileID: 11400000, guid: 3b8b9110b8ea6ba448d6b102f740481a, type: 2}
+  - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
   ReadyLoad: 0
   canMove: 1
