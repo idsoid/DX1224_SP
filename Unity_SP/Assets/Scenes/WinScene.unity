@@ -731,7 +731,6 @@ MonoBehaviour:
   - you're free...
   - or are you?
   text: {fileID: 520158435}
-  textBox: {fileID: 603935804}
 --- !u!1 &851558485
 GameObject:
   m_ObjectHideFlags: 0
