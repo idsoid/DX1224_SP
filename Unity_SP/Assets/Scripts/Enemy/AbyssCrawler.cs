@@ -65,7 +65,6 @@ public class AbyssCrawler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //enemyData.SetPos(transform.position);
             playerData.SavePos(player.transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
@@ -91,19 +90,12 @@ public class AbyssCrawler : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(50, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
-            //enemyData.SetPos(transform.position);
+            enemyData.Init(100, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
         }
-        //if (enemyData.GetPos() != null)
-        //{
-        //    transform.position = enemyData.GetPos();
-        //}
-        
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        //enemyData.SetDead(isDead);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -171,7 +163,7 @@ public class AbyssCrawler : MonoBehaviour
     private void FSM()
     {
         RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
-        if (!hit.collider.gameObject.CompareTag("Player"))
+        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
         }
@@ -247,7 +239,7 @@ public class AbyssCrawler : MonoBehaviour
                 break;
             case State.FLEE:
                 target = scaryAlert;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f && !lightOn)
+                if (Vector3.Distance(target.transform.position, transform.position) <= 0.5f && !lightOn)
                 {
                     speed /= 5;
                     totalTime = 0.0f;

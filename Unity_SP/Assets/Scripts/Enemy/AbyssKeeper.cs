@@ -69,7 +69,6 @@ public class AbyssKeeper : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerData.SavePos(player.transform.position);
-            //enemyData.SetPos(transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
@@ -96,17 +95,12 @@ public class AbyssKeeper : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(75, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
+            enemyData.Init(150, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
         }
-        //if (enemyData.GetPos() != null)
-        //{
-        //    transform.position = enemyData.GetPos();
-        //}
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        //enemyData.SetDead(isDead);
         FSM();
         
         if (path == null || currentWaypoint >= path.vectorPath.Count)

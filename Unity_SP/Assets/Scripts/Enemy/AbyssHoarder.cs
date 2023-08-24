@@ -47,7 +47,6 @@ public class AbyssHoarder : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerData.SavePos(player.transform.position);
-            //enemyData.SetPos(transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
@@ -69,17 +68,12 @@ public class AbyssHoarder : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(60, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
+            enemyData.Init(200, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
-        //if (enemyData.GetPos() != null)
-        //{
-        //    transform.position = enemyData.GetPos();
-        //}
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        //enemyData.SetDead(isDead);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -146,7 +140,7 @@ public class AbyssHoarder : MonoBehaviour
     private void FSM()
     {
         RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position);
-        if (!hit.collider.gameObject.CompareTag("Player"))
+        if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
         }
