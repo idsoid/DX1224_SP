@@ -28,6 +28,9 @@ public class EnemyData : ScriptableObject
             case "HOARDER":
                 _enemydata.type = enemydata.CATS.HOARDER;
                 break;
+            case "BOSS":
+                _enemydata.type = enemydata.CATS.BOSS;
+                break;
             default:
                 break;
         }
@@ -72,6 +75,10 @@ public class EnemyData : ScriptableObject
     {
         _enemydata.oldPos = pos;
     }
+    public string GetName()
+    {
+        return _enemydata.name;
+    }
 }
 
 [System.Serializable]
@@ -82,7 +89,8 @@ public class enemydata
         KEEPER,
         CRAWLER,
         IMITATER,
-        HOARDER
+        HOARDER,
+        BOSS
     }
     public CATS type;
     public float health;

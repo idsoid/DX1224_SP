@@ -6,5 +6,6 @@ using UnityEngine;
 public class WorldState : ScriptableObject
 {
     public List<bool> pickedUp;
+    public List<bool> locksOpened;
     public bool altered = false;
 }

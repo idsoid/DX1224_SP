@@ -30,11 +30,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 831e3d252d39ef649b8aacfc89b4b83d, type: 2}
   - {fileID: 11400000, guid: 9343dd826e0184143866d1a81ce2c527, type: 2}
   - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
-  temppos: {x: 9.90279, y: -25.670736, z: 0}
+  temppos: {x: -24.318037, y: -48.457943, z: 0}
   loadOldPos: 0
   safe: 0
   isCold: 0
   equippedWeapon: {fileID: 0}
   equippedCharm: {fileID: 0}
-  inventory: []
+  inventory:
+  - {fileID: 11400000, guid: 04965797797c7134e816b8cf29b865b9, type: 2}
   ReadyLoad: 0

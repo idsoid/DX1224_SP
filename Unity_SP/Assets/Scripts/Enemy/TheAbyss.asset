@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a8874c2276f9204ba58c003bca479a9, type: 3}
-  m_Name: WorldState
+  m_Script: {fileID: 11500000, guid: f9d2d98f76e748648be1669c62cfb3fb, type: 3}
+  m_Name: TheAbyss
   m_EditorClassIdentifier: 
-  pickedUp: 000000000000000100000000010000000000000000000100000001010101
-  locksOpened: 010000
-  altered: 1

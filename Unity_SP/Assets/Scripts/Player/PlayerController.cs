@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     float mvmt;
 
+    [SerializeField]
+    float speedmult = 1f;
+
     private enum HAND
     {
         FLASHLIGHT,
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioHandler audioHandler;
 
-    void Start()
+    void OnEnable()
     {
         hand = HAND.FLASHLIGHT;
         candleBurnTime = 0f;
@@ -52,17 +55,30 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        playerData.Init();
         if (playerData.loadOldPos)
         {
             transform.position = playerData.temppos;
             playerData.loadOldPos = false;
         }
+
         if(playerData.ReadyLoad)
         {
             playerData.Load();
-            playerData.ReadyLoad = false;
+            
         }
+        else
+        {
+            playerData.Init();
+        }
+    }
+
+    private void Start()
+    {
+        if (!playerData.ReadyLoad)
+            InventoryManager.Instance.Items.Clear();
+        else
+            InventoryManager.Instance.LoadInventory();
+            playerData.ReadyLoad = false;
     }
 
     // Update for input
@@ -91,8 +107,8 @@ public class PlayerController : MonoBehaviour
     private void HandleInputMovement()
     {
         mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
-        hInput = Input.GetAxis("Horizontal") * mvmt;
-        vInput = Input.GetAxis("Vertical") * mvmt;
+        hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
+        vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
 
 
         if (canRun)

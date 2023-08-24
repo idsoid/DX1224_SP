@@ -18,23 +18,29 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] GameObject verticalSet;
     [SerializeField] GameObject horizontalSet;
     [SerializeField] GameObject dangerZone;
+    [SerializeField] GameObject sweeper; 
 
     private bool startHell;
     private bool firstSpawn;
-    private float fTime_Elapsed;
 
-    public HorizontalSet spawnedHorizontalSet;
-    public VerticalSet spawnedVerticalSet;
+    // =============== Hoarder Scene Variables ===============
+    private HorizontalSet spawnedHorizontalSet;
+    private VerticalSet spawnedVerticalSet;
     private float safeTime;
     private bool danger;
     private Vector2 safeCenter;
+    // =======================================================
+
+    // =============== Boss Scene Variables ===============
+    private float sweeperRespawnTime;
+    // ====================================================
 
     // Start is called before the first frame update
     void Start()
     {
         startHell = false;
         firstSpawn = true;
-        fTime_Elapsed = 0f;
+        sweeperRespawnTime = 3f;
 
         switch (combatData.enemyData.GetEnemyType())
         {
@@ -54,12 +60,12 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
+        GameObject spawnedBullet;
+        switch (enemydata.CATS.BOSS) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
                 {
-                    GameObject spawnedBullet;
                     spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
                     SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
@@ -69,7 +75,6 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.CRAWLER:
                 if (startHell && firstSpawn)
                 {
-                    GameObject spawnedBullet;
                     int opp = 1;
 
                     for (int i = 0; i < 2; i++)
@@ -89,7 +94,6 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.IMITATER:
                 if (startHell && firstSpawn)
                 {
-                    GameObject spawnedBullet;
                     spawnedBullet = Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
                     SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     firstSpawn = false;
@@ -98,7 +102,6 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.HOARDER:
                 if (startHell && firstSpawn)
                 {
-                    GameObject spawnedBullet;
                     spawnedBullet = Instantiate(verticalSet, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
                     SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     spawnedVerticalSet = spawnedBullet.GetComponent<VerticalSet>();
@@ -129,7 +132,6 @@ public class BulletSpawner : MonoBehaviour
                         if (danger)
                         {
                             danger = false;
-                            GameObject spawnedBullet;
 
                             spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x + 6.25f, 0f), Quaternion.identity);
                             SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
@@ -146,6 +148,38 @@ public class BulletSpawner : MonoBehaviour
                     }
                 }
                 break;
+            case enemydata.CATS.BOSS:
+                int randomizeAttack = Random.Range(1, 4);
+                switch (1)
+                {
+                    case 1:
+                        if (startHell && firstSpawn)
+                        {
+                            spawnedBullet = Instantiate(sweeper, player.transform.position, Quaternion.identity);
+                            spawnedBullet.transform.right = (player.transform.position - new Vector3(0f, 0f)).normalized;
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            firstSpawn = false;
+                        }
+
+                        if (!firstSpawn)
+                        {
+                            if (sweeperRespawnTime > 0)
+                                sweeperRespawnTime -= Time.deltaTime;
+                            else if (sweeperRespawnTime < 0)
+                            {
+                                spawnedBullet = Instantiate(sweeper, player.transform.position, Quaternion.identity);
+                                spawnedBullet.transform.right = (new Vector3(0f, 0f) - player.transform.position).normalized;
+                                SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                                sweeperRespawnTime = 3f;
+                            }
+                        }
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
             default:
                 Debug.Log("Error: Invalid enemy type");
                 break;
@@ -158,13 +192,5 @@ public class BulletSpawner : MonoBehaviour
             startHell = true;
             timeToStartHell = 0;
         }
-    }
-
-    private void Bullet1()
-    {
-        GameObject bullet = Instantiate(projectile, new Vector3(Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity);
-        SceneManager.MoveGameObjectToScene(bullet,SceneManager.GetSceneByName("BulletHellScene"));
-        Vector3 dir = (player.transform.position - bullet.transform.position).normalized * 50f;
-        bullet.GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
     }
 }

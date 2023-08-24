@@ -45,7 +45,6 @@ public class PlayerData : ScriptableObject
         _playerData.maxHunger = 100f;
         _playerData.inventory.Clear();
         inventory.Clear();
-        InventoryManager.Instance.Items.Clear();
         worldState.altered = false;
     }
 
@@ -236,6 +235,8 @@ public class PlayerData : ScriptableObject
             }
         }
 
+        _playerData.locksOpened = worldState.locksOpened;
+
         string s = JsonUtility.ToJson(_playerData);
         FileManager.WriteToFile("playerdata.json", s);
     }
@@ -248,10 +249,11 @@ public class PlayerData : ScriptableObject
 
         
         worldState.pickedUp = _playerData.pickeds;
+        worldState.locksOpened = _playerData.locksOpened;
         worldState.altered = true;
 
 
-        InventoryManager.Instance.LoadInventory();
+        
     }
 
     
@@ -280,4 +282,6 @@ public class playerData
     public bool redUnlocked, blueUnlocked, yellowUnlocked;
 
     public List<bool> pickeds;
+
+    public List<bool> locksOpened;
 }
