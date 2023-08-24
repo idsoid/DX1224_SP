@@ -23,6 +23,7 @@ public class PlayerData : ScriptableObject
     public ItemData equippedWeapon, equippedCharm;
     public List<ItemData> inventory;
     public bool ReadyLoad = false;
+    public bool canMove = true;
 
     public void Init()
     {
@@ -37,7 +38,7 @@ public class PlayerData : ScriptableObject
         _playerData.hunger = 50f;
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 2f;
-        _playerData.hungerDecreaseMultiplier = 0.5f;
+        _playerData.hungerDecreaseMultiplier = 0.25f;
         _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
         _playerData.maxHealth = 100f;
         _playerData.maxStamina = 80f;
@@ -46,6 +47,7 @@ public class PlayerData : ScriptableObject
         _playerData.inventory.Clear();
         inventory.Clear();
         worldState.altered = false;
+        canMove = true;
     }
 
     public void SavePos(Vector3 pos)

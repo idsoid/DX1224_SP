@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5022208981258944429}
   - component: {fileID: 5022208981258944428}
   - component: {fileID: 5022208981258944417}
-  - component: {fileID: 8062813255150480815}
   - component: {fileID: 7512293785851137404}
+  - component: {fileID: 3411018355146347655}
   m_Layer: 2
   m_Name: TheAbyss
   m_TagString: Enemy
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5022208981258944416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.83, y: 8.75, z: 0.09554073}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.0077118, y: 1.0077118, z: 1.0077118}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5022208981505775383}
@@ -85,22 +85,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &8062813255150480815
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5022208981258944416}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.011941951, y: -0.16906585}
-  m_Size: {x: 0.6992458, y: 0.26788893}
-  m_Direction: 1
 --- !u!114 &7512293785851137404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +103,32 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   enemySprite: {fileID: 5022208981505775383}
   isDead: 0
+--- !u!61 &3411018355146347655
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022208981258944416}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02898717, y: 0.0000009536743}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.012223, y: 5.003413}
+  m_EdgeRadius: 0
 --- !u!1 &5022208981505775382
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +201,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 9f2ba281c8c266440889eebbd7316c4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

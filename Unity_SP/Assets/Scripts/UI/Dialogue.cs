@@ -9,6 +9,9 @@ public class Dialogue : MonoBehaviour
     private List<string> dialogueLines;
 
     [SerializeField]
+    private PlayerData playerData;
+
+    [SerializeField]
     private TMP_Text text;
 
     //[SerializeField]
@@ -32,8 +35,13 @@ public class Dialogue : MonoBehaviour
         bFinishedLine = false;
         fTime_elapsed = 0f;
         SetSpeed(.05f);
+        
     }
 
+    private void OnEnable()
+    {
+        playerData.canMove = false;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -80,6 +88,7 @@ public class Dialogue : MonoBehaviour
         current++;
         if (current == dialogueLines.Count)
         {
+            playerData.canMove = true;
             Destroy(gameObject);
         }
         strIndex = 0;

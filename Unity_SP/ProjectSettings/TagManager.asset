@@ -11,6 +11,8 @@ TagManager:
   - Flashlight
   - Walls
   - Ending
+  - eProjOrange
+  - eProjBlue
   layers:
   - Default
   - TransparentFX

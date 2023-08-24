@@ -47,5 +47,13 @@ public class HeartController : MonoBehaviour
         {
             playerData.AlterValue("health", -10);
         }
+        if (collision.gameObject.CompareTag("eProjOrange") && rb.velocity == new Vector2(0f, 0f))
+        {
+            playerData.AlterValue("health", -10);
+        }
+        if (collision.gameObject.CompareTag("eProjBlue") && rb.velocity != new Vector2(0f, 0f))
+        {
+            playerData.AlterValue("health", -10);
+        }
     }
 }
