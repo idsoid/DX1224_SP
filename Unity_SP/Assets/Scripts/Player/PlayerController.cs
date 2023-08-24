@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
                     {
                         candle.SetActive(false);
                     }
-                    increment *= 0.6f;
+                    increment *= 0.4f;
                 }
 
                 playerData.AlterValue("temperature", increment);
@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour
             {
                 candle.SetActive(true);
             }
-            candleBurnTime = 80f;
+            candleBurnTime = 180f;
         }
     }
 

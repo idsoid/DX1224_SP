@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
 
     public void bruh()
     {
-        combatManager.UpdateData();
+        //combatManager.UpdateData();
         audioHandler.playAudio("enemyHurt");
     }
 

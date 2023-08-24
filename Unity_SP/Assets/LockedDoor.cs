@@ -47,4 +47,12 @@ public class LockedDoor : MonoBehaviour
             canInteract = true;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            canInteract = false;
+        }
+    }
 }
