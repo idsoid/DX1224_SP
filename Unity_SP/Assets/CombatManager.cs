@@ -8,13 +8,7 @@ using UnityEngine.SceneManagement;
 public class CombatManager : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text playertext;
-
-    [SerializeField]
     private PlayerData playerData;
-
-    [SerializeField]
-    private TMP_Text enemytext;
 
     [SerializeField]
     private CombatData combatData;
@@ -61,7 +55,7 @@ public class CombatManager : MonoBehaviour
         action = ACTION.NONE;
         enemyData = combatData.enemyData;
         enemySprite.sprite = combatData.enemyData.GetSprite();
-        UpdateData();
+        //UpdateData();
     }
 
     // Update is called once per frame
@@ -99,7 +93,7 @@ public class CombatManager : MonoBehaviour
                 playerTurn = true;
                 eventsys.SetActive(true);
 
-                UpdateData();
+                //UpdateData();
             }
             //playerData.AlterValue("health", -10);
             //actionSelect.SetActive(true);
@@ -174,11 +168,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void UpdateData()
-    {
-        playertext.text = playerData.PrintSelf();
-        enemytext.text = enemyData.GetName() + "\n" + System.Convert.ToString(enemyData.GetHealth());
-    }
+    //public void UpdateData()
+    //{
+    //    playertext.text = playerData.PrintSelf();
+    //    enemytext.text = enemyData.GetName() + "\n" + System.Convert.ToString(enemyData.GetHealth());
+    //}
 
     private void Attack()
     {
