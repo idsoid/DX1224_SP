@@ -27,6 +27,7 @@ public class GeneralButtons : MonoBehaviour
         Time.timeScale = 1f;
         playerData.ReadyLoad = true;
         playerData.SetValue("health", 100);
+        playerData.SetValue("hunger", 100);
         playerData.Save();
         SceneManager.LoadScene(sceneName);
     }

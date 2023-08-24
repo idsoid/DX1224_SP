@@ -6,6 +6,8 @@ using UnityEngine.Animations;
 
 public class IntroState : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerData playerData;
     public static IntroState instance;
     Animator ar;
     void Awake()
@@ -36,6 +38,7 @@ public class IntroState : MonoBehaviour
 
     public void StartScene()
     {
+        playerData.Init();
         SceneManager.LoadScene("DemoScene");
     }
 }

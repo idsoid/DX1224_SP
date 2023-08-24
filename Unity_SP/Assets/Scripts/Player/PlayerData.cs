@@ -40,7 +40,7 @@ public class PlayerData : ScriptableObject
         _playerData.hunger = 50f;
         _playerData.isAlive = true;
         _playerData.tempDecreaseMultiplier = 2f;
-        _playerData.hungerDecreaseMultiplier = 0.25f;
+        _playerData.hungerDecreaseMultiplier = 0.1f;
         _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
         _playerData.maxHealth = 100f;
         _playerData.maxStamina = 80f;
