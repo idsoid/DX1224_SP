@@ -45,7 +45,6 @@ public class HeartController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("eProj"))
         {
-            Destroy(collision.gameObject);
             playerData.AlterValue("health", -10);
         }
     }

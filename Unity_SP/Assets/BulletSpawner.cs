@@ -54,13 +54,14 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
+        switch (enemydata.CATS.HOARDER) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
                 {
                     GameObject spawnedBullet;
                     spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     spawnedBullet.GetComponent<RotatingSquare>().SetTarget(player);
                     firstSpawn = false;
                 }
@@ -76,8 +77,10 @@ public class BulletSpawner : MonoBehaviour
                         if (i == 1)
                             opp = -1;
                         spawnedBullet = Instantiate(zigZagbullet, new Vector2(7f * opp, 2.5f * opp), Quaternion.identity);
+                        SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                         spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(4f);
                         spawnedBullet = Instantiate(zigZagbullet, new Vector2(9f * opp, 2.3f * opp), Quaternion.identity);
+                        SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                         spawnedBullet.GetComponent<ZigZagBullet>().SetSpeed(3f);
                     }
                     firstSpawn = false;
@@ -86,7 +89,9 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.IMITATER:
                 if (startHell && firstSpawn)
                 {
-                    Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
+                    GameObject spawnedBullet;
+                    spawnedBullet = Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
+                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     firstSpawn = false;
                 }
                 break;
@@ -95,8 +100,10 @@ public class BulletSpawner : MonoBehaviour
                 {
                     GameObject spawnedBullet;
                     spawnedBullet = Instantiate(verticalSet, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
+                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     spawnedVerticalSet = spawnedBullet.GetComponent<VerticalSet>();
                     spawnedBullet = Instantiate(horizontalSet, new Vector2(Random.Range(-5.2f, 5.2f), 0f), Quaternion.identity);
+                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
                     spawnedHorizontalSet = spawnedBullet.GetComponent<HorizontalSet>();
                     safeTime = 1.5f;
                     danger = false;
@@ -122,11 +129,16 @@ public class BulletSpawner : MonoBehaviour
                         if (danger)
                         {
                             danger = false;
+                            GameObject spawnedBullet;
 
-                            Instantiate(dangerZone, new Vector2(safeCenter.x + 6.25f, 0f), Quaternion.identity);
-                            Instantiate(dangerZone, new Vector2(safeCenter.x - 6.25f, 0f), Quaternion.identity);
-                            Instantiate(dangerZone, new Vector2(0f, safeCenter.y + 6.25f), Quaternion.identity);
-                            Instantiate(dangerZone, new Vector2(0f, safeCenter.y - 6.25f), Quaternion.identity);
+                            spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x + 6.25f, 0f), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x - 6.25f, 0f), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y + 6.25f), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y - 6.25f), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
 
                             Destroy(spawnedHorizontalSet.gameObject);
                             Destroy(spawnedVerticalSet.gameObject);

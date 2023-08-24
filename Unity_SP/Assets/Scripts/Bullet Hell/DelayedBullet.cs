@@ -53,7 +53,7 @@ public class DelayedBullet : MonoBehaviour
         if (shoot)
         {
             rb.velocity = Vector3.zero;
-            rb.velocity = direction * 150f;
+            rb.velocity = direction * 20f;
         }
     }
 
