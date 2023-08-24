@@ -12,13 +12,10 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private AudioHandler audioHandler;
 
-    private
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
     }
-
     private void OnEnable()
     {
         anim.Play("Slash1");

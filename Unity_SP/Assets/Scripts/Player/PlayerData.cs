@@ -17,6 +17,8 @@ public class PlayerData : ScriptableObject
     private playerData _playerData;
 
     public Vector3 temppos;
+    public float temphp;
+    public float temphunger;
     public bool loadOldPos;
     public bool safe;
     public bool isCold;
@@ -52,7 +54,7 @@ public class PlayerData : ScriptableObject
 
     public void SavePos(Vector3 pos)
     {
-        Save();
+        //Save();
         loadOldPos= true;
         temppos = pos;
     }
@@ -66,7 +68,7 @@ public class PlayerData : ScriptableObject
                 if(_playerData.health <= 0)
                 {
                     _playerData.isAlive = false;
-                    
+                    loadOldPos = false;
                     SceneManager.LoadScene("LoseScene");
 
                 }
@@ -254,8 +256,6 @@ public class PlayerData : ScriptableObject
         worldState.locksOpened = _playerData.locksOpened;
         worldState.altered = true;
 
-
-        
     }
 
     

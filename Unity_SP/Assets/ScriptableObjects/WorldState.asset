@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8874c2276f9204ba58c003bca479a9, type: 3}
   m_Name: WorldState
   m_EditorClassIdentifier: 
-  pickedUp: 000000000000000100000000010000000000000000000100000001010101
-  locksOpened: 010000
-  altered: 1
+  pickedUp: 000000000000000000000000000000000000000000000000000000000000
+  locksOpened: 00000000
+  altered: 0

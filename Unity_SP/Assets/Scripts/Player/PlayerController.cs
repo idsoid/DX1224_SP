@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool cheats = false;
+
     // Start is called before the first frame update
     private Rigidbody2D rb;
     private Animator anim;
@@ -55,11 +57,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        if (playerData.loadOldPos)
-        {
-            transform.position = playerData.temppos;
-            playerData.loadOldPos = false;
-        }
+        
 
         if(playerData.ReadyLoad)
         {
@@ -74,22 +72,37 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (!playerData.ReadyLoad)
+        if (playerData.loadOldPos)
+        {
+            transform.position = playerData.temppos;
+            playerData.SetValue("health", playerData.temphp);
+            playerData.SetValue("hunger", playerData.temphunger);
+            playerData.loadOldPos = false;
+            InventoryManager.Instance.LoadInventory();
+        }
+        else if (!playerData.ReadyLoad)
+        {
             InventoryManager.Instance.Items.Clear();
+        }
         else
+        {
             InventoryManager.Instance.LoadInventory();
             playerData.ReadyLoad = false;
+        }
+        playerData.canMove = true;
     }
 
     // Update for input
     void Update()
     {
+        HandleCheatCode();
         PlayerRun();
         HandleInputMovement();
         HandleTemperatureChange();
         HandleHungerChange();
         HandleHandSwapping();
         HandleFlashlightToggle();
+        
     }
 
     //fixed update for data processing
@@ -304,6 +317,24 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void HandleCheatCode()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            cheats = !cheats;
+            if(!cheats)
+            {
+                speedmult = 1f;
+            }
+        }
+        if(cheats)
+        {
+            speedmult = 5f;
+            playerData.SetValue("health", 100);
+        }
+
     }
     #endregion
 

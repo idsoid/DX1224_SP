@@ -165,6 +165,11 @@ public class CombatManager : MonoBehaviour
         if (enemyData.GetDead())
         {
             combatData.enemyData = enemyData;
+            playerData.loadOldPos = true;
+            playerData.ReadyLoad = true;
+            playerData.temphp = playerData.GetValue("health");
+            playerData.temphunger = playerData.GetValue("hunger");
+            playerData.Save();
             SceneManager.LoadScene(sceneName);
         }
     }

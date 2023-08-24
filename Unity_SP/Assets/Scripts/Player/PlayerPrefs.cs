@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerPrefs : ScriptableObject
 {
-    private playerprefs _playerPrefs;
+    private playerprefs _playerPrefs = new playerprefs();
 
     public void Save()
     {
