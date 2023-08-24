@@ -9,8 +9,6 @@ public class AbyssHoarder : MonoBehaviour
     [SerializeField]
     private Transform crystal;
     [SerializeField]
-    private GameObject mapCol;
-    [SerializeField]
     private CombatData combatData;
     [SerializeField]
     private EnemyData enemyData;
@@ -56,7 +54,6 @@ public class AbyssHoarder : MonoBehaviour
         if (collision.gameObject.CompareTag("Walls") || collision.gameObject.CompareTag("Enemy"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(mapCol.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
     }
     // Start is called before the first frame update
@@ -68,7 +65,7 @@ public class AbyssHoarder : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = objWaypoints[0].GetComponent<Transform>();
         Physics2D.IgnoreLayerCollision(2, 8);
-        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
+        Physics2D.IgnoreLayerCollision(2, 9);
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {

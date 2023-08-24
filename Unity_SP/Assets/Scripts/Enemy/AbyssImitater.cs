@@ -94,6 +94,7 @@ public class AbyssImitater : MonoBehaviour
         InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
         target = player.transform;
         Physics2D.IgnoreLayerCollision(2, 8);
+        Physics2D.IgnoreLayerCollision(2, 9);
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
