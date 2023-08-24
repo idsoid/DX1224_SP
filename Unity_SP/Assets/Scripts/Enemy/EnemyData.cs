@@ -67,14 +67,14 @@ public class EnemyData : ScriptableObject
     {
         return _enemydata.enemySprite;
     }
-    public Vector3 GetPos()
-    {
-        return _enemydata.oldPos;
-    }
-    public void SetPos(Vector3 pos) 
-    {
-        _enemydata.oldPos = pos;
-    }
+    //public Vector3 GetPos()
+    //{
+    //    return _enemydata.oldPos;
+    //}
+    //public void SetPos(Vector3 pos) 
+    //{
+    //    _enemydata.oldPos = pos;
+    //}
     public string GetName()
     {
         return _enemydata.name;
@@ -98,5 +98,5 @@ public class enemydata
     public Sprite enemySprite;
     public string name;
     public bool isDead;
-    public Vector3 oldPos;
+    //public Vector3 oldPos;
 }

@@ -49,7 +49,7 @@ public class AbyssHoarder : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             playerData.SavePos(player.transform.position);
-            enemyData.SetPos(transform.position);
+            //enemyData.SetPos(transform.position);
             combatData.enemyData = enemyData;
             SceneManager.LoadScene("CombatScene");
         }
@@ -74,10 +74,10 @@ public class AbyssHoarder : MonoBehaviour
         {
             enemyData.Init(60, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
-        if (enemyData.GetPos() != null)
-        {
-            transform.position = enemyData.GetPos();
-        }
+        //if (enemyData.GetPos() != null)
+        //{
+        //    transform.position = enemyData.GetPos();
+        //}
     }
     // Update is called once per frame
     void FixedUpdate()
