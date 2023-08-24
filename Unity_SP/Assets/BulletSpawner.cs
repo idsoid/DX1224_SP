@@ -18,21 +18,27 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] GameObject verticalSet;
     [SerializeField] GameObject horizontalSet;
     [SerializeField] GameObject dangerZone;
-    [SerializeField] GameObject sweeper; 
+    [SerializeField] GameObject sweeper;
+    [SerializeField] GameObject laserH;
+    [SerializeField] GameObject laserV;
+    [SerializeField] GameObject dangerLaserH;
+    [SerializeField] GameObject dangerLaserV;
 
     private bool startHell;
     private bool firstSpawn;
 
     // =============== Hoarder Scene Variables ===============
+    private HorizontalSet spawnedlaserH;
+    private VerticalSet spawnedlaserV;
+    // =======================================================
+
+    // =============== Boss Scene Variables ===============
+    private float sweeperRespawnTime;
     private HorizontalSet spawnedHorizontalSet;
     private VerticalSet spawnedVerticalSet;
     private float safeTime;
     private bool danger;
     private Vector2 safeCenter;
-    // =======================================================
-
-    // =============== Boss Scene Variables ===============
-    private float sweeperRespawnTime;
     // ====================================================
 
     // Start is called before the first frame update
@@ -61,7 +67,7 @@ public class BulletSpawner : MonoBehaviour
     void Update()
     {
         GameObject spawnedBullet;
-        switch (enemydata.CATS.BOSS) // combatData.enemyData.GetEnemyType()
+        switch (combatData.enemyData.GetEnemyType()) // combatData.enemyData.GetEnemyType()
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
@@ -102,12 +108,12 @@ public class BulletSpawner : MonoBehaviour
             case enemydata.CATS.HOARDER:
                 if (startHell && firstSpawn)
                 {
-                    spawnedBullet = Instantiate(verticalSet, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
+                    spawnedBullet = Instantiate(laserV, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
                     SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
-                    spawnedVerticalSet = spawnedBullet.GetComponent<VerticalSet>();
-                    spawnedBullet = Instantiate(horizontalSet, new Vector2(Random.Range(-5.2f, 5.2f), 0f), Quaternion.identity);
+                    spawnedlaserV = spawnedBullet.GetComponent<VerticalSet>();
+                    spawnedBullet = Instantiate(laserH, new Vector2(Random.Range(-5.2f, 5.2f), 0f), Quaternion.identity);
                     SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
-                    spawnedHorizontalSet = spawnedBullet.GetComponent<HorizontalSet>();
+                    spawnedlaserH = spawnedBullet.GetComponent<HorizontalSet>();
                     safeTime = 1.5f;
                     danger = false;
                     firstSpawn = false;
@@ -115,15 +121,15 @@ public class BulletSpawner : MonoBehaviour
 
                 if (!firstSpawn)
                 {
-                    if (spawnedHorizontalSet.GetSet() &&
-                    spawnedVerticalSet.GetSet())
+                    if (spawnedlaserH.GetSet() &&
+                    spawnedlaserV.GetSet())
                     {
                         if (safeTime > 0f)
                             safeTime -= Time.deltaTime;
                         else if (safeTime < 0f)
                         {
-                            safeCenter = new Vector2(spawnedHorizontalSet.GetComponent<HorizontalSet>().GetHorizontal(),
-                                spawnedVerticalSet.GetComponent<VerticalSet>().GetVertical());
+                            safeCenter = new Vector2(spawnedlaserH.GetComponent<HorizontalSet>().GetHorizontal(),
+                                spawnedlaserV.GetComponent<VerticalSet>().GetVertical());
 
                             danger = true;
                             safeTime = 0f;
@@ -133,24 +139,20 @@ public class BulletSpawner : MonoBehaviour
                         {
                             danger = false;
 
-                            spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x + 6.25f, 0f), Quaternion.identity);
+                            spawnedBullet = Instantiate(dangerLaserH, spawnedlaserH.transform.position, Quaternion.identity);
                             SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
-                            spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x - 6.25f, 0f), Quaternion.identity);
-                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
-                            spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y + 6.25f), Quaternion.identity);
-                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
-                            spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y - 6.25f), Quaternion.identity);
+                            spawnedBullet = Instantiate(dangerLaserV, spawnedlaserV.transform.position, Quaternion.identity);
                             SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
 
-                            Destroy(spawnedHorizontalSet.gameObject);
-                            Destroy(spawnedVerticalSet.gameObject);
+                            Destroy(spawnedlaserH.gameObject);
+                            Destroy(spawnedlaserV.gameObject);
                         }
                     }
                 }
                 break;
             case enemydata.CATS.BOSS:
                 int randomizeAttack = Random.Range(1, 4);
-                switch (1)
+                switch (randomizeAttack)
                 {
                     case 1:
                         if (startHell && firstSpawn)
@@ -175,6 +177,53 @@ public class BulletSpawner : MonoBehaviour
                         }
                         break;
                     case 2:
+                        if (startHell && firstSpawn)
+                        {
+                            spawnedBullet = Instantiate(verticalSet, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            spawnedVerticalSet = spawnedBullet.GetComponent<VerticalSet>();
+                            spawnedBullet = Instantiate(horizontalSet, new Vector2(Random.Range(-5.2f, 5.2f), 0f), Quaternion.identity);
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            spawnedHorizontalSet = spawnedBullet.GetComponent<HorizontalSet>();
+                            safeTime = 1.5f;
+                            danger = false;
+                            firstSpawn = false;
+                        }
+
+                        if (!firstSpawn)
+                        {
+                            if (spawnedHorizontalSet.GetSet() &&
+                            spawnedVerticalSet.GetSet())
+                            {
+                                if (safeTime > 0f)
+                                    safeTime -= Time.deltaTime;
+                                else if (safeTime < 0f)
+                                {
+                                    safeCenter = new Vector2(spawnedHorizontalSet.GetComponent<HorizontalSet>().GetHorizontal(),
+                                        spawnedVerticalSet.GetComponent<VerticalSet>().GetVertical());
+
+                                    danger = true;
+                                    safeTime = 0f;
+                                }
+
+                                if (danger)
+                                {
+                                    danger = false;
+
+                                    spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x + 6.25f, 0f), Quaternion.identity);
+                                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                                    spawnedBullet = Instantiate(dangerZone, new Vector2(safeCenter.x - 6.25f, 0f), Quaternion.identity);
+                                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                                    spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y + 6.25f), Quaternion.identity);
+                                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                                    spawnedBullet = Instantiate(dangerZone, new Vector2(0f, safeCenter.y - 6.25f), Quaternion.identity);
+                                    SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+
+                                    Destroy(spawnedHorizontalSet.gameObject);
+                                    Destroy(spawnedVerticalSet.gameObject);
+                                }
+                            }
+                        }
                         break;
                     case 3:
                         break;
