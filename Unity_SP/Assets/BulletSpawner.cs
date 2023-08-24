@@ -23,6 +23,8 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] GameObject laserV;
     [SerializeField] GameObject dangerLaserH;
     [SerializeField] GameObject dangerLaserV;
+    [SerializeField] GameObject orange;
+    [SerializeField] GameObject blue;
 
     private bool startHell;
     private bool firstSpawn;
@@ -33,12 +35,14 @@ public class BulletSpawner : MonoBehaviour
     // =======================================================
 
     // =============== Boss Scene Variables ===============
+    private int randomizeAttack;
     private float sweeperRespawnTime;
     private HorizontalSet spawnedHorizontalSet;
     private VerticalSet spawnedVerticalSet;
     private float safeTime;
     private bool danger;
     private Vector2 safeCenter;
+    private float barRespawnTime;
     // ====================================================
 
     // Start is called before the first frame update
@@ -47,27 +51,17 @@ public class BulletSpawner : MonoBehaviour
         startHell = false;
         firstSpawn = true;
         sweeperRespawnTime = 3f;
+        barRespawnTime = 1f;
 
-        switch (combatData.enemyData.GetEnemyType())
-        {
-            case enemydata.CATS.KEEPER:
-                break;
-            case enemydata.CATS.CRAWLER:
-                break;
-            case enemydata.CATS.IMITATER:
-                break;
-            case enemydata.CATS.HOARDER:
-                break;
-            default:
-                break;
-        }
+        if (combatData.enemyData.GetEnemyType() == enemydata.CATS.BOSS)
+            randomizeAttack = Random.Range(1, 4);
     }
 
     // Update is called once per frame
     void Update()
     {
         GameObject spawnedBullet;
-        switch (enemydata.CATS.BOSS) // combatData.enemyData.GetEnemyType()
+        switch (combatData.enemyData.GetEnemyType())
         {
             case enemydata.CATS.KEEPER:
                 if (startHell && firstSpawn)
@@ -151,8 +145,7 @@ public class BulletSpawner : MonoBehaviour
                 }
                 break;
             case enemydata.CATS.BOSS:
-                int randomizeAttack = Random.Range(1, 4);
-                switch (3)
+                switch (randomizeAttack)
                 {
                     case 1:
                         if (startHell && firstSpawn)
@@ -226,6 +219,36 @@ public class BulletSpawner : MonoBehaviour
                         }
                         break;
                     case 3:
+                        if (startHell && firstSpawn)
+                        {
+                            int randomizeColor = Random.Range(1, 3);
+
+                            if (randomizeColor == 1)
+                                spawnedBullet = Instantiate(orange, new Vector3(8f, 0f, 0f), Quaternion.identity);
+                            else
+                                spawnedBullet = Instantiate(blue, new Vector3(8f, 0f, 0f), Quaternion.identity);
+
+                            SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                            firstSpawn = false;
+                        }
+
+                        if (!firstSpawn)
+                        {
+                            if (barRespawnTime > 0f)
+                                barRespawnTime -= Time.deltaTime;
+                            else if (barRespawnTime < 0f)
+                            {
+                                int randomizeColor = Random.Range(1, 3);
+
+                                if (randomizeColor == 1)
+                                    spawnedBullet = Instantiate(orange, new Vector3(8f, 0f, 0f), Quaternion.identity);
+                                else
+                                    spawnedBullet = Instantiate(blue, new Vector3(8f, 0f, 0f), Quaternion.identity);
+
+                                SceneManager.MoveGameObjectToScene(spawnedBullet, SceneManager.GetSceneByName("BulletHellScene"));
+                                barRespawnTime = 1f;
+                            }
+                        }
                         break;
                 }
                 break;

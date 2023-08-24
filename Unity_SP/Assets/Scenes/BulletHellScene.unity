@@ -1194,6 +1194,8 @@ MonoBehaviour:
   laserV: {fileID: 8589659880770422388, guid: e4252a232cd55ad45ad9f99db6187002, type: 3}
   dangerLaserH: {fileID: 693549625549166811, guid: 4881c45be3927af46af213b8b62ac8fa, type: 3}
   dangerLaserV: {fileID: 7921477826931828822, guid: d8890ec0dc148ed41b811e73b92f88ab, type: 3}
+  orange: {fileID: 7174919565610027741, guid: 181bfa92325df3844a2275d21f0bf5cd, type: 3}
+  blue: {fileID: 1830001506269417227, guid: ae1ba595a8c61334fb5d6621221246af, type: 3}
 --- !u!1 &2023375486
 GameObject:
   m_ObjectHideFlags: 0
