@@ -33,9 +33,12 @@ MonoBehaviour:
   temppos: {x: -24.318037, y: -48.457943, z: 0}
   loadOldPos: 0
   safe: 0
-  isCold: 0
+  isCold: 1
   equippedWeapon: {fileID: 0}
   equippedCharm: {fileID: 0}
   inventory:
+  - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
+  - {fileID: 11400000, guid: 921f19e1505bc9c4580f0b44d9e8d41a, type: 2}
   - {fileID: 11400000, guid: 04965797797c7134e816b8cf29b865b9, type: 2}
   ReadyLoad: 0
+  canMove: 0

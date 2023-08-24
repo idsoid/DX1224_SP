@@ -21,11 +21,13 @@ public class SceneLoader : MonoBehaviour
 
     public void GoToStart()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("DemoScene");
     }
 
     public void GoToTitle()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("TitleScene");
     }
 }
