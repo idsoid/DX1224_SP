@@ -45,20 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f48f8674f994b34bb047f9c1abb401d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walk: {fileID: 8300000, guid: 04323b8a99ca72346aca3aee7b71ee9f, type: 3}
+  sprint: {fileID: 8300000, guid: 04323b8a99ca72346aca3aee7b71ee9f, type: 3}
   inventory: {fileID: 8300000, guid: ef672ef01c87d704cba0c737f024d27b, type: 3}
-  fireBurning: {fileID: 0}
-  fireExtinguish: {fileID: 0}
-  fireStoked: {fileID: 0}
-  equip: {fileID: 0}
+  fireBurning: {fileID: 8300000, guid: 65bcbc9aa1899464fb716f09d0fd296c, type: 3}
+  fireExtinguish: {fileID: 8300000, guid: 3d37eb5e815a13a4f993a3b388068861, type: 3}
+  fireStoked: {fileID: 8300000, guid: 5861177fa5871b5469daea602f193792, type: 3}
+  equip: {fileID: 8300000, guid: cc182a8b95f708d44be5eeacc46fd319, type: 3}
   playerAttack: {fileID: 0}
-  flashLight: {fileID: 0}
-  unlockNoise: {fileID: 0}
+  flashLightOn: {fileID: 8300000, guid: be5038aca3743f34497d319d23c2bfec, type: 3}
+  flashLightOff: {fileID: 8300000, guid: 48ee1d57f9f579f4cbf0457056c4dcd5, type: 3}
+  unlockNoise: {fileID: 8300000, guid: 93aa5c95b9bc2534ab2c92b641a15cc3, type: 3}
   exitDoorOpen: {fileID: 0}
-  playerDamaged: {fileID: 0}
+  playerHurt: {fileID: 8300000, guid: 9d8d709df09b49148adccfed3e0f229e, type: 3}
   frost: {fileID: 0}
-  eat: {fileID: 0}
-  heal: {fileID: 0}
+  eat: {fileID: 8300000, guid: 8d625f8780363634f9008f6ec991868c, type: 3}
+  drink: {fileID: 8300000, guid: 2e570fb96ca6bee4194649d2b90a0cf5, type: 3}
   pickup: {fileID: 8300000, guid: c885f9d618b308e4389c18376ee791e2, type: 3}
   enemyHurt: {fileID: 8300000, guid: 461fc16e725db784faa46100578676ac, type: 3}
 --- !u!82 &8815386744125544499

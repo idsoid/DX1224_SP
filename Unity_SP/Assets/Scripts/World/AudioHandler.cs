@@ -18,10 +18,10 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip flashLightOff;
     [SerializeField] private AudioClip unlockNoise;
     [SerializeField] private AudioClip exitDoorOpen;
-    [SerializeField] private AudioClip playerDamaged;
+    [SerializeField] private AudioClip playerHurt;
     [SerializeField] private AudioClip frost;
     [SerializeField] private AudioClip eat;
-    [SerializeField] private AudioClip heal;
+    [SerializeField] private AudioClip drink;
     [SerializeField] private AudioClip pickup;
 
     //enemystuff
@@ -65,6 +65,15 @@ public class AudioHandler : MonoBehaviour
                 break;
             case "unlockNoise":
                 sfxAudioSrc.PlayOneShot(unlockNoise);
+                break;
+            case "playerHurt":
+                sfxAudioSrc.PlayOneShot(playerHurt);
+                break;
+            case "eat":
+                sfxAudioSrc.PlayOneShot(eat);
+                break;
+            case "drink":
+                sfxAudioSrc.PlayOneShot(drink);
                 break;
             case "pickup":
                 sfxAudioSrc.PlayOneShot(pickup);

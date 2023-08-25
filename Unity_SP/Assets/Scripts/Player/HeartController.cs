@@ -6,6 +6,7 @@ public class HeartController : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
     [SerializeField] private CombatData combatData;
+    [SerializeField] private AudioHandler sfxHandler;
 
     private Rigidbody2D rb;
 
@@ -49,6 +50,7 @@ public class HeartController : MonoBehaviour
         if (iFrameTimer == 0)
         {
             playerData.AlterValue("health", -damageTaken);
+            sfxHandler.playAudio("playerHurt");
             iFrameTimer = 0.5f;
         }
     }

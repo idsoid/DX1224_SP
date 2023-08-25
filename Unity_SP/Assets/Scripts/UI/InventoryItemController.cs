@@ -62,7 +62,6 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetCount() <= 0)
         {
             RemoveItem();
-            Debug.Log("uh");
             InventoryManager.Instance.InventoryItems.Remove(this);
         }
 
@@ -75,6 +74,11 @@ public class InventoryItemController : MonoBehaviour
         {
             itemCountDisplay.SetActive(false);
         }
+
+        if (item.GetID() == 50)
+            sfxHandler.playAudio("drink");
+        else if (item.GetID() == 51)
+            sfxHandler.playAudio("eat");
     }
 
     public void SetAudioHandler(AudioHandler newAudioHandler)
