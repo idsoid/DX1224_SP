@@ -42,20 +42,17 @@ public class AudioVolumeManager : MonoBehaviour
     {
         mixer.SetFloat("MasterVolume", masterSlider.value);
         playerPrefs.SetVolume("master", masterSlider.value);
-        audioHandler.playAudio("inventory"); // to let the player hear when the change it
     }
 
     public void SetSFXVolume()
     {
         mixer.SetFloat("SFXVolume", sfxSlider.value);
         playerPrefs.SetVolume("sfx", sfxSlider.value);
-        audioHandler.playAudio("inventory"); // to let the player hear when the change it
     }
 
     public void SetBGMVolume()
     {
         mixer.SetFloat("BGMVolume", bgmSlider.value);
         playerPrefs.SetVolume("bgm", bgmSlider.value);
-        // change to bgm audioHandler.playAudio("inventory"); // to let the player hear when the change it
     }
 }

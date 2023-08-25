@@ -52,7 +52,7 @@ public class CombatManager : MonoBehaviour
     private PhysicsScene2D bhPhysicsScene;
     private Scene scene;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         enemySelect.SetActive(false);
         action = ACTION.NONE;
