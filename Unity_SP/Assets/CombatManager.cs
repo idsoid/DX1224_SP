@@ -22,6 +22,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     private GameObject attack;
 
+    [SerializeField]
+    private TMP_Text enemyText;
+
 
     public GameObject actionSelect;
     public GameObject enemySelect;
@@ -55,6 +58,7 @@ public class CombatManager : MonoBehaviour
         action = ACTION.NONE;
         enemyData = combatData.enemyData;
         enemySprite.sprite = combatData.enemyData.GetSprite();
+        enemyText.text = combatData.enemyData.GetName();
         //UpdateData();
     }
 
