@@ -31,6 +31,8 @@ public class IntroState : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            playerData.ReadyLoad = false;
+            playerData.loadOldPos = false;
             playerData.NewGame();
             ar.SetBool("boom", true);
             

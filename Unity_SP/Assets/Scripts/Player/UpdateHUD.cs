@@ -21,7 +21,7 @@ public class UpdateHUD : MonoBehaviour
     public GameObject frost4;
 
     [SerializeField]
-    public Image candle;
+    private Image candle;
 
     public ParticleSystem snowflake;
 
@@ -122,14 +122,14 @@ public class UpdateHUD : MonoBehaviour
         }
         lerpSpeed = 3f * Time.deltaTime;
 
-        setBars();
+        SetBars();
 
         stats.text = "Max Health: " + playerData.GetValue("maxHealth") + "\n Max Stamina: " + playerData.GetValue("maxStamina")
             + "\n Max Hunger: " + playerData.GetValue("maxHunger") + "\n Attack: " + playerData.GetValue("attack")
             + "\n Speed: " + playerData.GetValue("speed");
     }
 
-    private void setBars()
+    private void SetBars()
     {
         healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, playerData.GetValue("stamina") / playerData.GetValue("maxStamina"), lerpSpeed);

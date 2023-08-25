@@ -53,7 +53,6 @@ public class Dialogue : MonoBehaviour
         bFinishedLine = false;
         fTime_elapsed = 0f;
         SetSpeed(.05f);
-        playerData.canMove = false;
     }
     // Update is called once per frame
     void Update()
@@ -114,12 +113,10 @@ public class Dialogue : MonoBehaviour
         {
             if (deleteOnFinish)
             {
-                playerData.canMove = true;
                 Destroy(gameObject);
             }
             else if (DisableOnFinish)
             {
-                playerData.canMove = true;
                 gameObject.SetActive(false);
             }
         }

@@ -26,7 +26,6 @@ public class PlayerData : ScriptableObject
     public ItemData equippedWeapon, equippedCharm;
     public List<ItemData> inventory;
     public bool ReadyLoad = false;
-    public bool canMove = true;
 
     public void NewGame()
     {
@@ -40,7 +39,6 @@ public class PlayerData : ScriptableObject
         _playerData.Init();
         inventory.Clear();
         worldState.altered = false;
-        canMove = true;
     }
 
     public void SavePos(Vector3 pos)
@@ -93,9 +91,13 @@ public class PlayerData : ScriptableObject
         return _playerData.CheckUnlocked();
     }
 
-
+    public bool HasPlayerSaved()
+    {
+        return _playerData.GetSaved();
+    }
     public void Save()
     {
+        _playerData.ToggleSaved();
         inventory = InventoryManager.Instance.Items;
         _playerData.pickeds = worldState.pickedUp;
 
@@ -133,26 +135,3 @@ public class PlayerData : ScriptableObject
         return _playerData.GetInventory();
     }
 }
-
-//[System.Serializable]
-//public class playerinfo
-//{
-//    public float health;
-//    public float stamina;
-//    public float temperature;
-//    public float hunger;
-//    public float attack;
-//    public float speed;
-//    public bool isAlive;
-//    public float tempDecreaseMultiplier;
-//    public float hungerDecreaseMultiplier;
-//    //public List<ItemData> inventory;
-//    public List<int> inventory;
-//    public float maxHealth, maxStamina, maxTemperature, maxHunger;
-
-//    public bool redUnlocked, blueUnlocked, yellowUnlocked;
-
-//    public List<bool> pickeds;
-
-//    public List<bool> locksOpened;
-//}

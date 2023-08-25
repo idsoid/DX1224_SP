@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
             InventoryManager.Instance.LoadInventory();
             playerData.ReadyLoad = false;
         }
-        playerData.canMove = true;
     }
 
     // Update for input

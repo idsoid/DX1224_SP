@@ -10,30 +10,28 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private GameObject fireLight;
     [SerializeField] private AudioHandler sfxHandler;
+    [SerializeField] private PlayerData playerData;
 
-    private bool lit;
-    private float burnTime;
-    private bool playerInteract;
+    private bool lit = false;
+    private bool playerInteract = false;
 
     private void Start()
     {
-        lit = false;
-        burnTime = 0;
-        playerInteract = false;
+        ToggleLit(true);
     }
     private void Update()
     {
         if (lit)
         {
-            if (burnTime > 0f)
+            if (playerData.GetValue("fireplaceBurnTime") > 0f)
             {
-                burnTime -= 1f * Time.deltaTime;
+                playerData.AlterValue("fireplaceBurnTime",-1f * Time.deltaTime);
             }
-            else if (burnTime < 0f)
+            else if (playerData.GetValue("fireplaceBurnTime") < 0f)
             {
-                burnTime = 0f;
+                playerData.SetValue("fireplaceBurnTime",0f);
             }
-            else if (burnTime == 0f)
+            else if (playerData.GetValue("fireplaceBurnTime") == 0f)
             {
                 ToggleLit(false);
             }
@@ -59,7 +57,7 @@ public class Fireplace : MonoBehaviour
     {
         lit = x;
         fire.SetActive(lit);
-        safeZone?.SetActive(lit);
+        safeZone.SetActive(lit);
         if (!x)
         {
             fireplaceAnim.Play("fireplace_unlit");
@@ -75,7 +73,7 @@ public class Fireplace : MonoBehaviour
 
     public void AddFuel()
     {
-        burnTime += 120;
+        playerData.AlterValue("fireplaceBurnTime",120);
         if (!lit)
         {
             ToggleLit(true);
@@ -91,7 +89,7 @@ public class Fireplace : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerInteract = true;
         }
@@ -99,7 +97,7 @@ public class Fireplace : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerInteract = false;
         }

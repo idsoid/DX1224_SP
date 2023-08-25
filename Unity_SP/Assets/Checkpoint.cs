@@ -6,22 +6,20 @@ public class Checkpoint : MonoBehaviour
 {
     [SerializeField]
     private PlayerData playerData;
+    [SerializeField]
+    private GameObject saveDialogue;
 
     private bool bCanInteract;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         if(bCanInteract)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 SaveGame();
+                saveDialogue.SetActive(true);
             }
         }
     }

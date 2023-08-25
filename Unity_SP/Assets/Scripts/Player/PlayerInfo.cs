@@ -16,7 +16,9 @@ public class PlayerInfo : ScriptableObject
     private float tempDecreaseMultiplier;
     private float hungerDecreaseMultiplier;
     private float candleBurnTime;
-    
+    private float fireplaceBurnTime;
+
+    private bool hasSaved;
     public List<int> inventory;
     private float maxHealth, maxStamina, maxTemperature, maxHunger;
 
@@ -26,6 +28,7 @@ public class PlayerInfo : ScriptableObject
 
     public List<bool> locksOpened;
 
+    
     public void AlterValue(string x, float value)
     {
         switch (x)
@@ -72,7 +75,9 @@ public class PlayerInfo : ScriptableObject
             case "candleBurnTime":
                 candleBurnTime += value;
                 break;
-
+            case "fireplaceBurnTime":
+                fireplaceBurnTime += value;
+                break;
             default:
                 break;
         }
@@ -109,6 +114,9 @@ public class PlayerInfo : ScriptableObject
             case "candleBurnTime":
                 candleBurnTime = value;
                 break;
+            case "fireplaceBurnTime":
+                fireplaceBurnTime = value;
+                break;
             default:
                 break;
         }
@@ -143,6 +151,8 @@ public class PlayerInfo : ScriptableObject
                 return maxHunger;
             case "candleBurnTime":
                 return candleBurnTime;
+            case "fireplaceBurnTime":
+                return fireplaceBurnTime;
             default:
                 return -1;
         }
@@ -168,8 +178,18 @@ public class PlayerInfo : ScriptableObject
         }
     }
 
+    public void ToggleSaved()
+    {
+        hasSaved = true;
+    }
+
+    public bool GetSaved()
+    {
+        return hasSaved;
+    }
     public void Init()
     {
+        hasSaved = false;
         health = 100f;
         attack = 25f;
         speed = 1f;
@@ -186,6 +206,7 @@ public class PlayerInfo : ScriptableObject
         maxHunger = 100f;
         candleBurnTime = 0f;
         inventory.Clear();
+        fireplaceBurnTime = 0f;
     }
 
     public void Unlock(string col)
