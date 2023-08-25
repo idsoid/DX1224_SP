@@ -12,6 +12,7 @@ public class ExitDoor : MonoBehaviour
     [SerializeField] private GameObject redLock;
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private AudioHandler sfxHandler;
 
     private bool closed;
     private bool playerInteract;
@@ -124,6 +125,7 @@ public class ExitDoor : MonoBehaviour
             closeSprite.SetActive(false);
             openSprite.SetActive(true);
             boxCol.enabled = false;
+            sfxHandler.playAudio("exitDoorOpen");
         }
     }
 
