@@ -659,6 +659,10 @@ PrefabInstance:
       value: sfxHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
+      propertyPath: equip
+      value: 
+      objectReference: {fileID: 8300000, guid: cc182a8b95f708d44be5eeacc46fd319, type: 3}
+    - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
       propertyPath: sprint
       value: 
       objectReference: {fileID: 8300000, guid: 04323b8a99ca72346aca3aee7b71ee9f, type: 3}
@@ -51453,6 +51457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22b980c14346f443abeb043e356eed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 544936313}
   Items: []
   itemDatabase:
   - {fileID: 11400000, guid: 341f4a5e92df0a4449de5f79a78284f1, type: 2}
