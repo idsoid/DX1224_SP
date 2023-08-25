@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 float increment = -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier");
 
                 //if candle is being used, decrease rate of temp
-                if(hand == HAND.CANDLE && lightOn && candleBurnTime > 0f)
+                if (hand == HAND.CANDLE && lightOn && candleBurnTime > 0f)
                 {
                     candleBurnTime -= Time.deltaTime;
                     if(candleBurnTime <= 0f)

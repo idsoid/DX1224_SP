@@ -71,6 +71,10 @@ public class AudioHandler : MonoBehaviour
             case "playerHurt":
                 sfxAudioSrc.PlayOneShot(playerHurt);
                 break;
+            case "frost":
+                if (!sfxAudioSrc.isPlaying)
+                    sfxAudioSrc.PlayOneShot(frost);
+                break;
             case "eat":
                 sfxAudioSrc.PlayOneShot(eat);
                 break;
@@ -86,7 +90,5 @@ public class AudioHandler : MonoBehaviour
             default:
                 break;
         }
-
-
     }
 }

@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class UpdateHUD : MonoBehaviour
 {
+    [SerializeField] private AudioHandler sfxHandler;
+
     public Image healthBar;
     public Image staminaBar;
     public Image hungerBar;
@@ -33,10 +35,12 @@ public class UpdateHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         quintTemp = playerData.GetValue("maxTemperature") / 5;
         if (!playerData.safe)
         {
+            if (frost1.activeSelf)
+                sfxHandler.playAudio("frost");
+
             if (playerData.GetValue("temperature") < quintTemp)
             {
                 if (!frost4.activeSelf)
