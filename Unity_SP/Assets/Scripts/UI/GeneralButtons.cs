@@ -35,4 +35,11 @@ public class GeneralButtons : MonoBehaviour
             Debug.Log("Progress saved!");
         }
     }
+
+    public void BackToTitle()
+    {
+        Time.timeScale = 1f;
+        playerData.ReadyLoad = true;
+        SceneManager.LoadScene("TitleScene");
+    }
 }
