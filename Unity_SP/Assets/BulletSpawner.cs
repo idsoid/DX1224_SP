@@ -53,7 +53,7 @@ public class BulletSpawner : MonoBehaviour
         sweeperRespawnTime = 3f;
         barRespawnTime = 1f;
 
-        if (combatData.enemyData.GetEnemyType() == enemydata.CATS.BOSS)
+        if (combatData.enemyData.GetEnemyType() == EnemyData.CATS.BOSS)
             randomizeAttack = Random.Range(1, 4);
     }
 
@@ -63,7 +63,7 @@ public class BulletSpawner : MonoBehaviour
         GameObject spawnedBullet;
         switch (combatData.enemyData.GetEnemyType())
         {
-            case enemydata.CATS.KEEPER:
+            case EnemyData.CATS.KEEPER:
                 if (startHell && firstSpawn)
                 {
                     spawnedBullet = Instantiate(rotatingSquare, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
@@ -72,7 +72,7 @@ public class BulletSpawner : MonoBehaviour
                     firstSpawn = false;
                 }
                 break;
-            case enemydata.CATS.CRAWLER:
+            case EnemyData.CATS.CRAWLER:
                 if (startHell && firstSpawn)
                 {
                     int opp = 1;
@@ -91,7 +91,7 @@ public class BulletSpawner : MonoBehaviour
                     firstSpawn = false;
                 }
                 break;
-            case enemydata.CATS.IMITATER:
+            case EnemyData.CATS.IMITATER:
                 if (startHell && firstSpawn)
                 {
                     spawnedBullet = Instantiate(longBar, new Vector2(8.1f, 0f), Quaternion.identity);
@@ -99,7 +99,7 @@ public class BulletSpawner : MonoBehaviour
                     firstSpawn = false;
                 }
                 break;
-            case enemydata.CATS.HOARDER:
+            case EnemyData.CATS.HOARDER:
                 if (startHell && firstSpawn)
                 {
                     spawnedBullet = Instantiate(laserV, new Vector2(0f, Random.Range(-2.4f, 2.4f)), Quaternion.identity);
@@ -144,7 +144,7 @@ public class BulletSpawner : MonoBehaviour
                     }
                 }
                 break;
-            case enemydata.CATS.BOSS:
+            case EnemyData.CATS.BOSS:
                 switch (randomizeAttack)
                 {
                     case 1:

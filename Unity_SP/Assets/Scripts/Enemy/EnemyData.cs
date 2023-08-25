@@ -5,81 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyData : ScriptableObject
 {
-    private enemydata _enemydata = new enemydata();
-
-    public void Init(float health, float attack, Sprite enemySprite, string name, string cat)
-    {
-        _enemydata.health = health;
-        _enemydata.attack = attack;
-        _enemydata.enemySprite = enemySprite;
-        _enemydata.name = name;
-        _enemydata.isDead = false;
-        switch (cat)
-        {
-            case "KEEPER":
-                _enemydata.type = enemydata.CATS.KEEPER;
-                break;
-            case "CRAWLER":
-                _enemydata.type = enemydata.CATS.CRAWLER;
-                break;
-            case "IMITATER":
-                _enemydata.type = enemydata.CATS.IMITATER;
-                break;
-            case "HOARDER":
-                _enemydata.type = enemydata.CATS.HOARDER;
-                break;
-            case "BOSS":
-                _enemydata.type = enemydata.CATS.BOSS;
-                break;
-            default:
-                break;
-        }
-    }
-    public bool GetDead()
-    {
-        return _enemydata.isDead;
-    }
-    public void SetDead(bool state)
-    {
-        _enemydata.isDead = state;
-    }
-    public float GetHealth()
-    {
-        return _enemydata.health;
-    }
-    public void SetHealth(float damage)
-    {
-        _enemydata.health -= damage;
-        if (_enemydata.health <= 0.0f)
-        {
-            SetDead(true);
-        }
-    }
-    public void ResetHealth(float health)
-    {
-        _enemydata.health = health;
-    }
-    public enemydata.CATS GetEnemyType()
-    {
-        return _enemydata.type;
-    }
-    public Sprite GetSprite()
-    {
-        return _enemydata.enemySprite;
-    }
-    public string GetName()
-    {
-        return _enemydata.name;
-    }
-    public float GetAttack()
-    { 
-        return _enemydata.attack; 
-    }
-}
-
-[System.Serializable]
-public class enemydata
-{
     public enum CATS
     {
         KEEPER,
@@ -88,11 +13,79 @@ public class enemydata
         HOARDER,
         BOSS
     }
-    public CATS type;
-    public float health;
-    public float attack;
-    public Sprite enemySprite;
-    public string name;
-    public bool isDead;
-    //public Vector3 oldPos;
+    private CATS type;
+    private float health;
+    private float attack;
+    private Sprite enemySprite;
+    private string enemyName;
+    private bool isDead;
+
+    public void Init(float newhealth, float newattack, Sprite eSprite, string eName, string eCat)
+    {
+        health = newhealth;
+        attack = newattack;
+        enemySprite = eSprite;
+        enemyName = eName;
+        isDead = false;
+        switch (eCat)
+        {
+            case "KEEPER":
+                type = CATS.KEEPER;
+                break;
+            case "CRAWLER":
+                type = CATS.CRAWLER;
+                break;
+            case "IMITATER":
+                type = CATS.IMITATER;
+                break;
+            case "HOARDER":
+                type = CATS.HOARDER;
+                break;
+            case "BOSS":
+                type = CATS.BOSS;
+                break;
+            default:
+                break;
+        }
+    }
+    public bool GetDead()
+    {
+        return isDead;
+    }
+    public void SetDead(bool state)
+    {
+        isDead = state;
+    }
+    public float GetHealth()
+    {
+        return health;
+    }
+    public void SetHealth(float damage)
+    {
+        health -= damage;
+        if (health <= 0.0f)
+        {
+            SetDead(true);
+        }
+    }
+    public void ResetHealth(float newhealth)
+    {
+        health = newhealth;
+    }
+    public CATS GetEnemyType()
+    {
+        return type;
+    }
+    public Sprite GetSprite()
+    {
+        return enemySprite;
+    }
+    public string GetName()
+    {
+        return enemyName;
+    }
+    public float GetAttack()
+    {   
+        return attack; 
+    }
 }
