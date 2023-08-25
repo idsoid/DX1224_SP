@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 662200796}
   - component: {fileID: 662200795}
   m_Layer: 5
-  m_Name: HealthBarFilled
+  m_Name: EnemyHealthBarFilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,7 +1038,7 @@ GameObject:
   - component: {fileID: 998702583}
   - component: {fileID: 998702582}
   m_Layer: 5
-  m_Name: HealthBarFilled
+  m_Name: HungerBarFilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
