@@ -61,8 +61,6 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if(!playerTurn)
         {
             fTime_elapsed += Time.deltaTime;
@@ -86,7 +84,8 @@ public class CombatManager : MonoBehaviour
                     }
                 }
             }
-            if (fTime_elapsed > 15f)
+
+            if (fTime_elapsed > 10f)
             {
                 SceneManager.UnloadSceneAsync(scene);
                 actionSelect.SetActive(true);
