@@ -7,7 +7,7 @@ public class AudioHandler : MonoBehaviour
     [Header("Audio")]
     private AudioSource sfxAudioSrc;
 
-    public AudioClip walk;
+    public AudioClip sprint;
     public AudioClip inventory;
     public AudioClip fireBurning;
     public AudioClip fireExtinguish;
@@ -38,16 +38,16 @@ public class AudioHandler : MonoBehaviour
         {
             case "sprint":
                 if(!sfxAudioSrc.isPlaying)
-                    sfxAudioSrc.PlayOneShot(walk);
+                    sfxAudioSrc.PlayOneShot(sprint);
                 break;
             case "inventory":
                 sfxAudioSrc.PlayOneShot(inventory);
                 break;
-            case "enemyHurt":
-                sfxAudioSrc.PlayOneShot(enemyHurt);
-                break;
             case "pickup":
                 sfxAudioSrc.PlayOneShot(pickup);
+                break;
+            case "enemyHurt":
+                sfxAudioSrc.PlayOneShot(enemyHurt);
                 break;
             default:
                 break;
