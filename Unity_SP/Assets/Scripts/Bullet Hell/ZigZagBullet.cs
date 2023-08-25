@@ -30,9 +30,9 @@ public class ZigZagBullet : MonoBehaviour
         else if (transform.position.x < -6.5f && velocityX != speed)
             velocityX = speed;
 
-        if (transform.position.y > originalPositionY + 1.5f && velocityY != -speed * 2)
+        if (transform.position.y > originalPositionY + 1.7f && velocityY != -speed * 2)
             velocityY = -speed * 2;
-        else if (transform.position.y < originalPositionY - 1.5f && velocityY != speed * 2)
+        else if (transform.position.y < originalPositionY - 1.7f && velocityY != speed * 2)
             velocityY = speed * 2;
 
         rb.velocity = new Vector2(velocityX, velocityY); 

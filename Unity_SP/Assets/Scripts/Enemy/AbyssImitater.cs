@@ -212,7 +212,7 @@ public class AbyssImitater : MonoBehaviour
                 break;
             case State.TARGET:           
                 target = player.transform;
-                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f)
+                if (Vector3.Distance(player.transform.position, transform.position) >= 5.0f || enemyData.GetDead())
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
