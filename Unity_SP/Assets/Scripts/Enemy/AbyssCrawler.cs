@@ -90,7 +90,7 @@ public class AbyssCrawler : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(100, 5, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
+            enemyData.Init(50, 5, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
         }
     }
     // Update is called once per frame
@@ -110,12 +110,14 @@ public class AbyssCrawler : MonoBehaviour
         {
             rezTime = 30.0f;
             GetComponent<Collider2D>().enabled = false;
+            mapCol.SetActive(false);
             enemySprite.gameObject.SetActive(false);
         }
         else if (!enemyData.GetDead())
         {
             rb.AddForce(force);
             GetComponent<Collider2D>().enabled = true;
+            mapCol.SetActive(true);
             enemySprite.gameObject.SetActive(true);
         }
 
@@ -127,7 +129,7 @@ public class AbyssCrawler : MonoBehaviour
                 rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
-                enemyData.ResetHealth(100);
+                enemyData.ResetHealth(50);
             }
         }
 

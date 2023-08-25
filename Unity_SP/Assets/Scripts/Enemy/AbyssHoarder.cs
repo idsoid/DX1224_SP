@@ -68,7 +68,7 @@ public class AbyssHoarder : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(200, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
+            enemyData.Init(150, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
     }
     // Update is called once per frame
@@ -104,7 +104,7 @@ public class AbyssHoarder : MonoBehaviour
                 rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
-                enemyData.ResetHealth(200);
+                enemyData.ResetHealth(150);
             }
         }
 

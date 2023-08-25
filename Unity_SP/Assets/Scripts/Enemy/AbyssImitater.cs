@@ -118,6 +118,7 @@ public class AbyssImitater : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             mimicSprite.gameObject.SetActive(false);
             enemySprite.gameObject.SetActive(false);
+            mapCol.SetActive(false);
         }
         else if (!enemyData.GetDead())
         {
@@ -133,6 +134,7 @@ public class AbyssImitater : MonoBehaviour
                 enemySprite.gameObject.SetActive(false);
             }
             GetComponent<Collider2D>().enabled = true;
+            mapCol.SetActive(true);
         }
 
         if (rezTime > 0.0f)
