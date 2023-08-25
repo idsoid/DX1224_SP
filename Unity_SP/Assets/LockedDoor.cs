@@ -16,6 +16,8 @@ public class LockedDoor : MonoBehaviour
     [SerializeField]
     private int lockIndex;
 
+    [SerializeField] private AudioHandler sfxHandler;
+
     private bool canInteract;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class LockedDoor : MonoBehaviour
                 if(InventoryManager.Instance.GetItemByID(requiredLock) != null)
                 {
                     worldState.locksOpened[lockIndex] = true;
+                    sfxHandler.playAudio("unlockNoise");
                     dialogueText.SetActive(true);
                     Destroy(gameObject);
                 }

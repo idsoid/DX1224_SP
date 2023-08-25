@@ -9,6 +9,7 @@ public class InventoryItemController : MonoBehaviour
     [SerializeField] private ItemData item;
     [SerializeField] private GameObject equippedIcon;
     [SerializeField] private GameObject itemCountDisplay;
+    [SerializeField] private AudioHandler sfxHandler;
 
     public Button RemoveButton;
 
@@ -30,6 +31,7 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetEquipped() != equippedIcon.activeSelf)
         {
             equippedIcon.SetActive(item.GetEquipped());
+            sfxHandler.playAudio("equip");
         }
 
         // Wood fix
@@ -60,7 +62,6 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetCount() <= 0)
         {
             RemoveItem();
-            Debug.Log("uh");
             InventoryManager.Instance.InventoryItems.Remove(this);
         }
 
@@ -73,5 +74,15 @@ public class InventoryItemController : MonoBehaviour
         {
             itemCountDisplay.SetActive(false);
         }
+
+        if (item.GetID() == 50)
+            sfxHandler.playAudio("drink");
+        else if (item.GetID() == 51)
+            sfxHandler.playAudio("eat");
+    }
+
+    public void SetAudioHandler(AudioHandler newAudioHandler)
+    {
+        sfxHandler = newAudioHandler;
     }
 }

@@ -7,21 +7,22 @@ public class AudioHandler : MonoBehaviour
     [Header("Audio")]
     private AudioSource sfxAudioSrc;
 
-    public AudioClip walk;
-    public AudioClip inventory;
-    public AudioClip fireBurning;
-    public AudioClip fireExtinguish;
-    public AudioClip fireStoked;
-    public AudioClip equip;
-    public AudioClip playerAttack;
-    public AudioClip flashLight;
-    public AudioClip unlockNoise;
-    public AudioClip exitDoorOpen;
-    public AudioClip playerDamaged;
-    public AudioClip frost;
-    public AudioClip eat;
-    public AudioClip heal;
-    public AudioClip pickup;
+    [SerializeField] private AudioClip sprint;
+    [SerializeField] private AudioClip inventory;
+    [SerializeField] private AudioClip fireBurning;
+    [SerializeField] private AudioClip fireExtinguish;
+    [SerializeField] private AudioClip fireStoked;
+    [SerializeField] private AudioClip equip;
+    [SerializeField] private AudioClip playerAttack;
+    [SerializeField] private AudioClip flashLightOn;
+    [SerializeField] private AudioClip flashLightOff;
+    [SerializeField] private AudioClip unlockNoise;
+    [SerializeField] private AudioClip exitDoorOpen;
+    [SerializeField] private AudioClip playerHurt;
+    [SerializeField] private AudioClip frost;
+    [SerializeField] private AudioClip eat;
+    [SerializeField] private AudioClip drink;
+    [SerializeField] private AudioClip pickup;
 
     //enemystuff
     public AudioClip enemyHurt;
@@ -38,16 +39,47 @@ public class AudioHandler : MonoBehaviour
         {
             case "sprint":
                 if(!sfxAudioSrc.isPlaying)
-                    sfxAudioSrc.PlayOneShot(walk);
+                    sfxAudioSrc.PlayOneShot(sprint);
                 break;
             case "inventory":
                 sfxAudioSrc.PlayOneShot(inventory);
                 break;
-            case "enemyHurt":
-                sfxAudioSrc.PlayOneShot(enemyHurt);
+            case "fireBurning":
+                if (!sfxAudioSrc.isPlaying)
+                    sfxAudioSrc.PlayOneShot(fireBurning);
+                break;
+            case "fireExtinguish":
+                sfxAudioSrc.PlayOneShot(fireExtinguish);
+                break;
+            case "fireStoked":
+                sfxAudioSrc.PlayOneShot(fireStoked);
+                break;
+            case "equip":
+                sfxAudioSrc.PlayOneShot(equip);
+                break;
+            case "flashLightOn":
+                sfxAudioSrc.PlayOneShot(flashLightOn);
+                break;
+            case "flashLightOff":
+                sfxAudioSrc.PlayOneShot(flashLightOff);
+                break;
+            case "unlockNoise":
+                sfxAudioSrc.PlayOneShot(unlockNoise);
+                break;
+            case "playerHurt":
+                sfxAudioSrc.PlayOneShot(playerHurt);
+                break;
+            case "eat":
+                sfxAudioSrc.PlayOneShot(eat);
+                break;
+            case "drink":
+                sfxAudioSrc.PlayOneShot(drink);
                 break;
             case "pickup":
                 sfxAudioSrc.PlayOneShot(pickup);
+                break;
+            case "enemyHurt":
+                sfxAudioSrc.PlayOneShot(enemyHurt);
                 break;
             default:
                 break;

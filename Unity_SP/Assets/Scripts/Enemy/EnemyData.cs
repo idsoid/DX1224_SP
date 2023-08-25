@@ -71,6 +71,10 @@ public class EnemyData : ScriptableObject
     {
         return _enemydata.name;
     }
+    public float GetAttack()
+    { 
+        return _enemydata.attack; 
+    }
 }
 
 [System.Serializable]

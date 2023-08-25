@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &405403661
 Transform:
   m_ObjectHideFlags: 0
@@ -352,7 +352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5945832208770036766
 Transform:
   m_ObjectHideFlags: 0
@@ -668,9 +668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63604e454ad46564688fd407b0827aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
   playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   flashlight: {fileID: 5945832208770036765}
-  candle: {fileID: 0}
+  candle: {fileID: 405403660}
   lightOn: 0
   candleBurnTime: 0
   speedmult: 1
@@ -694,7 +695,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: b9ce09b015e783840bad9aab57d2e523, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &5945832209217094376
 BoxCollider2D:

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private AudioHandler sfxHandler;
+
     private bool cheats = false;
 
     // Start is called before the first frame update
@@ -284,6 +286,10 @@ public class PlayerController : MonoBehaviour
             {
                 case HAND.FLASHLIGHT:
                     flashlight.SetActive(lightOn);
+                    if (lightOn)
+                        sfxHandler.playAudio("flashLightOn");
+                    else
+                        sfxHandler.playAudio("flashLightOff");
                     break;
                 case HAND.CANDLE:
                     candle.SetActive(lightOn);

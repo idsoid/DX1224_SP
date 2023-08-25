@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class HeartController : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private CombatData combatData;
+    [SerializeField] private AudioHandler sfxHandler;
 
     private Rigidbody2D rb;
 
@@ -27,7 +29,7 @@ public class HeartController : MonoBehaviour
         HandleInputMovement();
 
         if (takeDamage)
-            TakeDamage(10);
+            TakeDamage(combatData.enemyData.GetAttack());
 
         if (iFrameTimer > 0)
             iFrameTimer -= Time.deltaTime;
@@ -43,11 +45,12 @@ public class HeartController : MonoBehaviour
         rb.velocity = new Vector2(hInput, vInput);
     }
 
-    private void TakeDamage(int damageTaken)
+    private void TakeDamage(float damageTaken)
     {
         if (iFrameTimer == 0)
         {
             playerData.AlterValue("health", -damageTaken);
+            sfxHandler.playAudio("playerHurt");
             iFrameTimer = 0.5f;
         }
     }

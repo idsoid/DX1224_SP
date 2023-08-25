@@ -8,18 +8,17 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private GameObject safeZone;
     [SerializeField] private Animator fireplaceAnim;
     [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private GameObject fireLight;
+    [SerializeField] private AudioHandler sfxHandler;
 
     private bool lit;
-    public float burnTime;
+    private float burnTime;
     private bool playerInteract;
-
-    [SerializeField]
-    private GameObject fireLight;
 
     private void Start()
     {
-        lit = true;
-        //burnTime = 120f;
+        lit = false;
+        burnTime = 0;
         playerInteract = false;
     }
 
@@ -39,6 +38,8 @@ public class Fireplace : MonoBehaviour
             {
                 ToggleLit(false);
             }
+
+            sfxHandler.playAudio("fireBurning");
         }
 
         if (playerInteract)
@@ -63,7 +64,8 @@ public class Fireplace : MonoBehaviour
         if (!x)
         {
             fireplaceAnim.Play("fireplace_unlit");
-            
+
+            sfxHandler.playAudio("fireExtinguish");
         }
         else
         {
@@ -79,6 +81,13 @@ public class Fireplace : MonoBehaviour
         {
             ToggleLit(true);
         }
+
+        sfxHandler.playAudio("fireStoked");
+    }
+
+    public bool GetLit()
+    {
+        return lit;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
