@@ -12,7 +12,7 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private AudioHandler sfxHandler;
 
     private bool lit;
-    public float burnTime;
+    private float burnTime;
     private bool playerInteract;
 
     private void Start()
@@ -83,6 +83,11 @@ public class Fireplace : MonoBehaviour
         }
 
         sfxHandler.playAudio("fireStoked");
+    }
+
+    public bool GetLit()
+    {
+        return lit;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
