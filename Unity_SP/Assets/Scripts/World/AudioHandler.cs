@@ -63,6 +63,9 @@ public class AudioHandler : MonoBehaviour
             case "flashLightOff":
                 sfxAudioSrc.PlayOneShot(flashLightOff);
                 break;
+            case "unlockNoise":
+                sfxAudioSrc.PlayOneShot(unlockNoise);
+                break;
             case "pickup":
                 sfxAudioSrc.PlayOneShot(pickup);
                 break;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    [SerializeField] private AudioHandler sfxHandler;
+
     public ItemData item;
 
     public int dropIndex;
@@ -15,12 +17,18 @@ public class PickUp : MonoBehaviour
     {
         InventoryManager.Instance.Add(item);
         worldState.pickedUp[dropIndex] = true;
+        sfxHandler.playAudio("pickup");
 
         if (!worldState.altered)
         {
             worldState.altered = true;
         }
         Destroy(gameObject);
+    }
+
+    public void SetAudioHandler(AudioHandler newAudioHandler)
+    {
+        sfxHandler = newAudioHandler;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

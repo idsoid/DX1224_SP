@@ -10,6 +10,8 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField]
     private WorldState worldState;
 
+    [SerializeField] private AudioHandler sfxHandler;
+
     private void Start()
     {
         listpickup = GetComponentsInChildren<PickUp>();
@@ -19,6 +21,7 @@ public class ItemSpawner : MonoBehaviour
         {
             listpickup[i].dropIndex = i;
             listpickup[i].worldState = worldState;
+            listpickup[i].SetAudioHandler(sfxHandler);
         }
     }
 
