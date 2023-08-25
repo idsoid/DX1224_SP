@@ -662,6 +662,18 @@ PrefabInstance:
       propertyPath: sprint
       value: 
       objectReference: {fileID: 8300000, guid: 04323b8a99ca72346aca3aee7b71ee9f, type: 3}
+    - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
+      propertyPath: fireStoked
+      value: 
+      objectReference: {fileID: 8300000, guid: 5861177fa5871b5469daea602f193792, type: 3}
+    - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
+      propertyPath: fireBurning
+      value: 
+      objectReference: {fileID: 8300000, guid: 65bcbc9aa1899464fb716f09d0fd296c, type: 3}
+    - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
+      propertyPath: fireExtinguish
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d37eb5e815a13a4f993a3b388068861, type: 3}
     - target: {fileID: 8815386744125544509, guid: d9446232084970f40a22c81ecebacc19, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -82992,6 +83004,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 333774844, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
+      propertyPath: sfxHandler
+      value: 
+      objectReference: {fileID: 544936313}
+    - target: {fileID: 333774844, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1522599128}
@@ -83018,6 +83034,10 @@ PrefabInstance:
     - target: {fileID: 1970797841, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 12.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905470266464448108, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7905470268432330798, guid: 2d45129cab92ad14aaacfbf56dd4e865, type: 3}
       propertyPath: m_RootOrder

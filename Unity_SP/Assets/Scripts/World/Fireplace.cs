@@ -12,12 +12,13 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private AudioHandler sfxHandler;
 
     private bool lit;
-    private float burnTime;
+    public float burnTime;
     private bool playerInteract;
 
     private void Start()
     {
-        lit = true;
+        lit = false;
+        burnTime = 0;
         playerInteract = false;
     }
 
