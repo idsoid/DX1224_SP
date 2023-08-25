@@ -36,7 +36,7 @@ public class UpdateHUD : MonoBehaviour
     public TMP_Text stats;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         quintTemp = playerData.GetValue("maxTemperature") / 5;
         if (!playerData.safe)

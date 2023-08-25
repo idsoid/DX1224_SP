@@ -142,13 +142,18 @@ public class CombatManager : MonoBehaviour
                 enemySelect.SetActive(false);
                 break;
             case ACTION.SKILL:
-                playerData.AlterValue("hunger", -20);
-                enemyData.SetHealth(playerData.GetValue("attack") * 2);
-                Attack();
-                playerTurn = false;
-                enemySelect.SetActive(false);
+                if (playerData.GetValue("hunger") > 5)
+                {
+                    playerData.AlterValue("hunger", -5);
+                    enemyData.SetHealth(playerData.GetValue("attack") * 2);
+                    Attack();
+                    playerTurn = false;
+                    enemySelect.SetActive(false);
+                }
                 break;
             case ACTION.HEAL:
+                playerData.AlterValue("health", 10);
+                playerTurn = false;
                 break;
             case ACTION.NONE:
                 break;

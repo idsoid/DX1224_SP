@@ -43,6 +43,10 @@ public class PlayerInfo : ScriptableObject
 
             case "hunger":
                 hunger += value;
+                if(hunger < 0)
+                {
+                    hunger = 0;
+                }
                 break;
 
             case "stamina":
