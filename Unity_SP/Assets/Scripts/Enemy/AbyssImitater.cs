@@ -202,7 +202,7 @@ public class AbyssImitater : MonoBehaviour
                     attackTime = 5.0f;
                     currentState = State.FREEZE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f)
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 2.0f && !enemyData.GetDead())
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
