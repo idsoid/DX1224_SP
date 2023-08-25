@@ -28,6 +28,7 @@ public class AbyssCrawler : MonoBehaviour
     private float nextWaypointDistance = 1f;
     private Transform scaryAlert;
     private float rezTime;
+    private bool inSight;
 
     public bool lightOn = false;
     public bool isDead = false;
@@ -88,6 +89,7 @@ public class AbyssCrawler : MonoBehaviour
         Physics2D.IgnoreLayerCollision(2, 9);
         Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), mapCol.GetComponent<Collider2D>());
         rezTime = 0.0f;
+        inSight = false;
         if (enemyData.GetSprite() == null)
         {
             enemyData.Init(50, 5, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
@@ -96,8 +98,6 @@ public class AbyssCrawler : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(rezTime);
-        Debug.Log(enemyData.GetHealth());
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -170,10 +170,12 @@ public class AbyssCrawler : MonoBehaviour
         if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
+            inSight = false;
         }
         else
         {
             Debug.DrawLine(transform.position, player.transform.position, Color.green);
+            inSight = true;
         }
 
         switch (currentState)
@@ -206,7 +208,7 @@ public class AbyssCrawler : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (Vector3.Distance(player.transform.position, transform.position) <= 4.0f && hit.collider.gameObject.CompareTag("Player"))
+                else if (Vector3.Distance(player.transform.position, transform.position) <= 4.0f && inSight)
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;

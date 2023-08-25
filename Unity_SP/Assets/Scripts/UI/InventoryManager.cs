@@ -113,7 +113,10 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < Items.Count; i++)
         {
-            Destroy(InventoryItems[i].gameObject);
+            if (InventoryItems[i] != null)
+            {
+                Destroy(InventoryItems[i].gameObject);
+            }
         }
         //InventoryItems = null;
     }

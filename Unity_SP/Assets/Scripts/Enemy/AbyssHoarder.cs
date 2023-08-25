@@ -25,6 +25,7 @@ public class AbyssHoarder : MonoBehaviour
     private float speed = 200f;
     private float nextWaypointDistance = 1f;
     private float rezTime;
+    private bool inSight;
 
     public bool isDead = false;
 
@@ -70,10 +71,12 @@ public class AbyssHoarder : MonoBehaviour
         {
             enemyData.Init(150, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
+        inSight = false;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(rezTime);
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -143,10 +146,12 @@ public class AbyssHoarder : MonoBehaviour
         if (hit.collider != null && !hit.collider.gameObject.CompareTag("Player"))
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
+            inSight = false;
         }
         else
         {
             Debug.DrawLine(transform.position, player.transform.position, Color.green);
+            inSight = true;
         }
 
         switch (currentState)
@@ -178,7 +183,7 @@ public class AbyssHoarder : MonoBehaviour
                     totalTime = 0.0f;
                     currentState = State.IDLE;
                 }
-                else if (player.GetComponent<PlayerController>().lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f && hit.collider.gameObject.CompareTag("Player"))
+                else if (player.GetComponent<PlayerController>().lightOn && Vector3.Distance(player.transform.position, transform.position) <= 20.0f && inSight)
                 {
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = 0f;
