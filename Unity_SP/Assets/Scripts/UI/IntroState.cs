@@ -38,7 +38,8 @@ public class IntroState : MonoBehaviour
 
     public void StartScene()
     {
-        playerData.Init();
-        SceneManager.LoadScene("DemoScene");
+        playerData.NewGame();
+        //playerData.Init();
+        //SceneManager.LoadScene("DemoScene");
     }
 }

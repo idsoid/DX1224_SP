@@ -27,6 +27,11 @@ public class PlayerData : ScriptableObject
     public bool ReadyLoad = false;
     public bool canMove = true;
 
+    public void NewGame()
+    {
+        Init();
+        SceneManager.LoadScene("DemoScene");
+    }
     public void Init()
     {
         equippedWeapon = equippedCharm = null;
