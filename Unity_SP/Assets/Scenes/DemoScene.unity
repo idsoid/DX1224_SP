@@ -824,6 +824,10 @@ PrefabInstance:
       value: sfxHandler
       objectReference: {fileID: 0}
     - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
+      propertyPath: frost
+      value: 
+      objectReference: {fileID: 8300000, guid: fb23f7992f6a3a147bb56a37a0372e5f, type: 3}
+    - target: {fileID: 8815386744125544498, guid: d9446232084970f40a22c81ecebacc19, type: 3}
       propertyPath: exitDoorOpen
       value: 
       objectReference: {fileID: 8300000, guid: e3e152dfd5dad7d4d95d651cdd3d5b62, type: 3}
@@ -39652,6 +39656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ccd7d577db532418948d6aa16e10db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 544936313}
   healthBar: {fileID: 1466672402}
   staminaBar: {fileID: 389622213}
   hungerBar: {fileID: 790864671}
@@ -83940,6 +83945,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5945832209217094368, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
+      propertyPath: sfxHandler
+      value: 
+      objectReference: {fileID: 544936313}
+    - target: {fileID: 5945832209217094368, guid: 42a5d699a9d554b4b83626273e82b0f4, type: 3}
       propertyPath: audioHandler
       value: 
       objectReference: {fileID: 544936313}
@@ -86220,6 +86229,10 @@ PrefabInstance:
       propertyPath: playerData
       value: 
       objectReference: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
+    - target: {fileID: 1385675839353654039, guid: 6c56e93fae48ef444a7fcaef6c88f06e, type: 3}
+      propertyPath: sfxHandler
+      value: 
+      objectReference: {fileID: 544936313}
     - target: {fileID: 1385675839353654039, guid: 6c56e93fae48ef444a7fcaef6c88f06e, type: 3}
       propertyPath: yellowLock
       value: 
