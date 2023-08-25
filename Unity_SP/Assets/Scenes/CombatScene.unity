@@ -2504,6 +2504,7 @@ MonoBehaviour:
   eventsys: {fileID: 903350077}
   enemySprite: {fileID: 720798207}
   attack: {fileID: 8271818340874494621}
+  enemyText: {fileID: 1038125204}
   actionSelect: {fileID: 914349105}
   enemySelect: {fileID: 1811680175}
   sceneName: DemoScene
