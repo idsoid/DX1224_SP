@@ -9,6 +9,7 @@ public class InventoryItemController : MonoBehaviour
     [SerializeField] private ItemData item;
     [SerializeField] private GameObject equippedIcon;
     [SerializeField] private GameObject itemCountDisplay;
+    [SerializeField] private AudioHandler sfxHandler;
 
     public Button RemoveButton;
 
@@ -30,6 +31,7 @@ public class InventoryItemController : MonoBehaviour
         if (item.GetEquipped() != equippedIcon.activeSelf)
         {
             equippedIcon.SetActive(item.GetEquipped());
+            sfxHandler.playAudio("equip");
         }
 
         // Wood fix
@@ -73,5 +75,10 @@ public class InventoryItemController : MonoBehaviour
         {
             itemCountDisplay.SetActive(false);
         }
+    }
+
+    public void SetAudioHandler(AudioHandler newAudioHandler)
+    {
+        sfxHandler = newAudioHandler;
     }
 }

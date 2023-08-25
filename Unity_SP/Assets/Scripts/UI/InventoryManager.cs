@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    [SerializeField] private AudioHandler sfxHandler;
+
     public static InventoryManager Instance;
     public List<ItemData> Items;
 
@@ -79,6 +81,7 @@ public class InventoryManager : MonoBehaviour
             GameObject obj = Instantiate(InventoryItem, ItemContent);
             obj.GetComponentInChildren<Image>().sprite = Item.itemSprite;
             obj.GetComponentInChildren<TextMeshProUGUI>().text = Item.itemName;
+            obj.GetComponent<InventoryItemController>().SetAudioHandler(sfxHandler);
             var removeButton = obj.GetComponentInChildren<Button>();
 
             if (EnableRemove.isOn)
