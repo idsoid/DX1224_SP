@@ -29,8 +29,9 @@ public class IntroState : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            playerData.NewGame();
             ar.SetBool("boom", true);
             
         }
@@ -38,7 +39,6 @@ public class IntroState : MonoBehaviour
 
     public void StartScene()
     {
-        playerData.NewGame();
         //playerData.Init();
         //SceneManager.LoadScene("DemoScene");
     }

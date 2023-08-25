@@ -14,7 +14,8 @@ public class PlayerData : ScriptableObject
     [SerializeField]
     private List<ItemData> itemsList;
 
-    private playerData _playerData;
+    [SerializeField]
+    private PlayerInfo _playerData;
 
     public Vector3 temppos;
     public float temphp;
@@ -29,7 +30,6 @@ public class PlayerData : ScriptableObject
 
     public void NewGame()
     {
-        Init();
         SceneManager.LoadScene("DemoScene");
     }
     public void Init()
@@ -37,21 +37,7 @@ public class PlayerData : ScriptableObject
         equippedWeapon = equippedCharm = null;
         isCold = false;
         safe = false;
-        _playerData.health = 100f;
-        _playerData.attack = 25f;
-        _playerData.speed = 1f;
-        _playerData.stamina = 80f;
-        _playerData.temperature = 100f;
-        _playerData.hunger = 50f;
-        _playerData.isAlive = true;
-        _playerData.tempDecreaseMultiplier = 2f;
-        _playerData.hungerDecreaseMultiplier = 0.1f;
-        _playerData.redUnlocked = _playerData.yellowUnlocked = _playerData.blueUnlocked = false;
-        _playerData.maxHealth = 100f;
-        _playerData.maxStamina = 80f;
-        _playerData.maxTemperature = 100f;
-        _playerData.maxHunger = 100f;
-        _playerData.inventory.Clear();
+        _playerData.Init();
         inventory.Clear();
         worldState.altered = false;
         canMove = true;
@@ -66,167 +52,45 @@ public class PlayerData : ScriptableObject
 
     public void AlterValue(string x, float value)
     {
-        switch(x)
+        _playerData.AlterValue(x, value);
+        if (x == "string")
         {
-            case "health":
-                _playerData.health += value;
-                if(_playerData.health <= 0)
-                {
-                    _playerData.isAlive = false;
-                    loadOldPos = false;
-                    SceneManager.LoadScene("LoseScene");
+            if (_playerData.GetValue("health") <= 0)
+            {
+                _playerData.isAlive = false;
+                loadOldPos = false;
+                SceneManager.LoadScene("LoseScene");
 
-                }
-                else if (_playerData.health > 100)
-                {
-                    _playerData.health = 100;
-                }
-                break;
-
-            case "attack":
-                _playerData.attack += value;
-                break;
-
-            case "hunger":
-                _playerData.hunger += value;
-                break;
-
-            case "stamina":
-                _playerData.stamina += value;
-                break;
-
-            case "temperature":
-                _playerData.temperature += value;
-                if (_playerData.temperature > 100)
-                {
-                    _playerData.temperature = 100;
-                }
-                else if (_playerData.temperature < 0)
-                {
-                    _playerData.temperature = 0;
-                }
-
-                break;
-            case "speed":
-                _playerData.speed += value;
-                break;
-
-            case "tempDecreaseMultiplier":
-                _playerData.tempDecreaseMultiplier += value;
-                break;
-            case "hungerDecreaseMultiplier":
-                _playerData.hungerDecreaseMultiplier += value;
-                break;
-            
-            default:
-                break;
+            }
+            else if (_playerData.GetValue("health") > 100)
+            {
+                _playerData.SetValue("health",100);
+            }
         }
     }
 
     public void SetValue(string x, float value)
     {
-        switch (x)
-        {
-            case "health":
-                _playerData.health = value;
-                break;
-            case "attack":
-                _playerData.attack = value;
-                break;
-            case "hunger":
-                _playerData.hunger = value;
-                break;
-            case "stamina":
-                _playerData.stamina = value;
-                break;
-            case "temperature":
-                _playerData.temperature = value;
-                break;
-            case "speed":
-                _playerData.speed = value;
-                break;
-            case "tempDecreaseMultiplier":
-                _playerData.tempDecreaseMultiplier = value;
-                break;
-            case "hungerDecreaseMultiplier":
-                _playerData.hungerDecreaseMultiplier = value;
-                break;
-            default:
-                break;
-        }
+        _playerData.SetValue(x, value);
     }
     public float GetValue(string x)
     {
-        switch (x)
-        {
-            case "health":
-                return _playerData.health;
-            case "attack":
-                return _playerData.attack;
-            case "hunger":
-                return _playerData.hunger;
-            case "stamina":
-                return _playerData.stamina;
-            case "temperature":
-                return _playerData.temperature;
-            case "speed":
-                return _playerData.speed;
-            case "tempDecreaseMultiplier":
-                return _playerData.tempDecreaseMultiplier;
-            case "hungerDecreaseMultiplier":
-                return _playerData.hungerDecreaseMultiplier;
-            case "maxHealth":
-                return _playerData.maxHealth;
-            case "maxStamina":
-                return _playerData.maxStamina;
-            case "maxTemperature":
-                return _playerData.maxTemperature;
-            case "maxHunger":
-                return _playerData.maxHunger;
-            default:
-                return -1;
-        }
-    }
-
-    public string PrintSelf()
-    {
-        return _playerData.health + "\n" + _playerData.stamina + "\n" + _playerData.temperature + "\n" + _playerData.hunger + "\n" + _playerData.attack + "\n" + _playerData.speed;
+       return _playerData.GetValue(x);
     }
 
     public void Unlock(string col)
     {
-        switch(col)
-        {
-            case "red":
-                _playerData.redUnlocked = true;
-                break;
-            case "yellow":
-                _playerData.yellowUnlocked = true;
-                break;
-            case "blue":
-                _playerData.blueUnlocked = true;
-                break;
-        }
+        _playerData.Unlock(col);
     }
 
     public bool GetUnlocked(string col)
     {
-        switch(col)
-        {
-            case "red":
-                return _playerData.redUnlocked;
-            case "yellow":
-                return _playerData.yellowUnlocked;
-            case "blue":
-                return _playerData.blueUnlocked;
-            default:
-                return false;
-        }
+        return _playerData.GetUnlocked(col);
     }
 
     public bool CheckUnlocked()
     {
-        return _playerData.redUnlocked && _playerData.blueUnlocked && _playerData.yellowUnlocked;
+        return _playerData.CheckUnlocked();
     }
 
 
@@ -266,29 +130,29 @@ public class PlayerData : ScriptableObject
     
     public List<int> GetInventory()
     {
-        return _playerData.inventory;
+        return _playerData.GetInventory();
     }
 }
 
-[System.Serializable]
-public class playerData
-{
-    public float health;
-    public float stamina;
-    public float temperature;
-    public float hunger;
-    public float attack;
-    public float speed;
-    public bool isAlive;
-    public float tempDecreaseMultiplier;
-    public float hungerDecreaseMultiplier;
-    //public List<ItemData> inventory;
-    public List<int> inventory;
-    public float maxHealth, maxStamina, maxTemperature, maxHunger;
+//[System.Serializable]
+//public class playerinfo
+//{
+//    public float health;
+//    public float stamina;
+//    public float temperature;
+//    public float hunger;
+//    public float attack;
+//    public float speed;
+//    public bool isAlive;
+//    public float tempDecreaseMultiplier;
+//    public float hungerDecreaseMultiplier;
+//    //public List<ItemData> inventory;
+//    public List<int> inventory;
+//    public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
-    public bool redUnlocked, blueUnlocked, yellowUnlocked;
+//    public bool redUnlocked, blueUnlocked, yellowUnlocked;
 
-    public List<bool> pickeds;
+//    public List<bool> pickeds;
 
-    public List<bool> locksOpened;
-}
+//    public List<bool> locksOpened;
+//}

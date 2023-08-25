@@ -28,6 +28,6 @@ public class DebuggerText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        debugtext.text = playerData.PrintSelf();
+        //debugtext.text = playerData.PrintSelf();
     }
 }

@@ -47,6 +47,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     AudioHandler audioHandler;
 
+    private void Awake()
+    {
+        if (playerData.ReadyLoad)
+        {
+            playerData.Load();
+
+        }
+        else
+        {
+            playerData.Init();
+        }
+    }
     void OnEnable()
     {
         hand = HAND.FLASHLIGHT;
@@ -61,19 +73,12 @@ public class PlayerController : MonoBehaviour
 
         
 
-        if(playerData.ReadyLoad)
-        {
-            playerData.Load();
-            
-        }
-        else
-        {
-            playerData.Init();
-        }
+        
     }
 
     private void Start()
     {
+        
         if (playerData.loadOldPos)
         {
             transform.position = playerData.temppos;
@@ -121,8 +126,8 @@ public class PlayerController : MonoBehaviour
     #region
     private void HandleInputMovement()
     {
-        if (playerData.canMove)
-        {
+        //if (playerData.canMove)
+        //{
             mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
             hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
             vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
@@ -147,7 +152,7 @@ public class PlayerController : MonoBehaviour
             }
 
             rb.velocity = new Vector2(hInput, vInput);
-        }
+        //}
     }
 
     private void HandleTemperatureChange()
