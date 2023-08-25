@@ -95,7 +95,7 @@ public class AbyssKeeper : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(150, 30, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
+            enemyData.Init(150, 10, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
         }
     }
     // Update is called once per frame
@@ -139,7 +139,7 @@ public class AbyssKeeper : MonoBehaviour
                     rezTime = 0.0f;
                     enemyData.SetDead(false);
                     isDead = false;
-                    enemyData.ResetHealth(75);
+                    enemyData.ResetHealth(150);
                 }
             }
         }

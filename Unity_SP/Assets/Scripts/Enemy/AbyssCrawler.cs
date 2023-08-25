@@ -90,12 +90,14 @@ public class AbyssCrawler : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(100, 10, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
+            enemyData.Init(100, 5, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
         }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(rezTime);
+        Debug.Log(enemyData.GetHealth());
         FSM();
 
         if (path == null || currentWaypoint >= path.vectorPath.Count)
@@ -125,7 +127,7 @@ public class AbyssCrawler : MonoBehaviour
                 rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
-                enemyData.ResetHealth(50);
+                enemyData.ResetHealth(100);
             }
         }
 
@@ -239,7 +241,7 @@ public class AbyssCrawler : MonoBehaviour
                 break;
             case State.FLEE:
                 target = scaryAlert;
-                if (Vector3.Distance(target.transform.position, transform.position) <= 0.5f && !lightOn)
+                if (Vector3.Distance(target.transform.position, transform.position) <= 2.0f && !lightOn)
                 {
                     speed /= 5;
                     totalTime = 0.0f;

@@ -98,7 +98,7 @@ public class AbyssImitater : MonoBehaviour
         rezTime = 0.0f;
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(80, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Imitater", "IMITATER");
+            enemyData.Init(80, 8, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Imitater", "IMITATER");
         }
     }
     // Update is called once per frame
@@ -143,7 +143,7 @@ public class AbyssImitater : MonoBehaviour
                 rezTime = 0.0f;
                 enemyData.SetDead(false);
                 isDead = false;
-                enemyData.ResetHealth(40);
+                enemyData.ResetHealth(80);
             }
         }
 
