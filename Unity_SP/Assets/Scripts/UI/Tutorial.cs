@@ -69,6 +69,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
+            playerData.Save();
             Destroy(gameObject);
         }
     }

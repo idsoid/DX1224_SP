@@ -20,8 +20,11 @@ public class CombatHUD : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
-        hungerBar.fillAmount = playerData.GetValue("hunger") / playerData.GetValue("maxHunger");
-        enemyBar.fillAmount = combatData.enemyData.GetHealth() / enemyMaxHealth;
+        if (healthBar.gameObject != null)
+            healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
+        if (hungerBar.gameObject != null)
+            hungerBar.fillAmount = playerData.GetValue("hunger") / playerData.GetValue("maxHunger");
+        if(enemyBar.gameObject != null)
+            enemyBar.fillAmount = combatData.enemyData.GetHealth() / enemyMaxHealth;
     }
 }
