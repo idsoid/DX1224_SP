@@ -53,18 +53,18 @@ public class PlayerData : ScriptableObject
     public void AlterValue(string x, float value)
     {
         _playerData.AlterValue(x, value);
-        if (x == "string")
+        if (x == "health")
         {
-            if (_playerData.GetValue("health") <= 0)
+            if (_playerData.GetValue(x) <= 0)
             {
                 _playerData.isAlive = false;
                 loadOldPos = false;
                 SceneManager.LoadScene("LoseScene");
 
             }
-            else if (_playerData.GetValue("health") > 100)
+            else if (_playerData.GetValue(x) > 100)
             {
-                _playerData.SetValue("health",100);
+                _playerData.SetValue(x,100);
             }
         }
     }

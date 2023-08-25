@@ -21,7 +21,6 @@ public class Fireplace : MonoBehaviour
         burnTime = 0;
         playerInteract = false;
     }
-
     private void Update()
     {
         if (lit)

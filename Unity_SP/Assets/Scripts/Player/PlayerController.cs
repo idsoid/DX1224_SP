@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     float mvmt;
 
     [SerializeField]
+    private Fireplace fp;
+
+    [SerializeField]
     float speedmult = 1f;
 
     private enum HAND
@@ -355,9 +358,8 @@ public class PlayerController : MonoBehaviour
         {
             if(hand == HAND.CANDLE && candleBurnTime > 0f)
             {
-                candle.SetActive(true);
+                candleBurnTime = 180f;
             }
-            candleBurnTime = 180f;
         }
     }
 
