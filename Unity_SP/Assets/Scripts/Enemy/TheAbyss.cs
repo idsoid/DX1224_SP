@@ -32,7 +32,7 @@ public class TheAbyss : MonoBehaviour
     {
         if (enemyData.GetSprite() == null)
         {
-            enemyData.Init(400, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "The Abyss", "BOSS");
+            enemyData.Init(400, 20, enemySprite.GetComponent<SpriteRenderer>().sprite, "The Abyss", "BOSS");
         }
         if (enemyData.GetDead())
         {
