@@ -165,8 +165,8 @@ MonoBehaviour:
   - {x: 1.0697175, y: 1.8757559, z: 0}
   - {x: -1.0095031, y: 1.872077, z: 0}
   m_ShapePathHash: 1808634779
-  m_Mesh: {fileID: 827791238}
-  m_InstanceId: 167708
+  m_Mesh: {fileID: 811529879}
+  m_InstanceId: 50910
   m_LocalBounds:
     m_Center: {x: 0.3542714, y: 2.1955423, z: 0}
     m_Extent: {x: 4.1505337, y: 0.32346523, z: 0}
@@ -730,9 +730,12 @@ MonoBehaviour:
   dialogueLines:
   - you're free...
   - or are you?
-  playerData: {fileID: 0}
+  playerData: {fileID: 11400000, guid: c8fb91015490b3b40b33149d0412adec, type: 2}
   text: {fileID: 520158435}
---- !u!43 &827791238
+  autoScroll: 1
+  scrollDelay: 5
+  deleteOnFinish: 0
+--- !u!43 &811529879
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

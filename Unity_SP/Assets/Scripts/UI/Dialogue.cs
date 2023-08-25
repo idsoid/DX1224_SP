@@ -14,6 +14,15 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private TMP_Text text;
 
+    [SerializeField]
+    private bool autoScroll;
+
+    [SerializeField]
+    private float scrollDelay;
+
+    [SerializeField]
+    private bool deleteOnFinish;
+
     //[SerializeField]
     //private GameObject textBox;
 
@@ -50,9 +59,20 @@ public class Dialogue : MonoBehaviour
         //    textBox.SetActive(true);
         //}
 
-        if (Input.GetKeyDown(KeyCode.E) && bFinishedLine)
+        if (!autoScroll)
         {
-            Next();
+            if (Input.GetKeyDown(KeyCode.E) && bFinishedLine)
+            {
+                Next();
+            }
+        }
+        else
+        {
+            fTime_elapsed += Time.deltaTime;
+            if(fTime_elapsed > scrollDelay)
+            {
+                Next();
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
@@ -86,14 +106,20 @@ public class Dialogue : MonoBehaviour
     private void Next()
     {
         current++;
-        if (current == dialogueLines.Count)
+        if (current >= dialogueLines.Count)
         {
-            playerData.canMove = true;
-            Destroy(gameObject);
+            if (deleteOnFinish)
+            {
+                playerData.canMove = true;
+                Destroy(gameObject);
+            }
         }
-        strIndex = 0;
-        line = "";
-        bFinishedLine = false;
+        else
+        {
+            strIndex = 0;
+            line = "";
+            bFinishedLine = false;
+        }
     }
 
     public void SetSpeed(float sec)
