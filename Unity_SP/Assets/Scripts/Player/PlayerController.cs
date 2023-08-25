@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private GameObject candle;
 
     public bool lightOn;
-    public float candleBurnTime;
+    //public float candleBurnTime;
 
     float hInput, vInput;
     string idleAnim;
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         hand = HAND.FLASHLIGHT;
-        candleBurnTime = 0f;
+        //candleBurnTime = 0f;
         lightOn = true;
         isHungry = false;
         canRun = true;
@@ -173,14 +173,14 @@ public class PlayerController : MonoBehaviour
                 float increment = -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier");
 
                 //if candle is being used, decrease rate of temp
-                if (hand == HAND.CANDLE && lightOn && candleBurnTime > 0f)
+                if (hand == HAND.CANDLE && lightOn && playerData.GetValue("candleBurnTime") > 0f)
                 {
-                    candleBurnTime -= Time.deltaTime;
-                    if(candleBurnTime <= 0f)
+                    playerData.AlterValue("candleBurnTime",-Time.deltaTime);
+                    if(playerData.GetValue("candleBurnTime") <= 0f)
                     {
                         candle.SetActive(false);
                     }
-                    increment *= 0.4f;
+                    increment *= 0.3f;
                 }
 
                 playerData.AlterValue("temperature", increment);
@@ -315,9 +315,8 @@ public class PlayerController : MonoBehaviour
                 case HAND.FLASHLIGHT:
                     hand = HAND.CANDLE;
                     flashlight.SetActive(false);
-                    if (lightOn && candleBurnTime > 0f)
+                    if (lightOn && playerData.GetValue("candleBurnTime") > 0f)
                     {
-                        
                         candle.SetActive(true);
                     }
                     break;
@@ -356,9 +355,13 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Fireplace"))
         {
-            if(hand == HAND.CANDLE && candleBurnTime > 0f)
+            if(fp.GetLit())
             {
-                candleBurnTime = 180f;
+                playerData.SetValue("candleBurnTime", 180f);
+                if (lightOn && hand == HAND.CANDLE)
+                {
+                    candle.SetActive(true);
+                }
             }
         }
     }

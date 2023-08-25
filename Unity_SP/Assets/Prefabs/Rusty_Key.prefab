@@ -81,7 +81,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.21, y: 0.21}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0933e157b6c8f6f47a7e79ce383bc6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxHandler: {fileID: 0}
   item: {fileID: 11400000, guid: 921f19e1505bc9c4580f0b44d9e8d41a, type: 2}
   dropIndex: 8
   worldState: {fileID: 0}

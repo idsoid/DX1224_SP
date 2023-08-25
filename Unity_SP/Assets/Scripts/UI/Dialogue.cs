@@ -23,6 +23,9 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private bool deleteOnFinish;
 
+    [SerializeField]
+    private bool DisableOnFinish;
+
     //[SerializeField]
     //private GameObject textBox;
 
@@ -36,7 +39,13 @@ public class Dialogue : MonoBehaviour
     private float fSpeed;
 
     private float fTime_elapsed;
-    void Start()
+    //void Start()
+    //{
+        
+        
+    //}
+
+    private void OnEnable()
     {
         line = "";
         current = 0;
@@ -44,11 +53,6 @@ public class Dialogue : MonoBehaviour
         bFinishedLine = false;
         fTime_elapsed = 0f;
         SetSpeed(.05f);
-        
-    }
-
-    private void OnEnable()
-    {
         playerData.canMove = false;
     }
     // Update is called once per frame
@@ -112,6 +116,11 @@ public class Dialogue : MonoBehaviour
             {
                 playerData.canMove = true;
                 Destroy(gameObject);
+            }
+            else if (DisableOnFinish)
+            {
+                playerData.canMove = true;
+                gameObject.SetActive(false);
             }
         }
         else

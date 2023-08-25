@@ -11,6 +11,9 @@ public class LockedDoor : MonoBehaviour
     private GameObject dialogueText;
 
     [SerializeField]
+    private GameObject noKeyText;
+
+    [SerializeField]
     private WorldState worldState;
 
     [SerializeField]
@@ -38,6 +41,13 @@ public class LockedDoor : MonoBehaviour
                     sfxHandler.playAudio("unlockNoise");
                     dialogueText.SetActive(true);
                     Destroy(gameObject);
+                }
+                else
+                {
+                    if(!noKeyText.activeSelf)
+                    {
+                        noKeyText.SetActive(true);
+                    }
                 }
             }
         }

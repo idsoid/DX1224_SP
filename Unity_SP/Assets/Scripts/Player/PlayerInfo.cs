@@ -15,6 +15,7 @@ public class PlayerInfo : ScriptableObject
     public bool isAlive;
     private float tempDecreaseMultiplier;
     private float hungerDecreaseMultiplier;
+    private float candleBurnTime;
     
     public List<int> inventory;
     private float maxHealth, maxStamina, maxTemperature, maxHunger;
@@ -68,6 +69,10 @@ public class PlayerInfo : ScriptableObject
                 hungerDecreaseMultiplier += value;
                 break;
 
+            case "candleBurnTime":
+                candleBurnTime += value;
+                break;
+
             default:
                 break;
         }
@@ -101,6 +106,9 @@ public class PlayerInfo : ScriptableObject
             case "hungerDecreaseMultiplier":
                 hungerDecreaseMultiplier = value;
                 break;
+            case "candleBurnTime":
+                candleBurnTime = value;
+                break;
             default:
                 break;
         }
@@ -133,6 +141,8 @@ public class PlayerInfo : ScriptableObject
                 return maxTemperature;
             case "maxHunger":
                 return maxHunger;
+            case "candleBurnTime":
+                return candleBurnTime;
             default:
                 return -1;
         }
@@ -174,6 +184,7 @@ public class PlayerInfo : ScriptableObject
         maxStamina = 80f;
         maxTemperature = 100f;
         maxHunger = 100f;
+        candleBurnTime = 0f;
         inventory.Clear();
     }
 

@@ -20,6 +20,9 @@ public class UpdateHUD : MonoBehaviour
     public GameObject frost3;
     public GameObject frost4;
 
+    [SerializeField]
+    public Image candle;
+
     public ParticleSystem snowflake;
 
     public Image vignette;
@@ -131,6 +134,10 @@ public class UpdateHUD : MonoBehaviour
         healthBar.fillAmount = playerData.GetValue("health") / playerData.GetValue("maxHealth");
         staminaBar.fillAmount = Mathf.Lerp(staminaBar.fillAmount, playerData.GetValue("stamina") / playerData.GetValue("maxStamina"), lerpSpeed);
         hungerBar.fillAmount = Mathf.Lerp(hungerBar.fillAmount, playerData.GetValue("hunger") / playerData.GetValue("maxHunger"), lerpSpeed);
+
+        UnityEngine.Color color = candle.color;
+        color.a = playerData.GetValue("candleBurnTime") / 180f;
+        candle.color = color;
         //frostBar.fillAmount = Mathf.Lerp(frostBar.fillAmount, (playerData.GetValue("maxTemperature") - playerData.GetValue("temperature")) / playerData.GetValue("maxTemperature"), lerpSpeed);
     }
 }
