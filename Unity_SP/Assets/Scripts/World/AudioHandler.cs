@@ -43,6 +43,16 @@ public class AudioHandler : MonoBehaviour
             case "inventory":
                 sfxAudioSrc.PlayOneShot(inventory);
                 break;
+            case "fireBurning":
+                if (!sfxAudioSrc.isPlaying)
+                    sfxAudioSrc.PlayOneShot(fireBurning);
+                break;
+            case "fireExtinguish":
+                sfxAudioSrc.PlayOneShot(fireExtinguish);
+                break;
+            case "fireStoked":
+                sfxAudioSrc.PlayOneShot(fireStoked);
+                break;
             case "pickup":
                 sfxAudioSrc.PlayOneShot(pickup);
                 break;
