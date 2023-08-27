@@ -24,15 +24,16 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        if(playerData.tutorialFinished)
-        {
-            Destroy(gameObject);
-        }
+        
     }
     // Update is called once per frame
     void Update()
     {
-        if (wood != null)
+        if (playerData.GetTutorialStatus())
+        {
+            Destroy(gameObject);
+        }
+        else if (wood != null)
         {
             Vector3 temp = wood.transform.position;
             temp.y += 0.5f;
@@ -75,9 +76,9 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
-            playerData.tutorialFinished = true;
+            playerData.SetTutorialStatus(true);
             playerData.Save();
-            Destroy(gameObject);
         }
+        Debug.Log(playerData.GetTutorialStatus());
     }
 }

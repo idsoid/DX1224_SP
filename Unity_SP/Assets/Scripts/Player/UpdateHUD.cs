@@ -35,9 +35,21 @@ public class UpdateHUD : MonoBehaviour
 
     public TMP_Text stats;
 
+    private void Update()
+    {
+        if (stats.enabled)
+        {
+            stats.text = "Max Health: " + playerData.GetValue("maxHealth") + "\n Max Stamina: " + playerData.GetValue("maxStamina")
+            + "\n Max Hunger: " + playerData.GetValue("maxHunger") + "\n Attack: " + playerData.GetValue("attack")
+            + "\n Speed: " + playerData.GetValue("speed");
+
+            Debug.Log("stats updating");
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         quintTemp = playerData.GetValue("maxTemperature") / 5;
         if (!playerData.safe)
         {
@@ -52,7 +64,7 @@ public class UpdateHUD : MonoBehaviour
                     frost4.SetActive(true);
                 }
             }
-            else if (playerData.GetValue("temperature") < quintTemp * 2)
+            if (playerData.GetValue("temperature") < quintTemp * 2)
             {
                 if (!frost3.activeSelf)
                 {
@@ -60,7 +72,7 @@ public class UpdateHUD : MonoBehaviour
                     frost3.SetActive(true);
                 }
             }
-            else if (playerData.GetValue("temperature") < quintTemp * 3)
+            if (playerData.GetValue("temperature") < quintTemp * 3)
             {
                 if (!frost2.activeSelf)
                 {
@@ -68,7 +80,7 @@ public class UpdateHUD : MonoBehaviour
                     frost2.SetActive(true);
                 }
             }
-            else if (playerData.GetValue("temperature") < quintTemp * 4)
+            if (playerData.GetValue("temperature") < quintTemp * 4)
             {
                 if (!frost1.activeSelf)
                 {
@@ -79,7 +91,7 @@ public class UpdateHUD : MonoBehaviour
             }
         }
 
-        else if(playerData.safe)
+        else
         {
             if(playerData.GetValue("temperature") > quintTemp)
             {
@@ -115,8 +127,12 @@ public class UpdateHUD : MonoBehaviour
                 if (frost1.activeSelf)
                 {
                     snowflake.gameObject.SetActive(false);
-                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0f);
+                    
                     frost1.SetActive(false);
+                }
+                if(vignette.color.a != 0)
+                {
+                    vignette.color = new UnityEngine.Color(vignette.color.r, vignette.color.g, vignette.color.b, 0f);
                 }
             }
         }
@@ -124,9 +140,7 @@ public class UpdateHUD : MonoBehaviour
 
         SetBars();
 
-        stats.text = "Max Health: " + playerData.GetValue("maxHealth") + "\n Max Stamina: " + playerData.GetValue("maxStamina")
-            + "\n Max Hunger: " + playerData.GetValue("maxHunger") + "\n Attack: " + playerData.GetValue("attack")
-            + "\n Speed: " + playerData.GetValue("speed");
+        
     }
 
     private void SetBars()

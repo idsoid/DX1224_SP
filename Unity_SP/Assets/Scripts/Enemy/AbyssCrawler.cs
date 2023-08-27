@@ -94,6 +94,10 @@ public class AbyssCrawler : MonoBehaviour
         {
             enemyData.Init(50, 5, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Crawler", "CRAWLER");
         }
+        if(enemyData.GetDead())
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()

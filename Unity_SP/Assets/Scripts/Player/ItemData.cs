@@ -165,7 +165,7 @@ public class ItemData : ScriptableObject
             if (!equipped)
             {
                 equipped = true;
-                playerData.AlterValue("speed", 5);
+                playerData.AlterValue("speed", 2);
                 if (playerData.equippedCharm != this && playerData.equippedCharm != null)
                 {
                     playerData.equippedCharm.UseItem();
@@ -175,7 +175,7 @@ public class ItemData : ScriptableObject
             else
             {
                 equipped = false;
-                playerData.AlterValue("speed", -5);
+                playerData.SetValue("speed", 1);
                 playerData.equippedCharm = null;
             }
         }
@@ -203,7 +203,7 @@ public class ItemData : ScriptableObject
             if (!equipped)
             {
                 equipped = true;
-                playerData.AlterValue("tempDecreaseMultiplier", -2.5f);
+                playerData.AlterValue("tempDecreaseMultiplier", -1f);
                 if (playerData.equippedCharm != this && playerData.equippedCharm != null)
                 {
                     playerData.equippedCharm.UseItem();
@@ -213,7 +213,7 @@ public class ItemData : ScriptableObject
             else
             {
                 equipped = false;
-                playerData.AlterValue("tempDecreaseMultiplier", 2.5f);
+                playerData.SetValue("tempDecreaseMultiplier", 2f);
                 playerData.equippedCharm = null;
             }
         }
@@ -222,7 +222,7 @@ public class ItemData : ScriptableObject
             if (!equipped)
             {
                 equipped = true;
-                playerData.AlterValue("hungerDecreaseMultiplier", 0.25f);
+                playerData.AlterValue("hungerDecreaseMultiplier", -0.05f);
                 if (playerData.equippedCharm != this && playerData.equippedCharm != null)
                 {
                     playerData.equippedCharm.UseItem();
@@ -232,7 +232,7 @@ public class ItemData : ScriptableObject
             else
             {
                 equipped = false;
-                playerData.AlterValue("hungerDecreaseMultiplier", -0.25f);
+                playerData.SetValue("hungerDecreaseMultiplier", 0.1f);
                 playerData.equippedCharm = null;
             }
         }
@@ -240,7 +240,7 @@ public class ItemData : ScriptableObject
         {
             if (count > 0)
             {
-                playerData.AlterValue("health", 35);
+                playerData.AlterValue("health", 75);
                 count--;
             }
             else
@@ -250,7 +250,7 @@ public class ItemData : ScriptableObject
         {
             if (count > 0)
             {
-                playerData.AlterValue("hunger", 35);
+                playerData.AlterValue("hunger", 75);
                 count--;
             }
             else

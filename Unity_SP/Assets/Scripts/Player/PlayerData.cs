@@ -26,7 +26,6 @@ public class PlayerData : ScriptableObject
     public ItemData equippedWeapon, equippedCharm;
     public List<ItemData> inventory;
     public bool ReadyLoad = false;
-    public bool tutorialFinished = false;
 
     public void NewGame()
     {
@@ -40,7 +39,6 @@ public class PlayerData : ScriptableObject
         _playerData.Init();
         inventory.Clear();
         worldState.altered = false;
-        tutorialFinished = false;
     }
 
     public void SavePos(Vector3 pos)
@@ -60,11 +58,6 @@ public class PlayerData : ScriptableObject
                 _playerData.isAlive = false;
                 loadOldPos = false;
                 SceneManager.LoadScene("LoseScene");
-
-            }
-            else if (_playerData.GetValue(x) > 100)
-            {
-                _playerData.SetValue(x,100);
             }
         }
     }
@@ -135,5 +128,15 @@ public class PlayerData : ScriptableObject
     public List<int> GetInventory()
     {
         return _playerData.GetInventory();
+    }
+
+    public bool GetTutorialStatus()
+    {
+        return _playerData.GetTutFinished();
+    }
+
+    public void SetTutorialStatus(bool x)
+    {
+        _playerData.SetTutFinished(x);
     }
 }

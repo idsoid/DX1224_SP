@@ -6,35 +6,47 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerInfo : ScriptableObject
 {
-    private float health;
-    private float stamina;
-    private float temperature;
-    private float hunger;
-    private float attack;
-    private float speed;
+    public float health;
+    public float stamina;
+    public float temperature;
+    public float hunger;
+    public float attack;
+    public float speed;
     public bool isAlive;
-    private float tempDecreaseMultiplier;
-    private float hungerDecreaseMultiplier;
-    private float candleBurnTime;
-    private float fireplaceBurnTime;
+    public float tempDecreaseMultiplier;
+    public float hungerDecreaseMultiplier;
+    public float candleBurnTime;
+    public float fireplaceBurnTime;
 
-    private bool hasSaved;
+    public bool hasSaved;
+    public bool tutorialFinished;
     public List<int> inventory;
-    private float maxHealth, maxStamina, maxTemperature, maxHunger;
+    public float maxHealth, maxStamina, maxTemperature, maxHunger;
 
-    private bool redUnlocked, blueUnlocked, yellowUnlocked;
+    public bool redUnlocked, blueUnlocked, yellowUnlocked;
 
     public List<bool> pickeds;
 
     public List<bool> locksOpened;
 
-    
+    public bool GetTutFinished()
+    {
+        return tutorialFinished;
+    }
+    public void SetTutFinished(bool x)
+    {
+        tutorialFinished = x;
+    }
     public void AlterValue(string x, float value)
     {
         switch (x)
         {
             case "health":
                 health += value;
+                if(health > maxHealth)
+                {
+                    health = maxHealth;
+                }
                 break;
 
             case "attack":
@@ -47,10 +59,18 @@ public class PlayerInfo : ScriptableObject
                 {
                     hunger = 0;
                 }
+                else if (hunger > maxHunger)
+                {
+                    hunger = maxHunger;
+                }
                 break;
 
             case "stamina":
                 stamina += value;
+                if(stamina > maxStamina)
+                {
+                    stamina = maxStamina;
+                }
                 break;
 
             case "temperature":
@@ -209,8 +229,10 @@ public class PlayerInfo : ScriptableObject
         maxTemperature = 100f;
         maxHunger = 100f;
         candleBurnTime = 0f;
+        pickeds.Clear();
         inventory.Clear();
         fireplaceBurnTime = 0f;
+        tutorialFinished = false;
     }
 
     public void Unlock(string col)

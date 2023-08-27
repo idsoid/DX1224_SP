@@ -100,6 +100,12 @@ public class AbyssImitater : MonoBehaviour
         {
             enemyData.Init(80, 8, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Imitater", "IMITATER");
         }
+        if (enemyData.GetDead())
+        {
+            mimicSprite.gameObject.SetActive(false);
+            enemySprite.gameObject.SetActive(false);
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()

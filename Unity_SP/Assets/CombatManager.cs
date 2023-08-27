@@ -122,6 +122,7 @@ public class CombatManager : MonoBehaviour
     public void OnHealButtonClick()
     {
         action = ACTION.HEAL;
+        TakeAction();
     }
 
     public void OnBackButtonClick()
@@ -136,7 +137,7 @@ public class CombatManager : MonoBehaviour
         switch(action)
         {
             case ACTION.ATTACK:
-                enemyData.SetHealth(playerData.GetValue("attack"));
+                //enemyData.SetHealth(playerData.GetValue("attack"));
                 Attack();
                 playerTurn = false;
                 enemySelect.SetActive(false);
@@ -145,7 +146,7 @@ public class CombatManager : MonoBehaviour
                 if (playerData.GetValue("hunger") > 5)
                 {
                     playerData.AlterValue("hunger", -5);
-                    enemyData.SetHealth(playerData.GetValue("attack") * 2);
+                    //enemyData.SetHealth(playerData.GetValue("attack") * 2);
                     Attack();
                     playerTurn = false;
                     enemySelect.SetActive(false);
@@ -154,12 +155,29 @@ public class CombatManager : MonoBehaviour
             case ACTION.HEAL:
                 playerData.AlterValue("health", 10);
                 playerTurn = false;
+                actionSelect.SetActive(false);
                 break;
             case ACTION.NONE:
                 break;
         }
 
         fTime_elapsed = 0f;
+    }
+
+    public void DamageEnemy()
+    {
+        switch (action)
+        {
+            case ACTION.ATTACK:
+                enemyData.SetHealth(playerData.GetValue("attack"));
+                break;
+            case ACTION.SKILL:
+                enemyData.SetHealth(playerData.GetValue("attack") * 2);
+                break;
+            default:
+                break;
+        }
+        
     }
 
     public void CheckDead()

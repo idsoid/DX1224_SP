@@ -72,6 +72,10 @@ public class AbyssHoarder : MonoBehaviour
             enemyData.Init(150, 15, enemySprite.GetComponent<SpriteRenderer>().sprite, "Abyss Hoarder", "HOARDER");
         }
         inSight = false;
+        if (enemyData.GetDead())
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()

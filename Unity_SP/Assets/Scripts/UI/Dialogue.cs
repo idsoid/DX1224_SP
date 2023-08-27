@@ -91,7 +91,6 @@ public class Dialogue : MonoBehaviour
             {
                 line += dialogueLines[current][strIndex];
                 text.text = line;
-                Debug.Log(line);
                 if (line == dialogueLines[current])
                 {
                     bFinishedLine = true;

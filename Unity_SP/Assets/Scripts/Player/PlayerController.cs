@@ -281,8 +281,9 @@ public class PlayerController : MonoBehaviour
 
     private void PrintSelf()
     {
-        //Debug.Log("hInput: " + hInput);
-        //Debug.Log("vInput: " + vInput);
+        //Debug.Log("Temperature: " + playerData.GetValue("temperature") 
+        //    + ", TDM: " + playerData.GetValue("tempDecreaseMultiplier")
+        //    + ", HDM: " + playerData.GetValue("hungerDecreaseMultiplier"));
     }
 
     private void HandleFlashlightToggle()

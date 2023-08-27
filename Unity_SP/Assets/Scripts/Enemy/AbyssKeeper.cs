@@ -97,6 +97,10 @@ public class AbyssKeeper : MonoBehaviour
         {
             enemyData.Init(100, 10, wanderSprite.GetComponent<SpriteRenderer>().sprite, "Abyss Keeper", "KEEPER");
         }
+        if (enemyData.GetDead())
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()

@@ -28,7 +28,6 @@ public class Flashlight : MonoBehaviour
         {
             diff -= 360f;
         }
-        Debug.Log("mouse angle: " + angle + ", angle: " + transform.eulerAngles.z + ", diff" + diff);
         if (diff > 5)
         {
             if (diff > 180)
