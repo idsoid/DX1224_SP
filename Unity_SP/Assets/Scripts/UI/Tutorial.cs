@@ -21,8 +21,14 @@ public class Tutorial : MonoBehaviour
     private Checkpoint checkpoint;
     [SerializeField]
     private TMP_Text text;
-    // Start is called before the first frame update
 
+    private void Start()
+    {
+        if(playerData.tutorialFinished)
+        {
+            Destroy(gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -69,6 +75,7 @@ public class Tutorial : MonoBehaviour
         }
         else
         {
+            playerData.tutorialFinished = true;
             playerData.Save();
             Destroy(gameObject);
         }

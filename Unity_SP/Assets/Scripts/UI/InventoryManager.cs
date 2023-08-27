@@ -124,16 +124,26 @@ public class InventoryManager : MonoBehaviour
     {
         if(EnableRemove.isOn)
         {
+            int index = 0;
             foreach(Transform item in ItemContent)
             {
-                item.Find("RemoveButton").gameObject.SetActive(true);
+                if (Items[index].GetID() > 10)
+                {
+                    item.Find("RemoveButton").gameObject.SetActive(true);
+                }
+                index++;
             }
         }
         else
         {
+            int index = 0;
             foreach (Transform item in ItemContent)
             {
-                item.Find("RemoveButton").gameObject.SetActive(false);
+                if (Items[index].GetID() > 10)
+                {
+                    item.Find("RemoveButton").gameObject.SetActive(false);
+                }
+                index++;
             }
         }
     }

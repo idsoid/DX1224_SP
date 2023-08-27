@@ -7354,7 +7354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -371}
+  m_AnchoredPosition: {x: -121, y: -371}
   m_SizeDelta: {x: 137, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833181606
@@ -7377,7 +7377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press any key
+  m_text: '[Space] New Game'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f28540eb041b02419500c5fdd057dbe, type: 2}
   m_sharedMaterial: {fileID: -5629268008804981341, guid: 7f28540eb041b02419500c5fdd057dbe, type: 2}
@@ -7420,7 +7420,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

@@ -11,6 +11,7 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private GameObject fireLight;
     [SerializeField] private AudioHandler sfxHandler;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameObject candleTip;
 
     private bool lit = false;
     private bool playerInteract = false;
@@ -48,6 +49,11 @@ public class Fireplace : MonoBehaviour
                     var wood = inventoryManager.GetItemByID(52);
                     wood.UseItem();
                     AddFuel();
+                    playerData.SetValue("candleBurnTime", 180f);
+                    if (!playerData.HasPlayerSaved())
+                    {
+                        candleTip.SetActive(true);
+                    }
                 }
             }
         }
@@ -56,8 +62,9 @@ public class Fireplace : MonoBehaviour
     private void ToggleLit(bool x)
     {
         lit = x;
-        fire.SetActive(lit);
-        safeZone.SetActive(lit);
+        fire.SetActive(x);
+        safeZone.SetActive(x);
+        fireLight.SetActive(x);
         if (!x)
         {
             fireplaceAnim.Play("fireplace_unlit");
@@ -67,8 +74,9 @@ public class Fireplace : MonoBehaviour
         else
         {
             fireplaceAnim.Play("fireplace_lit");
+            
         }
-        fireLight.SetActive(lit);
+        
     }
 
     public void AddFuel()

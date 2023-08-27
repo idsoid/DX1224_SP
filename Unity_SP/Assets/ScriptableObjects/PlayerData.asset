@@ -31,14 +31,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9343dd826e0184143866d1a81ce2c527, type: 2}
   - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
   _playerData: {fileID: 11400000, guid: e3fd70b3242d7f1409037d1bf8bcb20e, type: 2}
-  temppos: {x: 125.346054, y: -9.224641, z: 0}
-  temphp: 99.966446
-  temphunger: 28.947025
+  temppos: {x: 123.345345, y: -9.385296, z: 0}
+  temphp: 60
+  temphunger: 11.285528
   loadOldPos: 0
   safe: 0
   isCold: 0
-  equippedWeapon: {fileID: 0}
+  equippedWeapon: {fileID: 11400000, guid: 1ffa1db87b71c1c4a8a438893ca5778e, type: 2}
   equippedCharm: {fileID: 0}
-  inventory: []
-  ReadyLoad: 0
-  canMove: 1
+  inventory:
+  - {fileID: 11400000, guid: 1d708ad6160d80a41aea4f9a203569eb, type: 2}
+  - {fileID: 11400000, guid: 1ca662e437bc80646a7b7e35339b74c9, type: 2}
+  - {fileID: 11400000, guid: 921f19e1505bc9c4580f0b44d9e8d41a, type: 2}
+  - {fileID: 11400000, guid: 04965797797c7134e816b8cf29b865b9, type: 2}
+  - {fileID: 11400000, guid: e7e813d8055e0ea44ad1b2ab678dec50, type: 2}
+  - {fileID: 11400000, guid: 3b8b9110b8ea6ba448d6b102f740481a, type: 2}
+  - {fileID: 11400000, guid: 1ffa1db87b71c1c4a8a438893ca5778e, type: 2}
+  - {fileID: 11400000, guid: 527f51043286a544584e75ca2a9332b5, type: 2}
+  ReadyLoad: 1

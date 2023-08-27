@@ -26,6 +26,7 @@ public class PlayerData : ScriptableObject
     public ItemData equippedWeapon, equippedCharm;
     public List<ItemData> inventory;
     public bool ReadyLoad = false;
+    public bool tutorialFinished = false;
 
     public void NewGame()
     {
@@ -39,6 +40,7 @@ public class PlayerData : ScriptableObject
         _playerData.Init();
         inventory.Clear();
         worldState.altered = false;
+        tutorialFinished = false;
     }
 
     public void SavePos(Vector3 pos)

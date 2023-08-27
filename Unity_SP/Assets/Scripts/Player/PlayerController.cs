@@ -128,33 +128,34 @@ public class PlayerController : MonoBehaviour
     #region
     private void HandleInputMovement()
     {
-        //if (playerData.canMove)
-        //{
-            mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
-            hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
-            vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
 
+        mvmt = playerData.GetValue("speed") + (playerData.GetValue("temperature") * 0.01f);
+        hInput = Input.GetAxis("Horizontal") * mvmt * speedmult;
+        vInput = Input.GetAxis("Vertical") * mvmt * speedmult;
 
-            if (canRun)
+        
+        if (canRun)
+        {
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    hInput *= 1.5f;
-                    vInput *= 1.5f;
-                    anim.speed = 0.8f;
-                    isRunning = true;
-                    audioHandler.playAudio("sprint");
-                }
-                else
-                {
-                    isRunning = false;
-                    anim.speed = 0.5f;
-
-                }
+                hInput *= 1.5f;
+                vInput *= 1.5f;
+                anim.speed = 0.8f;
+                isRunning = true;
+                    
             }
+            else
+            {
+                isRunning = false;
+                anim.speed = 0.5f;
 
-            rb.velocity = new Vector2(hInput, vInput);
-        //}
+            }
+        }
+        if (hInput != 0 || vInput != 0)
+        {
+            audioHandler.playAudio("sprint");
+        }
+        rb.velocity = new Vector2(hInput, vInput);
     }
 
     private void HandleTemperatureChange()
@@ -169,23 +170,23 @@ public class PlayerController : MonoBehaviour
             //Decrease temperature until cold
             if (!playerData.isCold)
             {
-                float increment = -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier");
-
-                //if candle is being used, decrease rate of temp
+                //if candle is being used, cant lose temperature
                 if (hand == HAND.CANDLE && lightOn && playerData.GetValue("candleBurnTime") > 0f)
                 {
-                    playerData.AlterValue("candleBurnTime",-Time.deltaTime);
-                    if(playerData.GetValue("candleBurnTime") <= 0f)
+                    playerData.AlterValue("candleBurnTime", -Time.deltaTime);
+                    if (playerData.GetValue("candleBurnTime") <= 0f)
                     {
                         candle.SetActive(false);
                     }
-                    increment *= 0.3f;
                 }
-
-                playerData.AlterValue("temperature", increment);
-                if (playerData.GetValue("temperature") == 0)
+                else
                 {
-                    playerData.isCold = true;
+                    float increment = -Time.deltaTime * playerData.GetValue("tempDecreaseMultiplier");
+                    playerData.AlterValue("temperature", increment);
+                    if (playerData.GetValue("temperature") == 0)
+                    {
+                        playerData.isCold = true;
+                    }
                 }
             }
         }
