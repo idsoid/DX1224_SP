@@ -8,7 +8,7 @@ public class PickUp : MonoBehaviour
 
     public ItemData item;
 
-    public int dropIndex;
+    public int dropIndex = 0;
 
     public WorldState worldState;
 
