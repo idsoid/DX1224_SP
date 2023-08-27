@@ -58,7 +58,8 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseCorrespondingItem()
     {
-        item.UseItem();
+        if (item.GetID() != 52)
+            item.UseItem();
         if (item.GetCount() <= 0)
         {
             RemoveItem();
