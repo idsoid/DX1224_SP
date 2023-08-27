@@ -15,7 +15,9 @@ public class Flashlight : MonoBehaviour
         screenPosition.z = 0;
         worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
         worldPosition.z = 0;
-        float angle = Mathf.Atan2(worldPosition.y - transform.position.y, worldPosition.x - transform.position.x) * Mathf.Rad2Deg - 90;
+        //float angle = Mathf.Atan2(worldPosition.y - transform.position.y, worldPosition.x - transform.position.x) * Mathf.Rad2Deg - 90;
+        float angle = Mathf.Atan2(worldPosition.y - transform.position.y, worldPosition.x - transform.position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         //if(angle < 0)
         //{
         //    angle += 360f;
@@ -23,33 +25,33 @@ public class Flashlight : MonoBehaviour
         //Quaternion target = Quaternion.AngleAxis(angle, Vector3.forward);
         //transform.rotation = target;
 
-        float diff = Mathf.Abs(angle - transform.eulerAngles.z);
-        if(diff > 360)
-        {
-            diff -= 360f;
-        }
-        if (diff > 5)
-        {
-            if (diff > 180)
-            {
-                transform.Rotate(new Vector3(0f, 0f, 1f), 2);
-            }
-            else
-            {
+        //float diff = Mathf.Abs(angle - transform.eulerAngles.z);
+        //if(diff > 360)
+        //{
+        //    diff -= 360f;
+        //}
+        //if (diff > 5)
+        //{
+        //    if (diff > 180)
+        //    {
+        //        transform.Rotate(new Vector3(0f, 0f, 1f), 2);
+        //    }
+        //    else
+        //    {
                 
-                if (transform.eulerAngles.z <= 90)
-                {
-                    diff = angle - transform.eulerAngles.z;
-                    Debug.Log(diff);
-                    if(diff < 0)
-                        transform.Rotate(new Vector3(0f, 0f, 1f), -2);
-                    else
-                        transform.Rotate(new Vector3(0f, 0f, 1f), 2);
+        //        if (transform.eulerAngles.z <= 90)
+        //        {
+        //            diff = angle - transform.eulerAngles.z;
+        //            Debug.Log(diff);
+        //            if(diff < 0)
+        //                transform.Rotate(new Vector3(0f, 0f, 1f), -2);
+        //            else
+        //                transform.Rotate(new Vector3(0f, 0f, 1f), 2);
 
-                }
-                else
-                    transform.Rotate(new Vector3(0f, 0f, 1f), -2);
-            }
-        }
+        //        }
+        //        else
+        //            transform.Rotate(new Vector3(0f, 0f, 1f), -2);
+        //    }
+        //}
     }
 }
